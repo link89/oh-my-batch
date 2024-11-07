@@ -1,84 +1,166 @@
 from itertools import product
 from string import Template
-import os
 import random
-import shutil
+import glob 
+import os
 
 
-class TaskBuilder:
+class ComboMaker:
 
-    def __init__(self):
-        self.product_vars = {}
-        self.broadcase_vars = {}
+    def __init__(self, seed: int=None):
+        """
+        ComboMaker constructor
+
+        :param seed: Seed for random number generator
+        """
+        self._product_vars = {}
+        self._broadcase_vars = {}
+        if seed is not None:
+            random.seed(seed)
+
+    def add_seq(self, key: str, start: int, stop: int, step: int=1, broadcast=False):
+        """
+        Add a variable with sequence of integer values
+
+        :param key: Variable name
+        :param start: Start value
+        :param stop: Stop value
+        :param step: Step
+        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        """
+        args = list(range(start, stop, step))
+        self.add_var(key, *args, broadcast=broadcast)
+        return self
     
-    def add_randint(self, name: str, n: int, a: int, b: int, broadcast=False):
+    def add_randint(self, key: str, n: int, a: int, b: int, broadcast=False, seed=None):
+        """
+        Add a variable with random integer values
+
+        :param key: Variable name
+        :param n: Number of values
+        :param a: Lower bound
+        :param b: Upper bound
+        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        :param seed: Seed for random number generator
+        """
+        if seed is not None:
+            random.seed(seed)
         args = [random.randint(a, b) for _ in range(n)]
-        self.add_var(name, *args, broadcast=broadcast)
+        self.add_var(key, *args, broadcast=broadcast)
         return self
     
-    def add_rand(self, name: str, n: int, a=0, b=1, broadcast=False):
+    def add_rand(self, key: str, n: int, a: float, b: float, broadcast=False, seed=None):
+        """
+        Add a variable with random float values
+
+        :param key: Variable name
+        :param n: Number of values
+        :param a: Lower bound
+        :param b: Upper bound
+        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        :param seed: Seed for random number generator
+        """
+        if seed is not None:
+            random.seed(seed)
         args = [random.uniform(a, b) for _ in range(n)]
-        self.add_var(name, *args, broadcast=broadcast)
+        self.add_var(key, *args, broadcast=broadcast)
         return self
     
-    def add_files(self, name: str, glob: str, broadcast=False):
-        return self
-    
-    def add_files_as_one(self, name: str, glob: str, broadcast=False, sep=' '):
+    def add_files(self, key: str, path: str, broadcast=False):
+        """
+        Add a variable with files by glob pattern
+        For example, suppose there are 1.txt, 2.txt, 3.txt in data directory,
+        then calling add_files('DATA_FILE', 'data/*.txt') will add list ["data/1.txt", "data/2.txt", "data/3.txt"]
+        to the variable DATA_FILE.
+
+        :param key: Variable name
+        :param path: Path to files, can include glob pattern
+        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        """
+        args = glob.glob(path)
+        if not args:
+            raise ValueError(f"No files found for {path}")
+        self.add_var(key, *args, broadcast=broadcast)
         return self
 
-        
-    def add_var(self, name: str, *args, broadcast=False):
-        if name == 'i':
+    def add_files_as_one(self, key: str, path: str, broadcast=False, sep=' '):
+        """
+        Add a variable with files by glob pattern as one string
+        Unlike add_files, this function joins the files with a delimiter.
+        For example, suppose there are 1.txt, 2.txt, 3.txt in data directory,
+        then calling add_files_as_one('DATA_FILE', 'data/*.txt') will add string "data/1.txt data/2.txt data/3.txt"
+        to the variable DATA_FILE.
+
+        :param key: Variable name
+        :param path: Path to files, can include glob pattern
+        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        :param sep: Separator to join files
+        """
+        args = glob.glob(path)
+        if not args:
+            raise ValueError(f"No files found for {path}")
+        self.add_var(key, sep.join(args), broadcast=broadcast)
+        return self
+
+    def add_var(self, key: str, *args, broadcast=False):
+        if key == 'i':
             raise ValueError("Variable name 'i' is reserved")
 
         if broadcast:
-            if name in self.product_vars:
-                raise ValueError(f"Variable {name} already defined as product variable")
-            self.broadcase_vars.setdefault(name, []).extend(args)
+            if key in self._product_vars:
+                raise ValueError(f"Variable {key} already defined as product variable")
+            self._broadcase_vars.setdefault(key, []).extend(args)
         else:
-            if name in self.broadcase_vars:
-                raise ValueError(f"Variable {name} already defined as broadcast variable")
-            self.product_vars.setdefault(name, []).extend(args)
+            if key in self._broadcase_vars:
+                raise ValueError(f"Variable {key} already defined as broadcast variable")
+            self._product_vars.setdefault(key, []).extend(args)
         return self
 
-    def make_files_from_template(self, template_file: str, dest: str, delimiter='$'):
+    def shuffle(self, *keys: str, seed=None):
+        """
+        Shuffle variables
+        :param keys: Variable names to shuffle
+        :param seed: Seed for random number generator
+        """
+        if seed is not None:
+            random.seed(seed)
+
+        for key in keys:
+            if key in self._product_vars:
+                random.shuffle(self._product_vars[key])
+            elif key in self._broadcase_vars:
+                random.shuffle(self._broadcase_vars[key])
+            else:
+                raise ValueError(f"Variable {key} not found")
+        return self
+
+    def make_files(self, template: str, dest: str, delimiter='$'):
         _delimiter = delimiter
 
         class _Template(Template):
             delimiter = _delimiter
 
-        vars_list = self._get_vars_list()
-        for i, vars in enumerate(vars_list):
-            with open(template_file, 'r') as f:
-                template = f.read()
-            text = _Template(template).safe_substitute(vars)
-            _dest = dest.format(i=i, **vars)
+        combos = self._make_combos()
+        for i, combo in enumerate(combos):
+            with open(template, 'r') as f:
+                template_text = f.read()
+            text = _Template(template_text).safe_substitute(combo)
+            _dest = dest.format(i=i, **combo)
             os.makedirs(os.path.dirname(_dest), exist_ok=True)
             with open(_dest, 'w') as f:
                 f.write(text)
         return self
-    
-    def copy_files(self, src: str, dest: str):
-        vars_list = self._get_vars_list()
-        for i, vars in enumerate(vars_list):
-            _src = src.format(i=i, **vars)
-            _dest = dest.format(i=i, **vars)
-            os.makedirs(os.path.dirname(_dest), exist_ok=True)
-            os.system(f'cp -r {src} {dest}')  # TODO: use shutil
-        return self
-    
 
-    def _get_vars_list(self):
-        keys = self.product_vars.keys()
-        values_list = product(*self.product_vars.values())
-        vars_list = [ dict(zip(keys, values)) for values in values_list ]
-        for i, vars in enumerate(vars_list):
-            for k, v in self.broadcase_vars.items():
-                vars[k] = v[i % len(v)]
-        return vars_list
-
+    def _make_combos(self):
+        keys = self._product_vars.keys()
+        values_list = product(*self._product_vars.values())
+        combos = [ dict(zip(keys, values)) for values in values_list ]
+        for i, combo in enumerate(combos):
+            for k, v in self._broadcase_vars.items():
+                combo[k] = v[i % len(v)]
+        return combos
+    
 
 if __name__ == '__main__':
     import fire
-    fire.Fire(TaskBuilder)
+    fire.Fire(ComboMaker)
