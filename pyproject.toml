@@ -15,3 +15,6 @@ fire = "^0.7.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+oh-my-batch = "oh_my_batch"

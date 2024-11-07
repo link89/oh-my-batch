@@ -103,6 +103,14 @@ class ComboMaker:
         return self
 
     def add_var(self, key: str, *args, broadcast=False):
+        """
+        Add a variable with values
+
+        :param key: Variable name
+        :param args: Values
+        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        """
+
         if key == 'i':
             raise ValueError("Variable name 'i' is reserved")
 
@@ -135,6 +143,20 @@ class ComboMaker:
         return self
 
     def make_files(self, template: str, dest: str, delimiter='$'):
+        """
+        Make files from template
+        The template file can include variables with delimiter.
+        For example, if delimiter is '$', then the template file can include $var1, $var2, ...
+
+        The destination can also include variables in string format style.
+        For example, if dest is 'output/{i}.txt', then files are saved as output/0.txt, output/1.txt, ...
+        
+        :param template: Path to template file
+        :param dest: Path pattern to destination file
+        :param delimiter: Delimiter for variables in template, default is '$', 
+        can be changed to other character, e.g $$, @, ...
+        """
+
         _delimiter = delimiter
 
         class _Template(Template):
@@ -150,6 +172,12 @@ class ComboMaker:
             with open(_dest, 'w') as f:
                 f.write(text)
         return self
+    
+    def done(self):
+        """
+        End of command chain
+        """
+        pass
 
     def _make_combos(self):
         keys = self._product_vars.keys()
