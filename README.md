@@ -11,9 +11,10 @@ pip install oh-my-batch
 ### Use `omb combo` to generate files with different combinations of parameters
 
 It's a very common task to generate files with different combinations of parameters. 
-For example, you may have serveral LAMMPS data files in `tmp` directory (e.g., `tmp/1.data`, `tmp/2.data`, `tmp/3.data`),
-You want to generate a series of input files with different parameters,
-for example, different temperature (e.g. 300K, 400K, 500K).
+For example, you have 3 LAMMPS data files in `tmp` directory: `tmp/1.data`, `tmp/2.data`, `tmp/3.data`.
+
+Now you want to generate a series of input files with different parameters,
+for example, different temperatures 300K, 400K, 500K, against each data file.
 
 In this case, you can use `combo` command to generate a series of input files for you.
 
@@ -29,6 +30,7 @@ velocity all create $TEMP $RANDOM
 run 1000
 EOF
 
+# prepare a run script template
 cat > tmp/run.sh.tmp <<EOF
 lmp -in in.lmp
 EOF

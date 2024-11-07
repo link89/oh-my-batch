@@ -17,6 +17,7 @@ class ComboMaker:
         self._broadcase_vars = {}
         if seed is not None:
             random.seed(seed)
+        self._combos = []
 
     def add_seq(self, key: str, start: int, stop: int, step: int=1, broadcast=False):
         """
@@ -69,7 +70,7 @@ class ComboMaker:
     def add_files(self, key: str, path: str, broadcast=False):
         """
         Add a variable with files by glob pattern
-        For example, suppose there are 1.txt, 2.txt, 3.txt in data directory,
+        For example, suppose there are 3 files named 1.txt, 2.txt, 3.txt in data directory,
         then calling add_files('DATA_FILE', 'data/*.txt') will add list ["data/1.txt", "data/2.txt", "data/3.txt"]
         to the variable DATA_FILE.
 
@@ -180,13 +181,18 @@ class ComboMaker:
         pass
 
     def _make_combos(self):
+        if not self._product_vars and not self._broadcase_vars:
+            return self._combos
         keys = self._product_vars.keys()
         values_list = product(*self._product_vars.values())
         combos = [ dict(zip(keys, values)) for values in values_list ]
         for i, combo in enumerate(combos):
             for k, v in self._broadcase_vars.items():
                 combo[k] = v[i % len(v)]
-        return combos
+        self._combos.extend(combos)
+        self._product_vars = {}
+        self._broadcase_vars = {}
+        return self._combos 
     
 
 if __name__ == '__main__':
