@@ -37,7 +37,7 @@ EOF
 
 # generate input files
 omb combo \
-    add_files DATA_FILE tmp/*.data - \
+    add_files DATA_FILE tmp/*.data --abs - \
     add_var TEMP 300 400 500 - \
     add_randint RANDOM -n 3 -a 1 -b 1000 --broadcast - \
     make_files tmp/in.lmp.tmp tmp/{i}-T-{TEMP}/in.lmp - \

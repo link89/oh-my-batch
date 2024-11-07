@@ -1,9 +1,9 @@
 from itertools import product
 from string import Template
 import random
-import glob 
 import os
 
+from .util import expand_globs
 
 class ComboMaker:
 
@@ -67,7 +67,7 @@ class ComboMaker:
         self.add_var(key, *args, broadcast=broadcast)
         return self
     
-    def add_files(self, key: str, path: str, broadcast=False):
+    def add_files(self, key: str, *path: str, broadcast=False, abs=False):
         """
         Add a variable with files by glob pattern
         For example, suppose there are 3 files named 1.txt, 2.txt, 3.txt in data directory,
@@ -77,14 +77,17 @@ class ComboMaker:
         :param key: Variable name
         :param path: Path to files, can include glob pattern
         :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        :param abs: If True, path will be turned into absolute path
         """
-        args = glob.glob(path)
+        args = expand_globs(path, raise_invalid=True)
         if not args:
             raise ValueError(f"No files found for {path}")
+        if abs:
+            args = [os.path.abspath(p) for p in args]
         self.add_var(key, *args, broadcast=broadcast)
         return self
 
-    def add_files_as_one(self, key: str, path: str, broadcast=False, sep=' '):
+    def add_files_as_one(self, key: str, path: str, broadcast=False, sep=' ', abs=False):
         """
         Add a variable with files by glob pattern as one string
         Unlike add_files, this function joins the files with a delimiter.
@@ -96,10 +99,13 @@ class ComboMaker:
         :param path: Path to files, can include glob pattern
         :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         :param sep: Separator to join files
+        :param abs: If True, path will be turned into absolute path
         """
-        args = glob.glob(path)
+        args = expand_globs(path, raise_invalid=True)
         if not args:
             raise ValueError(f"No files found for {path}")
+        if abs:
+            args = [os.path.abspath(p) for p in args]
         self.add_var(key, sep.join(args), broadcast=broadcast)
         return self
 
