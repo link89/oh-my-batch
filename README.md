@@ -39,14 +39,14 @@ EOF
 omb combo \
     add_files DATA_FILE tmp/*.data - \
     add_var TEMP 300 400 500 - \
-    add_randint RANDOM 1 1000 --broadcast - \
+    add_randint RANDOM -n 3 -a 1 -b 1000 --broadcast - \
     make_files tmp/in.lmp.tmp tmp/{i}-T-{TEMP}/in.lmp - \
     make_files tmp/run.sh.tmp tmp/{i}-T-{TEMP}/run.sh - \
     done
 ```
 
 The above script will generate 9 folders in `tmp` directory
-with names like `1-T-300`, `1-T-400`, `1-T-500`, `2-T-300` and so on.
+with names like `0-T-300`, `1-T-400`, `2-T-500`, `3-T-300` and so on.
 Each folder will contain a `in.lmp` file and a `run.sh` file.
 
 The 9 folders are the combinations of 3 data files and 3 temperatures,
