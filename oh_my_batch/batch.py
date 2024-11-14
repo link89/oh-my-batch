@@ -15,6 +15,8 @@ class BatchMaker:
     def add_work_dir(self, *dir: str):
         """
         Add working directories
+
+        :param dir: Directories to work on, can be glob patterns
         """
         self._work_dirs.extend(expand_globs(dir))
         return self
@@ -22,6 +24,9 @@ class BatchMaker:
     def add_header_file(self, file: str, encoding='utf-8'):
         """
         Add script header from files
+
+        :param file: File path
+        :param encoding: File encoding
         """
         with open(file, 'r', encoding=encoding) as f:
             self._script_header.append(f.read())
@@ -30,6 +35,9 @@ class BatchMaker:
     def add_bottom_file(self, file: str, encoding='utf-8'):
         """
         Add script bottom from files
+
+        :param file: File path
+        :param encoding: File encoding
         """
         with open(file, 'r', encoding=encoding) as f:
             self._script_bottom.append(f.read())
@@ -37,6 +45,9 @@ class BatchMaker:
     def add_command_file(self, file: str, encoding='utf-8'):
         """
         Add commands from files to run under every working directory
+
+        :param file: File path
+        :param encoding: File encoding
         """
         with open(file, 'r', encoding=encoding) as f:
             self._command.append(f.read())
@@ -45,6 +56,8 @@ class BatchMaker:
     def add_command(self, *cmd: str):
         """
         add commands to run under every working directory
+
+        :param cmd: Commands to run, can be multiple
         """
         self._command.extend(cmd)
         return self
