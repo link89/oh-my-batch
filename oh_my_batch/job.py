@@ -111,6 +111,8 @@ class Slurm(BaseJobManager):
             new_state = []
 
         for job in jobs:
+            if not job['id']:
+                continue
             for row in new_state:
                 if job['id'] == row['JobID']:
                     job['state'] = self._map_state(row['State'])
@@ -118,8 +120,7 @@ class Slurm(BaseJobManager):
                         logger.warning('Unknown job %s state: %s',row['JobID'], row['State'])
                     break
             else:
-                if job['id']:
-                    logger.error('Job %s not found in sacct output', job['id'])
+                logger.error('Job %s not found in sacct output', job['id'])
 
         # check if there are jobs to be (re)submitted
         for job in jobs:
