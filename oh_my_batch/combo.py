@@ -14,7 +14,7 @@ class ComboMaker:
         :param seed: Seed for random number generator
         """
         self._product_vars = {}
-        self._broadcase_vars = {}
+        self._broadcast_vars = {}
         if seed is not None:
             random.seed(seed)
         self._combos = []
@@ -124,9 +124,9 @@ class ComboMaker:
         if broadcast:
             if key in self._product_vars:
                 raise ValueError(f"Variable {key} already defined as product variable")
-            self._broadcase_vars.setdefault(key, []).extend(args)
+            self._broadcast_vars.setdefault(key, []).extend(args)
         else:
-            if key in self._broadcase_vars:
+            if key in self._broadcast_vars:
                 raise ValueError(f"Variable {key} already defined as broadcast variable")
             self._product_vars.setdefault(key, []).extend(args)
         return self
@@ -143,8 +143,8 @@ class ComboMaker:
         for key in keys:
             if key in self._product_vars:
                 random.shuffle(self._product_vars[key])
-            elif key in self._broadcase_vars:
-                random.shuffle(self._broadcase_vars[key])
+            elif key in self._broadcast_vars:
+                random.shuffle(self._broadcast_vars[key])
             else:
                 raise ValueError(f"Variable {key} not found")
         return self
@@ -188,15 +188,15 @@ class ComboMaker:
         pass
 
     def _make_combos(self):
-        if not self._product_vars and not self._broadcase_vars:
+        if not self._product_vars and not self._broadcast_vars:
             return self._combos
         keys = self._product_vars.keys()
         values_list = product(*self._product_vars.values())
         combos = [ dict(zip(keys, values)) for values in values_list ]
         for i, combo in enumerate(combos):
-            for k, v in self._broadcase_vars.items():
+            for k, v in self._broadcast_vars.items():
                 combo[k] = v[i % len(v)]
         self._combos.extend(combos)
         self._product_vars = {}
-        self._broadcase_vars = {}
+        self._broadcast_vars = {}
         return self._combos

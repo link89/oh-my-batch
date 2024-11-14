@@ -12,7 +12,7 @@ EOF
 
 # prepare a run script template
 cat > tmp/run.sh.tmp <<EOF
-lmp -in in.lmp
+cat in.lmp  # simulate running lammps
 EOF
 
 # generate input files
