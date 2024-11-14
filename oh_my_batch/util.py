@@ -1,9 +1,9 @@
 from typing import List, Iterable
-from logging import getLogger
+import logging
 import glob
 import os
 
-logger = getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def expand_globs(patterns: Iterable[str], raise_invalid=False) -> List[str]:
