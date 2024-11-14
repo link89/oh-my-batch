@@ -100,12 +100,12 @@ You can use `omb job` to track the state of the jobs.
 ```bash
 
 omb job slurm \
-    submit tmp/*.slurm --max_tries 3 --wait --recovery lammps.recovery
+    submit tmp/*.slurm --max_tries 3 --wait --recovery lammps-jobs.json 
 ```
 
 The above command will submit the batch scripts to the job scheduler,
 and wait for the jobs to finish. If the job fails, it will retry for at most 3 times.
 
-The `--recovery` option will save the job information to `lammps.recovery` file,
+The `--recovery` option will save the job information to `lammps-jobs.json` file,
 if `omb job` is interrupted, you can run the exact same command to recover the job status, 
 so that you don't need to resubmit the jobs that are already submitted.
