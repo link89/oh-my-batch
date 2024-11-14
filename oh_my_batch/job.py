@@ -101,10 +101,6 @@ class Slurm(BaseJobManager):
         job_ids = [j['id'] for j in jobs if j['id']]
         if job_ids:
             query_cmd = f'{self._sacct_bin} -X -P --format=JobID,JobName,State -j {",".join(job_ids)}'
-            user = os.environ.get('USER')
-            if user:
-                query_cmd += f' -u {user}'
-
             cp = shell_run(query_cmd)
             if cp.returncode != 0:
                 logger.error('Failed to query job status: %s', cp.stderr.decode('utf-8'))
