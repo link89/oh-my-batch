@@ -92,4 +92,20 @@ For example, `checkpoint` will check if the job is done and skip the job if it's
 You can run the above script by `./examples/omb-batch.sh`,
 
 ### Track the state of job in job schedular
-TODO
+
+Let's continue the above example, now you have submitted the batch scripts to the job scheduler.
+
+You can use `omb job` to track the state of the jobs.
+
+```bash
+
+omb job slurm \
+    submit tmp/*.slurm --max_tries 3 --wait --recovery lammps.recovery
+```
+
+The above command will submit the batch scripts to the job scheduler,
+and wait for the jobs to finish. If the job fails, it will retry for at most 3 times.
+
+The `--recovery` option will save the job information to `lammps.recovery` file,
+if `omb job` is interrupted, you can run the exact same command to recover the job status, 
+so that you don't need to resubmit the jobs that are already submitted.
