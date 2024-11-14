@@ -13,7 +13,7 @@ checkpoint() {
             printf 'Command succeeded at %s\n' "$current_time" > "$flag_file"
             echo "Created flag file '$flag_file' with timestamp: $current_time"
         else
-            echo "Command failed with exit code $exit_code. Did not create flag file '$flag_file'."
+            echo "Command `$@` failed with exit code $exit_code"
             return $exit_code
         fi
     fi
