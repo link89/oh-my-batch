@@ -7,7 +7,7 @@ from .util import expand_globs
 
 class ComboMaker:
 
-    def __init__(self, seed: int=None):
+    def __init__(self, seed=None):
         """
         ComboMaker constructor
 
@@ -32,7 +32,7 @@ class ComboMaker:
         args = list(range(start, stop, step))
         self.add_var(key, *args, broadcast=broadcast)
         return self
-    
+
     def add_randint(self, key: str, n: int, a: int, b: int, broadcast=False, seed=None):
         """
         Add a variable with random integer values
@@ -49,7 +49,7 @@ class ComboMaker:
         args = [random.randint(a, b) for _ in range(n)]
         self.add_var(key, *args, broadcast=broadcast)
         return self
-    
+
     def add_rand(self, key: str, n: int, a: float, b: float, broadcast=False, seed=None):
         """
         Add a variable with random float values
@@ -66,7 +66,7 @@ class ComboMaker:
         args = [random.uniform(a, b) for _ in range(n)]
         self.add_var(key, *args, broadcast=broadcast)
         return self
-    
+
     def add_files(self, key: str, *path: str, broadcast=False, abs=False):
         """
         Add a variable with files by glob pattern
@@ -157,13 +157,12 @@ class ComboMaker:
 
         The destination can also include variables in string format style.
         For example, if dest is 'output/{i}.txt', then files are saved as output/0.txt, output/1.txt, ...
-        
+
         :param template: Path to template file
         :param dest: Path pattern to destination file
-        :param delimiter: Delimiter for variables in template, default is '$', 
+        :param delimiter: Delimiter for variables in template, default is '$',
         can be changed to other character, e.g $$, @, ...
         """
-
         _delimiter = delimiter
 
         class _Template(Template):
@@ -179,7 +178,7 @@ class ComboMaker:
             with open(_dest, 'w') as f:
                 f.write(text)
         return self
-    
+
     def done(self):
         """
         End of command chain
@@ -198,9 +197,4 @@ class ComboMaker:
         self._combos.extend(combos)
         self._product_vars = {}
         self._broadcase_vars = {}
-        return self._combos 
-    
-
-if __name__ == '__main__':
-    import fire
-    fire.Fire(ComboMaker)
+        return self._combos

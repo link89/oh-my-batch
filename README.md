@@ -1,22 +1,27 @@
 # oh-my-batch
 A simple tool to manipulate batch tasks.
 
+The goal of this to is to provide a handy command tool for
+* generate folders/files from different combinations of parameters
+* generate batch scripts from multiple working directories
+* track the state of job in job schedular
+
 ## Install
 ```bash
 pip install oh-my-batch
 ```
 
-## Usage
+## Use cases
 
-### Use `omb combo` to generate files with different combinations of parameters
+### Generate files from different combinations of parameters
 
-It's a very common task to generate files with different combinations of parameters. 
+It's common to generate files with different combinations of parameters in scientific computing.
 For example, you have 3 LAMMPS data files in `tmp` directory: `tmp/1.data`, `tmp/2.data`, `tmp/3.data`.
-
-Now you want to generate a series of input files with different parameters,
+And you want to generate a series of input files with different parameters,
 for example, different temperatures 300K, 400K, 500K, against each data file.
 
-In this case, you can use `combo` command to generate a series of input files for you.
+In this case, you can use `omb combo` command to generate a series of input files for you.
+
 
 ```bash
 # prepare fake data files
@@ -46,7 +51,7 @@ omb combo \
 ```
 
 The above script will generate 9 folders in `tmp` directory
-with names like `0-T-300`, `1-T-400`, `2-T-500`, `3-T-300` and so on.
+with names from `0-T-300`, `1-T-400`, `2-T-500`, `3-T-300` to `8-T-500`.
 Each folder will contain a `in.lmp` file and a `run.sh` file.
 
 The 9 folders are the combinations of 3 data files and 3 temperatures,
@@ -56,5 +61,5 @@ You can save the above script to a file and run it yourself to see the result,
 and you can also run `omb combo --help` to see the detailed usage of `combo` command.
 
 
-### Use `omb batch` to generate batch scripts
-TODO
+### Generate batch scripts from multiple working directories
+

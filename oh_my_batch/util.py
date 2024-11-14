@@ -1,5 +1,6 @@
 from typing import List, Iterable
 import glob
+import os
 
 
 def expand_globs(patterns: Iterable[str], raise_invalid=False) -> List[str]:
@@ -21,3 +22,35 @@ def expand_globs(patterns: Iterable[str], raise_invalid=False) -> List[str]:
             else:
                 print(f'path {p} already exists in the list')
     return paths
+
+
+def split_list(l, n):
+    """
+    Splits a list into n sub-lists.
+
+    :param l: The list to be split.
+    :param n: The number of sub-lists to create.
+    :return: A list of sub-lists.
+    """
+    if n <= 0:
+        raise ValueError("Number of sub-lists must be a positive integer")
+
+    # Calculate the size of each sublist
+    k, m = divmod(len(l), n)
+
+    for i in range(n):
+        start = i * k + min(i, m)
+        end = (i + 1) * k + min(i + 1, m)
+        if start == end:
+            break
+        yield l[start:end]
+
+
+def ensure_dir(path: str):
+    """
+    Ensure the directory exists
+
+    :param path: Path to directory or file.
+    """
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
