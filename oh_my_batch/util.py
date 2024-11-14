@@ -1,7 +1,10 @@
 from typing import List, Iterable
+import subprocess as sp
 import logging
 import glob
+import csv
 import os
+
 
 logger = logging.getLogger(__name__)
 
@@ -64,3 +67,20 @@ def mode_translate(mode: str):
     For example, convert 777 -> 0o777, 755 -> 0o755
     """
     return int(mode, 8)
+
+
+def shell_run(cmd: str):
+    """
+    Run a shell command
+
+    :param cmd: Command to run
+    """
+    return sp.run(cmd, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
+
+
+def parse_csv(text: str, delimiter="|"):
+    """
+    Parse CSV text to list of dictionaries
+    """
+    reader = csv.DictReader(text.splitlines(), delimiter=delimiter)
+    return list(reader)

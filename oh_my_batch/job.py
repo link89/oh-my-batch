@@ -1,19 +1,45 @@
-from dataclasses import dataclass, asdict
+from typing import List, Dict
+from enum import Enum
 
-import subprocess as sp
 import logging
-import shlex
 import json
+import time
 import os
+import re
 
-from .util import expand_globs
+
+from .util import expand_globs, shell_run, parse_csv
 
 logger = logging.getLogger(__name__)
 
 
+class JobState(bytes, Enum):
+    """
+    Job state enumeration
+    """
+    def __new__(cls, value: int, terminal: bool, status_name: str) -> "JobState":
+        obj = bytes.__new__(cls, [value])
+        obj._value_ = value
+        obj.terminal = terminal
+        obj.status_name = status_name
+        return obj
+
+    value: int  # type: ignore
+    terminal: bool
+    status_name: str
+
+    NULL = (0, True, "NULL")
+    PENDING = (1, False, "PENDING")
+    RUNNING = (2, False, "RUNNING")
+    CANCELLED = (3, True, "CANCELLED")
+    COMPLETED = (4, True, "COMPLETED")
+    FAILED = (5, True, "FAILED")
+    UNKNOWN = (6, True, "UNKNOWN")
+
+
 def new_job(script: str):
     return {
-        'id': '', 'script': script, 'cwd': '', 'state': '', 'tries': 0,
+        'id': '', 'script': script, 'state': JobState.NULL, 'tries': 0,
     }
 
 
@@ -32,33 +58,107 @@ class Slurm:
         :param recovery: Recovery file to store the state of the submitted scripts
         :param wait: If True, wait for the job to finish
         :param timeout: Timeout in seconds for waiting
-        :param opts: Additional options for sbatch
+        :param opts: Additional options for submit command
+        :param max_tries: Maximum number of tries for each job
+        :param interval: Interval in seconds for checking job status
         """
-        jobs = {}
+        jobs = []
         if recovery and os.path.exists(recovery):
             with open(recovery, 'r', encoding='utf-8') as f:
                 jobs = json.load(f)
-        logger.info('Recovery state: %s', jobs)
 
-        for script_file in expand_globs(script):
-            script_file = os.path.normpath(script_file)
-            if script_file not in jobs:
-                jobs[script_file] = new_job(script_file)
+        recover_scripts = set(j['script'] for j in jobs)
+        logger.info('Scripts in recovery files: %s', recover_scripts)
 
+        scripts = set(os.path.normpath(s) for s in expand_globs(script))
+        logger.info('Scripts to submit: %s', scripts)
+
+        if recovery and recover_scripts != scripts:
+            raise ValueError('Scripts to submit are different from scripts in recovery file')
+
+        for script_file in scripts:
+            if script_file not in recover_scripts:
+                jobs.append(new_job(script_file))
+
+        current = time.time()
         while True:
-            for script_file, job in jobs.items():
-                ...
+            self._update_jobs(jobs, max_tries, opts)
+            with open(recovery, 'w', encoding='utf-8') as f:
+                json.dump(jobs, f, indent=2)
+
+            if not wait:
+                break
+
+            # stop if all jobs are terminal and not job to be submitted
+            if (all(j['state'].terminal for j in jobs) and
+                    not any(should_submit(j, max_tries) for j in jobs)):
+                break
+
+            if timeout and time.time() - current > timeout:
+                logger.error('Timeout, current state: %s', jobs)
+                break
+
+            time.sleep(interval)
+
+    def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
+        # query job status
+        job_ids = ','.join(j['id'] for j in jobs if j['id'])
+        query_cmd = f'{self._sacct_bin} -X -P -j {job_ids} --format=JobID,JobName,State'
+        cp = shell_run(query_cmd)
+        if cp.returncode != 0:
+            logger.error('Failed to query job status: %s', cp.stderr.decode('utf-8'))
+            return jobs
+        logger.info('Job status: %s', cp.stdout.decode('utf-8'))
+        for row in parse_csv(cp.stdout.decode('utf-8')):
+            for job in jobs:
+                if job['id'] == row['JobID']:
+                    job['state'] = self._map_state(row['State'])
+                    if job['state'] == JobState.UNKNOWN:
+                        logger.warning('Unknown job %s state: %s',row['JobID'], row['State'])
+
+        # check if there are jobs to be (re)submitted
+        for job in jobs:
+            if should_submit(job, max_tries):
+                job['tries'] += 1
+                job['id'] = ''
+                job['state'] = JobState.NULL
+                submit_cmd = f'{self._sbatch_bin} {submit_opts} {job["script"]}'
+                cp = shell_run(submit_cmd)
+                if cp.returncode != 0:
+                    job['state'] = JobState.FAILED
+                    logger.error('Failed to submit job: %s', cp.stderr.decode('utf-8'))
+                else:
+                    job['id'] = self._parse_job_id(cp.stdout.decode('utf-8'))
+                    assert job['id'], 'Failed to parse job id'
+                    job['state'] = JobState.PENDING
+                    logger.info('Job %s submitted', job['id'])
 
 
+    def _map_state(self, state: str):
+        if state.startswith('CANCELLED'):
+            return JobState.CANCELLED
+        return {
+            'PENDING': JobState.PENDING,
+            'RUNNING': JobState.RUNNING,
+            'COMPLETED': JobState.COMPLETED,
+            'FAILED': JobState.FAILED,
+            'OUT_OF_MEMORY': JobState.FAILED,
+            'TIMEOUT': JobState.FAILED,
+        }.get(state, JobState.UNKNOWN)
 
-            # if '--parsable' not in opts:
-            #     opts += ' --parsable'
-            # submit_cmd = f'{self._sbatch_bin} {opts} {script_file}'
+    def _parse_job_id(self, output: str):
+        """
+        Parse job id from sbatch output
+        """
+        m = re.search(r'\d+', output)
+        return m.group(0) if m else ''
 
-            # job = jobs.get(script_file, new_job(script_file))
 
-
-            # if not job.id:
-            #     cp = sp.run(submit_cmd, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
-
+def should_submit(job: dict, max_tries: int):
+    state: JobState = job['state']
+    if not state.terminal:
+        return False
+    if job['tries'] >= max_tries:
+        return False
+    return state != JobState.COMPLETED
 
