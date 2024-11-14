@@ -109,7 +109,7 @@ class Slurm(BaseJobManager):
             if cp.returncode != 0:
                 logger.error('Failed to query job status: %s', cp.stderr.decode('utf-8'))
                 return jobs
-            logger.info('Job status: %s', cp.stdout.decode('utf-8'))
+            logger.info('Job status:\n%s', cp.stdout.decode('utf-8'))
             new_state = parse_csv(cp.stdout.decode('utf-8'))
         else:
             new_state = []
