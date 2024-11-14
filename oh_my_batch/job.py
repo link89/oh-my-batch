@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List
 from enum import Enum
 
 import logging
@@ -7,8 +7,8 @@ import time
 import os
 import re
 
-
 from .util import expand_globs, shell_run, parse_csv
+
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ class JobState(bytes, Enum):
     CANCELLED = (3, True, "CANCELLED")
     COMPLETED = (4, True, "COMPLETED")
     FAILED = (5, True, "FAILED")
-    UNKNOWN = (6, True, "UNKNOWN")
+    UNKNOWN = (6, False, "UNKNOWN")
 
 
 def new_job(script: str):
@@ -43,11 +43,7 @@ def new_job(script: str):
     }
 
 
-class Slurm:
-
-    def __init__(self, sbatch='sbatch',  sacct='sacct'):
-        self._sbatch_bin = sbatch
-        self._sacct_bin = sacct
+class BaseJobManager:
 
     def submit(self, *script: str, recovery: str = '', wait=False,
                timeout=None, opts='', max_tries=1, interval=10):
@@ -101,6 +97,15 @@ class Slurm:
             time.sleep(interval)
 
     def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
+        raise NotImplementedError
+
+
+class Slurm(BaseJobManager):
+    def __init__(self, sbatch='sbatch',  sacct='sacct'):
+        self._sbatch_bin = sbatch
+        self._sacct_bin = sacct
+
+    def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
         # query job status
         job_ids = ','.join(j['id'] for j in jobs if j['id'])
         query_cmd = f'{self._sacct_bin} -X -P -j {job_ids} --format=JobID,JobName,State'
@@ -133,7 +138,6 @@ class Slurm:
                     job['state'] = JobState.PENDING
                     logger.info('Job %s submitted', job['id'])
 
-
     def _map_state(self, state: str):
         if state.startswith('CANCELLED'):
             return JobState.CANCELLED
@@ -161,4 +165,3 @@ def should_submit(job: dict, max_tries: int):
     if job['tries'] >= max_tries:
         return False
     return state != JobState.COMPLETED
-

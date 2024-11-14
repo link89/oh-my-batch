@@ -17,5 +17,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-oh-my-batch = "oh_my_batch:main"
-omb = "oh_my_batch:main"
+oh-my-batch = "oh_my_batch.cli:main"
+omb = "oh_my_batch.cli:main"
