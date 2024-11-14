@@ -1,4 +1,9 @@
 # oh-my-batch
+
+[![PyPI version](https://badge.fury.io/py/oh-my-batch.svg)](https://badge.fury.io/py/oh-my-batch)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/oh-my-batch)](https://pypi.org/project/oh-my-batch/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/oh-my-batch)](https://pypi.org/project/oh-my-batch/)
+
 A simple tool to manipulate batch tasks designed for scientific computing community.
 
 ## Features
