@@ -1,6 +1,6 @@
 
-# Create a flag file that indicates that a command has been executed successfully.
 checkpoint() {
+    # Usage: checkpoint <flag_file> <command> [arg1] [arg2] ...
     local flag_file="$1"
     shift  # Remove the first argument so $@ contains only the command and its arguments
     if [ -f "$flag_file" ]; then
