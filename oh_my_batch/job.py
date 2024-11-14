@@ -12,29 +12,22 @@ from .util import expand_globs, shell_run, parse_csv
 
 logger = logging.getLogger(__name__)
 
+class JobState:
+    NULL = 0
+    PENDING = 1
+    RUNNING = 2
+    CANCELLED = 3
+    COMPLETED = 4
+    FAILED = 5
+    UNKNOWN = 6
 
-class JobState(bytes, Enum):
-    """
-    Job state enumeration
-    """
-    def __new__(cls, value: int, terminal: bool, status_name: str) -> "JobState":
-        obj = bytes.__new__(cls, [value])
-        obj._value_ = value
-        obj.terminal = terminal
-        obj.status_name = status_name
-        return obj
+    @classmethod
+    def is_terminal(cls, state: int):
+        return state in (JobState.NULL, JobState.COMPLETED, JobState.FAILED, JobState.CANCELLED)
 
-    value: int  # type: ignore
-    terminal: bool
-    status_name: str
-
-    NULL = (0, True, "NULL")
-    PENDING = (1, False, "PENDING")
-    RUNNING = (2, False, "RUNNING")
-    CANCELLED = (3, True, "CANCELLED")
-    COMPLETED = (4, True, "COMPLETED")
-    FAILED = (5, True, "FAILED")
-    UNKNOWN = (6, False, "UNKNOWN")
+    @classmethod
+    def is_success(cls, state: int):
+        return state == JobState.COMPLETED
 
 
 def new_job(script: str):
@@ -84,7 +77,7 @@ class BaseJobManager:
                 break
 
             # stop if all jobs are terminal and not job to be submitted
-            if (all(j['state'].terminal for j in jobs) and
+            if (all(JobState.is_terminal(j['state']) for j in jobs) and
                     not any(should_submit(j, max_tries) for j in jobs)):
                 break
 
@@ -129,8 +122,8 @@ class Slurm(BaseJobManager):
                         logger.warning('Unknown job %s state: %s',row['JobID'], row['State'])
                     break
             else:
-                job['state'] = JobState.FAILED
-                logger.error('Job %s not found in sacct output', job['id'])
+                if job['id']:
+                    logger.error('Job %s not found in sacct output', job['id'])
 
         # check if there are jobs to be (re)submitted
         for job in jobs:
@@ -170,8 +163,8 @@ class Slurm(BaseJobManager):
 
 
 def should_submit(job: dict, max_tries: int):
-    state: JobState = job['state']
-    if not state.terminal:
+    state: int = job['state']
+    if not JobState.is_terminal(state):
         return False
     if job['tries'] >= max_tries:
         return False
