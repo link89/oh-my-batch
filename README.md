@@ -1,7 +1,7 @@
 # oh-my-batch
-A simple tool to manipulate batch tasks.
+A simple tool to manipulate batch tasks designed for scientific computing community.
 
-The goal of this to is to provide a handy command tool for
+## Features
 * `omb combo`: generate folders/files from different combinations of parameters
 * `omb batch`: generate batch scripts from multiple working directories
 * `omb job`: track the state of job in job schedular
