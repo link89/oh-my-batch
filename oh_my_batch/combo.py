@@ -3,7 +3,7 @@ from string import Template
 import random
 import os
 
-from .util import expand_globs
+from .util import expand_globs, mode_translate
 
 class ComboMaker:
 
@@ -149,7 +149,7 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
         return self
 
-    def make_files(self, template: str, dest: str, delimiter='$'):
+    def make_files(self, template: str, dest: str, delimiter='$', mode=None):
         """
         Make files from template
         The template file can include variables with delimiter.
@@ -177,6 +177,8 @@ class ComboMaker:
             os.makedirs(os.path.dirname(_dest), exist_ok=True)
             with open(_dest, 'w') as f:
                 f.write(text)
+            if mode is not None:
+                os.chmod(_dest, mode_translate(str(mode)))
         return self
 
     def done(self):

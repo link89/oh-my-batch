@@ -1,6 +1,9 @@
 from typing import List, Iterable
+from logging import getLogger
 import glob
 import os
+
+logger = getLogger(__name__)
 
 
 def expand_globs(patterns: Iterable[str], raise_invalid=False) -> List[str]:
@@ -20,7 +23,7 @@ def expand_globs(patterns: Iterable[str], raise_invalid=False) -> List[str]:
             if p not in paths:
                 paths.append(p)
             else:
-                print(f'path {p} already exists in the list')
+                logger.warning('path %s already exists in the list', p)
     return paths
 
 
@@ -54,3 +57,10 @@ def ensure_dir(path: str):
     """
     os.makedirs(os.path.dirname(path), exist_ok=True)
 
+
+def mode_translate(mode: str):
+    """
+    Translate mode in decimal to octal
+    For example, convert 777 -> 0o777, 755 -> 0o755
+    """
+    return int(mode, 8)

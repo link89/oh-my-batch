@@ -22,4 +22,9 @@ class TestUtil(TestCase):
         self.assertEqual(result[1], [1])
         self.assertEqual(result[9], [9])
 
-
+    def test_mode_translate(self):
+        self.assertEqual(util.mode_translate('777'), 0o777)
+        self.assertEqual(util.mode_translate('755'), 0o755)
+        self.assertEqual(util.mode_translate('700'), 0o700)
+        self.assertEqual(util.mode_translate('644'), 0o644)
+        self.assertEqual(util.mode_translate('600'), 0o600)
