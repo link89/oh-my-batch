@@ -79,8 +79,9 @@ class BaseJobManager:
         current = time.time()
         while True:
             self._update_jobs(jobs, max_tries, opts)
-            with open(recovery, 'w', encoding='utf-8') as f:
-                json.dump(jobs, f, indent=2)
+            if recovery:
+                with open(recovery, 'w', encoding='utf-8') as f:
+                    json.dump(jobs, f, indent=2)
 
             if not wait:
                 break
@@ -109,17 +110,28 @@ class Slurm(BaseJobManager):
         # query job status
         job_ids = ','.join(j['id'] for j in jobs if j['id'])
         query_cmd = f'{self._sacct_bin} -X -P -j {job_ids} --format=JobID,JobName,State'
+
+        user = os.environ.get('USER')
+        if user:
+            query_cmd += f' -u {user}'
+
         cp = shell_run(query_cmd)
         if cp.returncode != 0:
             logger.error('Failed to query job status: %s', cp.stderr.decode('utf-8'))
             return jobs
         logger.info('Job status: %s', cp.stdout.decode('utf-8'))
-        for row in parse_csv(cp.stdout.decode('utf-8')):
-            for job in jobs:
+        new_state = parse_csv(cp.stdout.decode('utf-8'))
+
+        for job in jobs:
+            for row in new_state:
                 if job['id'] == row['JobID']:
                     job['state'] = self._map_state(row['State'])
                     if job['state'] == JobState.UNKNOWN:
                         logger.warning('Unknown job %s state: %s',row['JobID'], row['State'])
+                    break
+            else:
+                job['state'] = JobState.FAILED
+                logger.error('Job %s not found in sacct output', job['id'])
 
         # check if there are jobs to be (re)submitted
         for job in jobs:
