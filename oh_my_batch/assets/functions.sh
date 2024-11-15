@@ -11,6 +11,7 @@ checkpoint() {
         local exit_code=$?
         if [ $exit_code -eq 0 ]; then
             local current_time=$(date '+%Y-%m-%d %H:%M:%S')
+            mkdir -p "$(dirname "$flag_file")"
             printf 'Command succeeded at %s\n' "$current_time" > "$flag_file"
             echo "Created flag file '$flag_file' with timestamp: $current_time"
         else
