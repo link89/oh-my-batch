@@ -80,10 +80,10 @@ class BatchMaker:
             work_dirs_arr = "\n".join(shlex.quote(w) for w in work_dirs)
             body.extend([
                 '[ -n "$PBS_O_WORKDIR" ] && cd $PBS_O_WORKDIR  # fix PBS',
-                f'work_dirs=({work_dirs_arr})',
+                f'WORK_DIRS=({work_dirs_arr})',
                 '',
-                'for work_dir in "${work_dirs[@]}"; do',
-                'pushd $work_dir',
+                'for WORK_DIR in "${WORK_DIRS[@]}"; do',
+                'pushd $WORK_DIR',
                 *self._command,
                 'popd',
                 'done'
