@@ -12,16 +12,17 @@ A toolkit to manipulate batch tasks with command line. Designed for scientific c
 * `omb job`: track the state of job in job schedular
 * `omb misc`: miscellaneous commands
 
-## Shell Tips
-`oh-my-batch` is intended to help you implement computational workflows with shell scripts.
-To make the best use of `oh-my-batch`, you need to know some shell tips.
-
-* [Retry commands until success in shell script](https://stackoverflow.com/a/79191004/3099733)
-
 ## Install
 ```bash
 pip install oh-my-batch
 ```
+
+## Shell tips
+`oh-my-batch` is intended to help you implement computational workflows with shell scripts.
+To make the best use of `oh-my-batch`, you need to know some shell tips.
+
+* [Retry commands until success in shell script](https://stackoverflow.com/a/79191004/3099733)
+* [Run multiple line shell script with ssh](https://stackoverflow.com/a/32082912/3099733)
 
 ## Use cases
 ### Load functions in shell script
