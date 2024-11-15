@@ -89,7 +89,7 @@ class ComboMaker:
         self.add_var(key, *args, broadcast=broadcast)
         return self
 
-    def add_files_as_one(self, key: str, path: str, broadcast=False, format=None,
+    def add_files_as_one(self, key: str, *path: str, broadcast=False, format=None,
                          sep=' ', abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern as one string

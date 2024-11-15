@@ -1,0 +1,2702 @@
+[
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 0,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 1,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 2,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 3,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 4,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 5,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 6,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 7,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 8,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 1,
+    "SEQ": 9,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 0,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 1,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 2,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 3,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 4,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 5,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 6,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 7,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 8,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 2,
+    "SEQ": 9,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 0,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 1,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 2,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 3,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 4,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 5,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 6,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 7,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 8,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 7,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 1,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 5.601472492317477
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 1,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 8.599796663725433
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 5,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 7.821589626462722
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 5,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 4,
+    "RAND_BC": 4.7851442274776055
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 9,
+    "FILES": "tests/data/2.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 5,
+    "RAND_BC": 3.3302507526366703
+  },
+  {
+    "VAR": 3,
+    "SEQ": 9,
+    "RANDINT": 9,
+    "FILES": "tests/data/1.dummy.txt",
+    "FILE_ONE": "tests/data/2.dummy.txt tests/data/1.dummy.txt",
+    "VAR_BC": 6,
+    "RAND_BC": 5.601472492317477
+  }
+]
