@@ -117,7 +117,6 @@ class ComboMaker:
         :param args: Values
         :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         """
-
         if key == 'i':
             raise ValueError("Variable name 'i' is reserved")
 

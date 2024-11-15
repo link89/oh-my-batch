@@ -59,7 +59,7 @@ class BaseJobManager:
         recover_scripts = set(j['script'] for j in jobs)
         logger.info('Scripts in recovery files: %s', recover_scripts)
 
-        scripts = set(os.path.normpath(s) for s in expand_globs(script))
+        scripts = set(norm_path(s) for s in expand_globs(script, raise_invalid=True))
         logger.info('Scripts to submit: %s', scripts)
 
         for script_file in scripts:
@@ -166,3 +166,7 @@ def should_submit(job: dict, max_tries: int):
     if job['tries'] >= max_tries:
         return False
     return state != JobState.COMPLETED
+
+
+def norm_path(path: str):
+    return os.path.normpath(os.path.abspath(path))

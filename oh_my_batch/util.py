@@ -19,7 +19,7 @@ def expand_globs(patterns: Iterable[str], raise_invalid=False) -> List[str]:
     """
     paths = []
     for pattern in patterns:
-        result = glob.glob(pattern, recursive=True) if '*' in pattern else [pattern]
+        result = glob.glob(pattern, recursive=True)
         if raise_invalid and len(result) == 0:
             raise FileNotFoundError(f'No file found for {pattern}')
         for p in result:
