@@ -81,9 +81,9 @@ cat > tmp/lammps_header.sh <<EOF
 EOF
 
 omb batch \
-    add_work_dir tmp/tasks/* - \
-    add_header_file tmp/lammps_header.sh - \
-    add_command "checkpoint lmp.done ./run.sh" - \
+    add_work_dirs tmp/tasks/* - \
+    add_header_files tmp/lammps_header.sh - \
+    add_cmds "checkpoint lmp.done ./run.sh" - \
     make tmp/lmp-{i}.slurm --concurrency 2
 ```
 
