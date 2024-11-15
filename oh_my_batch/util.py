@@ -84,3 +84,16 @@ def parse_csv(text: str, delimiter="|"):
     """
     reader = csv.DictReader(text.splitlines(), delimiter=delimiter)
     return list(reader)
+
+
+def log_cp(cp):
+    """
+    Log child process
+    """
+    return '\n'.join([
+        f'Command: {cp.args}',
+        'STDOUT:',
+        cp.stdout.decode('utf-8'),
+        'STDERR:',
+        cp.stderr.decode('utf-8')
+    ])

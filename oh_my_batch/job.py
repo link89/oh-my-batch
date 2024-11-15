@@ -6,7 +6,7 @@ import time
 import os
 import re
 
-from .util import expand_globs, shell_run, parse_csv, ensure_dir
+from .util import expand_globs, shell_run, parse_csv, ensure_dir, log_cp
 
 
 logger = logging.getLogger(__name__)
@@ -133,7 +133,7 @@ class Slurm(BaseJobManager):
                 cp = shell_run(submit_cmd)
                 if cp.returncode != 0:
                     job['state'] = JobState.FAILED
-                    logger.error('Failed to submit job: %s', cp.stderr.decode('utf-8'))
+                    logger.error('Failed to submit job: %s', log_cp(cp))
                 else:
                     job['id'] = self._parse_job_id(cp.stdout.decode('utf-8'))
                     assert job['id'], 'Failed to parse job id'
