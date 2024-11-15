@@ -129,7 +129,7 @@ class Slurm(BaseJobManager):
                 logger.error('Failed to query job status: %s', log_cp(cp))
                 return jobs
             out = cp.stdout.decode('utf-8')
-            logger.info('Job status:\n%s',out)
+            logger.info('Job status:\n%s', out)
             new_state = parse_csv(out)
         else:
             new_state = []
@@ -153,10 +153,10 @@ class Slurm(BaseJobManager):
         if cp.returncode != 0:
             logger.error('Failed to submit job: %s', log_cp(cp))
             return ''
-        output = cp.stdout.decode('utf-8')
-        job_id  = self._parse_job_id(output)
+        out = cp.stdout.decode('utf-8')
+        job_id  = self._parse_job_id(out)
         if not job_id:
-            raise ValueError(f'Unexpected sbatch output: {output}')
+            raise ValueError(f'Unexpected sbatch output: {out}')
         return job_id
 
     def _map_state(self, state: str):
