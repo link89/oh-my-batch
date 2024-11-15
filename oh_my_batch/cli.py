@@ -23,6 +23,9 @@ class OhMyBatch:
     def job(self):
         return JobCli()
 
+    def misc(self):
+        from .misc import Misc
+        return Misc()
 
 def main():
     fire.Fire(OhMyBatch)

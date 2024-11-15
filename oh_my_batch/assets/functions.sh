@@ -1,6 +1,7 @@
+GREEN='\033[0;32m'
+NC='\033[0m'
 
 checkpoint() {
-    # Usage: checkpoint <flag_file> <command> [arg1] [arg2] ...
     local flag_file="$1"
     shift  # Remove the first argument so $@ contains only the command and its arguments
     if [ -f "$flag_file" ]; then
@@ -18,3 +19,16 @@ checkpoint() {
         fi
     fi
 }
+
+echo -e "${GREEN}Functiion: checkpoint${NC}"
+cat <<EOF
+Usage:
+    checkpoint <flag_file> <command> [arg1] [arg2] ...
+
+Set a flag file to indicate the completion of a command,
+so that it will not be executed again next time.
+
+Example:
+    checkpoint lmp.done lmp -in in.lmp
+
+EOF
