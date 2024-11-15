@@ -5,8 +5,8 @@ touch tmp/1.data tmp/2.data tmp/3.data
 
 # prepare a lammps input file template
 cat > tmp/in.lmp.tmp <<EOF
-read_data $DATA_FILE
-velocity all create $TEMP $RANDOM
+read_data @DATA_FILE
+velocity all create @TEMP @RANDOM
 run 1000
 EOF
 

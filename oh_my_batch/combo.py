@@ -161,19 +161,20 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
         return self
 
-    def make_files(self, template: str, dest: str, delimiter='$', mode=None):
+    def make_files(self, template: str, dest: str, delimiter='@', mode=None):
         """
         Make files from template
         The template file can include variables with delimiter.
-        For example, if delimiter is '$', then the template file can include $var1, $var2, ...
+        For example, if delimiter is '@', then the template file can include @var1, @var2, ...
 
         The destination can also include variables in string format style.
-        For example, if dest is 'output/{i}.txt', then files are saved as output/0.txt, output/1.txt, ...
+        For example, if dest is 'output/{i}-{TEMP}.txt', 
+        then files are saved as output/0-300K.txt, output/1-400K.txt, ...
 
         :param template: Path to template file
         :param dest: Path pattern to destination file
-        :param delimiter: Delimiter for variables in template, default is '$',
-        can be changed to other character, e.g $$, @, ...
+        :param delimiter: Delimiter for variables in template, default is '@', as '$' is popular in shell scripts
+        can be changed to other character, e.g $, $$, ...
         """
         _delimiter = delimiter
 
