@@ -24,6 +24,14 @@ pip install oh-my-batch
 ```
 
 ## Use cases
+### Load useful functions to your shell script
+You can load useful functions from `oh-my-batch` this way:
+
+```bash
+omb misc export-shell-func > omb-func.sh && source omb-func.sh
+```
+
+This will load some useful functions to your shell script, for example, `checkpoint` function.
 
 ### Generate files from different combinations of parameters
 
