@@ -104,7 +104,7 @@ class Slurm(BaseJobManager):
             query_cmd = f'{self._sacct_bin} -X -P --format=JobID,JobName,State -j {",".join(job_ids)}'
             cp = shell_run(query_cmd)
             if cp.returncode != 0:
-                logger.error('Failed to query job status: %s', cp.stderr.decode('utf-8'))
+                logger.error('Failed to query job status: %s', log_cp(cp))
                 return jobs
             logger.info('Job status:\n%s', cp.stdout.decode('utf-8'))
             new_state = parse_csv(cp.stdout.decode('utf-8'))

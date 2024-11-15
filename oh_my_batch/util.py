@@ -90,7 +90,8 @@ def log_cp(cp):
     """
     Log child process
     """
-    log = f'Command: {cp.args}'
+    log = f'Command: {cp.args}\nReturn code: {cp.returncode}'
+
     out = cp.stdout.decode('utf-8').strip()
     if out:
         log += f'\nSTDOUT:\n{out}'
