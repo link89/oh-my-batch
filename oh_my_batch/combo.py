@@ -1,6 +1,7 @@
 from itertools import product
 from string import Template
 import random
+import json
 import os
 
 from .util import expand_globs, mode_translate
@@ -67,7 +68,7 @@ class ComboMaker:
         self.add_var(key, *args, broadcast=broadcast)
         return self
 
-    def add_files(self, key: str, *path: str, broadcast=False, abs=False):
+    def add_files(self, key: str, *path: str, broadcast=False, abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern
         For example, suppose there are 3 files named 1.txt, 2.txt, 3.txt in data directory,
@@ -78,8 +79,9 @@ class ComboMaker:
         :param path: Path to files, can include glob pattern
         :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         :param abs: If True, path will be turned into absolute path
+        :param raise_invalid: If True, will raise error if no file found for a glob pattern
         """
-        args = expand_globs(path, raise_invalid=True)
+        args = expand_globs(path, raise_invalid=raise_invalid)
         if not args:
             raise ValueError(f"No files found for {path}")
         if abs:
@@ -87,7 +89,8 @@ class ComboMaker:
         self.add_var(key, *args, broadcast=broadcast)
         return self
 
-    def add_files_as_one(self, key: str, path: str, broadcast=False, sep=' ', abs=False):
+    def add_files_as_one(self, key: str, path: str, broadcast=False, format=None,
+                         sep=' ', abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern as one string
         Unlike add_files, this function joins the files with a delimiter.
@@ -98,15 +101,25 @@ class ComboMaker:
         :param key: Variable name
         :param path: Path to files, can include glob pattern
         :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
+        :param format: the way to format the files, can be None, 'json-list','json-item'
         :param sep: Separator to join files
         :param abs: If True, path will be turned into absolute path
+        :param raise_invalid: If True, will raise error if no file found for a glob pattern
         """
-        args = expand_globs(path, raise_invalid=True)
+        args = expand_globs(path, raise_invalid=raise_invalid)
         if not args:
             raise ValueError(f"No files found for {path}")
         if abs:
             args = [os.path.abspath(p) for p in args]
-        self.add_var(key, sep.join(args), broadcast=broadcast)
+        if format is None:
+            value = sep.join(args)
+        elif format == 'json-list':
+            value = json.dumps(args)
+        elif format == 'json-item':
+            value = json.dumps(args).strip('[]')
+        else:
+            raise ValueError(f"Invalid format: {format}")
+        self.add_var(key, value, broadcast=broadcast)
         return self
 
     def add_var(self, key: str, *args, broadcast=False):
