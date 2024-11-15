@@ -77,7 +77,7 @@ class BaseJobManager:
             if not wait:
                 break
 
-            # stop if all jobs are terminal and not job to be submitted
+            # stop if all jobs are terminal and no job to be submitted
             if (all(JobState.is_terminal(j['state']) for j in jobs) and
                     not any(should_submit(j, max_tries) for j in jobs)):
                 break
