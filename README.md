@@ -10,6 +10,7 @@ A toolkit to manipulate batch tasks with command line. Designed for scientific c
 * `omb combo`: generate folders/files from different combinations of parameters
 * `omb batch`: generate batch scripts from multiple working directories
 * `omb job`: track the state of job in job schedular
+* `omb misc`: miscellaneous commands
 
 ## Shell Tips
 `oh-my-batch` is intended to help you implement computational workflows with shell scripts.
