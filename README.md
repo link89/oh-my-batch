@@ -28,7 +28,6 @@ for example, different temperatures 300K, 400K, 500K, against each data file.
 In this case, you can use `omb combo` command to generate a series of input files for you.
 
 ```bash
-#! /bin/bash
 # prepare fake data files
 mkdir -p tmp/
 touch tmp/1.data tmp/2.data tmp/3.data
@@ -74,7 +73,6 @@ You want to package them into 2 batch scripts to submit to a job scheduler.
 You can use `omb batch` to generate batch scripts for you like this:
 
 ```bash
-#! /bin/bash
 cat > tmp/lammps_header.sh <<EOF
 #!/bin/bash
 #SBATCH -J lmp
@@ -99,18 +97,15 @@ You can run the above script by `./examples/omb-batch.sh`,
 ### Track the state of job in job schedular
 
 Let's continue the above example, now you have submitted the batch scripts to the job scheduler.
-
-You can use `omb job` to track the state of the jobs.
+In this case, you can use `omb job` to track the state of the jobs.
 
 ```bash
-
-omb job slurm \
-    submit tmp/*.slurm --max_tries 3 --wait --recovery lammps-jobs.json 
+omb job slurm submit tmp/*.slurm --max_tries 3 --wait --recovery lammps-jobs.json
 ```
 
 The above command will submit the batch scripts to the job scheduler,
 and wait for the jobs to finish. If the job fails, it will retry for at most 3 times.
 
-The `--recovery` option will save the job information to `lammps-jobs.json` file,
-if `omb job` is interrupted, you can run the exact same command to recover the job status, 
-so that you don't need to resubmit the jobs that are already submitted.
+The `--recovery` option will save the job information to `lammps-jobs.json` file.
+If `omb job` is interrupted, you can rerun the exact same command to recover the job status,
+so that you don't need to resubmit the jobs that are still running or completed.
