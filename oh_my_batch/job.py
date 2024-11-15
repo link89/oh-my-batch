@@ -6,7 +6,7 @@ import time
 import os
 import re
 
-from .util import expand_globs, shell_run, parse_csv
+from .util import expand_globs, shell_run, parse_csv, ensure_dir
 
 
 logger = logging.getLogger(__name__)
@@ -70,6 +70,7 @@ class BaseJobManager:
         while True:
             self._update_jobs(jobs, max_tries, opts)
             if recovery:
+                ensure_dir(recovery)
                 with open(recovery, 'w', encoding='utf-8') as f:
                     json.dump(jobs, f, indent=2)
 
