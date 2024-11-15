@@ -1,4 +1,6 @@
 # Change Log
+## v0.2.1
+* feat: implement `omb misc export-shell-func`
 
 ## v0.2.0
 * breaking: change `omb batch` api, check with `omb batch`

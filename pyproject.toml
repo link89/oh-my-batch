@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "oh-my-batch"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["weihong.xu <xuweihong.cn@gmail.com>"]
 license = "GPL"
@@ -10,7 +10,6 @@ packages = [{include = "oh_my_batch"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 fire = "^0.7.0"
-
 
 [build-system]
 requires = ["poetry-core"]
