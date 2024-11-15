@@ -68,7 +68,7 @@ class BatchMaker:
         Make batch script files from the previous setup
 
         :param path: Path to save batch script files, use {i} to represent index
-        :param concurrency: Number of concurrent commands to run
+        :param concurrency: Number of scripts to to make
         """
         # inject pre-defined functions
         self.add_header_file(get_asset('functions.sh'))
