@@ -90,10 +90,10 @@ def log_cp(cp):
     """
     Log child process
     """
-    return '\n'.join([
-        f'Command: {cp.args}',
-        'STDOUT:',
-        cp.stdout.decode('utf-8'),
-        'STDERR:',
-        cp.stderr.decode('utf-8')
-    ])
+    log = f'Command: {cp.args}'
+    out = cp.stdout.decode('utf-8').strip()
+    if out:
+        log += f'\nSTDOUT:\n{out}'
+    err = cp.stderr.decode('utf-8').strip()
+    if err:
+        log += f'\nSTDERR:\n{err}'
