@@ -4,12 +4,19 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/oh-my-batch)](https://pypi.org/project/oh-my-batch/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/oh-my-batch)](https://pypi.org/project/oh-my-batch/)
 
-A simple tool to manipulate batch tasks designed for scientific computing community.
+A toolkit to manipulate batch tasks with command line. Designed for scientific computing community.
 
 ## Features
 * `omb combo`: generate folders/files from different combinations of parameters
 * `omb batch`: generate batch scripts from multiple working directories
 * `omb job`: track the state of job in job schedular
+
+
+## Shell Tips
+`oh-my-batch` is intended to help you implement computational workflows with shell scripts.
+To make the best use of `oh-my-batch`, you need to know some shell tips.
+
+* [Retry commands until success in shell script](https://stackoverflow.com/a/79191004/3099733)
 
 ## Install
 ```bash
