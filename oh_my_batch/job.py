@@ -68,7 +68,7 @@ class BaseJobManager:
 
         current = time.time()
         while True:
-            self._update_jobs(jobs, max_tries, opts)
+            jobs = self._update_jobs(jobs, max_tries, opts)
             if recovery:
                 ensure_dir(recovery)
                 with open(recovery, 'w', encoding='utf-8') as f:
@@ -88,7 +88,30 @@ class BaseJobManager:
 
             time.sleep(interval)
 
+
     def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
+        jobs = self._update_state(jobs)
+
+        # check if there are jobs to be (re)submitted
+        for job in jobs:
+            if should_submit(job, max_tries):
+                job['tries'] += 1
+                job['id'] = ''
+                job['state'] = JobState.NULL
+                job_id = self._submit_job(job, submit_opts)
+                if job_id:
+                    job['state'] = JobState.PENDING
+                    job['id'] = job_id
+                    logger.info('Job %s submitted', job['id'])
+                else:
+                    job['state'] = JobState.FAILED
+                    logger.error('Failed to submit job %s', job['script'])
+        return jobs
+
+    def _update_state(self, jobs: List[dict]):
+        raise NotImplementedError
+    
+    def _submit_job(self, job: dict, submit_opts: str):
         raise NotImplementedError
 
 
@@ -97,8 +120,7 @@ class Slurm(BaseJobManager):
         self._sbatch_bin = sbatch
         self._sacct_bin = sacct
 
-    def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
-        # query job status
+    def _update_state(self, jobs: List[dict]):
         job_ids = [j['id'] for j in jobs if j['id']]
         if job_ids:
             query_cmd = f'{self._sacct_bin} -X -P --format=JobID,JobName,State -j {",".join(job_ids)}'
@@ -123,23 +145,19 @@ class Slurm(BaseJobManager):
                     break
             else:
                 logger.error('Job %s not found in sacct output', job['id'])
+        return jobs 
 
-        # check if there are jobs to be (re)submitted
-        for job in jobs:
-            if should_submit(job, max_tries):
-                job['tries'] += 1
-                job['id'] = ''
-                job['state'] = JobState.NULL
-                submit_cmd = f'{self._sbatch_bin} {submit_opts} {job["script"]}'
-                cp = shell_run(submit_cmd)
-                if cp.returncode != 0:
-                    job['state'] = JobState.FAILED
-                    logger.error('Failed to submit job: %s', log_cp(cp))
-                else:
-                    job['id'] = self._parse_job_id(cp.stdout.decode('utf-8'))
-                    assert job['id'], 'Failed to parse job id'
-                    job['state'] = JobState.PENDING
-                    logger.info('Job %s submitted', job['id'])
+    def _submit_job(self, job:dict, submit_opts:str):
+        submit_cmd = f'{self._sbatch_bin} {submit_opts} {job["script"]}'
+        cp = shell_run(submit_cmd)
+        if cp.returncode != 0:
+            logger.error('Failed to submit job: %s', log_cp(cp))
+            return ''
+        output = cp.stdout.decode('utf-8')
+        job_id  = self._parse_job_id(output)
+        if not job_id:
+            raise ValueError(f'Unexpected sbatch output: {output}')
+        return job_id
 
     def _map_state(self, state: str):
         if state.startswith('CANCELLED'):
