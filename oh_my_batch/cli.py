@@ -1,7 +1,6 @@
 import logging
 import fire
 
-logging.basicConfig(format='%(asctime)s %(name)s: %(message)s', level=logging.INFO)
 
 class JobCli:
 
@@ -27,5 +26,7 @@ class OhMyBatch:
         from .misc import Misc
         return Misc()
 
+
 def main():
+    logging.basicConfig(format='%(asctime)s %(name)s: %(message)s', level=logging.INFO)
     fire.Fire(OhMyBatch)
