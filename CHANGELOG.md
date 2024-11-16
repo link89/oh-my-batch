@@ -1,4 +1,7 @@
 # Change Log
+## v0.2.3
+* feat: implement `omb combo print` command
+
 ## v0.2.2
 * refactor: change default template delimiter from `$` to `@`
 * feat: `omb combo add_files_as_one` support `json-list` and `json-item` format
