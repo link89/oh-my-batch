@@ -225,7 +225,7 @@ class ComboMaker:
         pass
 
     def _make_combos(self):
-        if not self._product_vars and not self._broadcast_vars:
+        if not self._product_vars:
             return self._combos
         keys = self._product_vars.keys()
         values_list = product(*self._product_vars.values())
