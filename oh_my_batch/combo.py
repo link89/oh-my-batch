@@ -4,7 +4,7 @@ import random
 import json
 import os
 
-from .util import expand_globs, mode_translate
+from .util import expand_globs, mode_translate, ensure_dir
 
 class ComboMaker:
 
@@ -161,9 +161,9 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
         return self
 
-    def make_files(self, template: str, dest: str, delimiter='@', mode=None):
+    def make_files(self, template: str, dest: str, delimiter='@', mode=None, encoding='utf-8'):
         """
-        Make files from template
+        Make files from template against each combo
         The template file can include variables with delimiter.
         For example, if delimiter is '@', then the template file can include @var1, @var2, ...
 
@@ -175,6 +175,8 @@ class ComboMaker:
         :param dest: Path pattern to destination file
         :param delimiter: Delimiter for variables in template, default is '@', as '$' is popular in shell scripts
         can be changed to other character, e.g $, $$, ...
+        :param mode: File mode, e.g. 755, 644, ...
+        :param encoding: File encoding
         """
         _delimiter = delimiter
 
@@ -187,11 +189,33 @@ class ComboMaker:
                 template_text = f.read()
             text = _Template(template_text).safe_substitute(combo)
             _dest = dest.format(i=i, **combo)
-            os.makedirs(os.path.dirname(_dest), exist_ok=True)
-            with open(_dest, 'w') as f:
+            ensure_dir(_dest)
+            with open(_dest, 'w', encoding=encoding) as f:
                 f.write(text)
             if mode is not None:
                 os.chmod(_dest, mode_translate(str(mode)))
+        return self
+    
+    def print(self, *line: str, file: str = '', mode=None, encoding='utf-8'):
+        """
+        Print lines to a file against each combo
+
+        :param line: Lines to print, can include format style variables, e.g. {i}, {i:03d}, {TEMP}
+        :param file: File to save the output, if not provided, print to stdout
+        """
+        combos = self._make_combos()
+        out_lines = []
+        for i, combo in enumerate(combos):
+            out_lines.extend(l.format(i=i, **combo) for l in line)
+        out = '\n'.join(out_lines)
+        if file:
+            ensure_dir(file)
+            with open(file, 'w', encoding=encoding) as f:
+                f.write(out)
+            if mode is not None:
+                os.chmod(file, mode_translate(str(mode)))
+        else:
+            print(out)
         return self
 
     def done(self):
