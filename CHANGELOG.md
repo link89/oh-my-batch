@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.2.5
+* fix: change normpath method
+
 ## v0.2.4
 * fix: util: ensure_dir 
 
