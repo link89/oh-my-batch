@@ -58,7 +58,9 @@ def ensure_dir(path: str):
 
     :param path: Path to directory or file.
     """
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    d = os.path.dirname(path)
+    if d:
+        os.makedirs(os.path.dirname(d), exist_ok=True)
 
 
 def mode_translate(mode: str):
