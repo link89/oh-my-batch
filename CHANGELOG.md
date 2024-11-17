@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.3.0
+* breaking: change `omb combo make_files` API
+
 ## v0.2.5
 * fix: change normpath method
 
