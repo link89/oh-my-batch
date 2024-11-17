@@ -1,4 +1,8 @@
 # Change Log
+
+## v0.2.4
+* fix: util: ensure_dir 
+
 ## v0.2.3
 * feat: implement `omb combo print` command
 
