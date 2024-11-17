@@ -189,4 +189,4 @@ def should_submit(job: dict, max_tries: int):
 
 
 def norm_path(path: str):
-    return os.path.normpath(os.path.abspath(path))
+    return os.path.normpath(path)
