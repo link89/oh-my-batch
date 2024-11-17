@@ -161,7 +161,7 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
         return self
 
-    def make_files(self, template: str, dest: str, delimiter='@', mode=None, encoding='utf-8'):
+    def make_files(self, file: str, template: str, delimiter='@', mode=None, encoding='utf-8'):
         """
         Make files from template against each combo
         The template file can include variables with delimiter.
@@ -171,8 +171,8 @@ class ComboMaker:
         For example, if dest is 'output/{i}-{TEMP}.txt', 
         then files are saved as output/0-300K.txt, output/1-400K.txt, ...
 
+        :param file: Path pattern to destination file
         :param template: Path to template file
-        :param dest: Path pattern to destination file
         :param delimiter: Delimiter for variables in template, default is '@', as '$' is popular in shell scripts
         can be changed to other character, e.g $, $$, ...
         :param mode: File mode, e.g. 755, 644, ...
@@ -188,12 +188,12 @@ class ComboMaker:
             with open(template, 'r') as f:
                 template_text = f.read()
             text = _Template(template_text).safe_substitute(combo)
-            _dest = dest.format(i=i, **combo)
-            ensure_dir(_dest)
-            with open(_dest, 'w', encoding=encoding) as f:
+            _file = file.format(i=i, **combo)
+            ensure_dir(_file)
+            with open(_file, 'w', encoding=encoding) as f:
                 f.write(text)
             if mode is not None:
-                os.chmod(_dest, mode_translate(str(mode)))
+                os.chmod(_file, mode_translate(str(mode)))
         return self
     
     def print(self, *line: str, file: str = '', mode=None, encoding='utf-8'):

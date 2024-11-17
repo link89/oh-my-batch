@@ -65,8 +65,8 @@ omb combo \
     add_files DATA_FILE tmp/*.data - \
     add_var TEMP 300 400 500 - \
     add_randint RANDOM -n 3 -a 1 -b 1000 --broadcast - \
-    make_files tmp/in.lmp.tmp tmp/tasks/{i}-T-{TEMP}/in.lmp - \
-    make_files tmp/run.sh.tmp tmp/tasks/{i}-T-{TEMP}/run.sh --mode 755 - \
+    make_files tmp/tasks/{i}-T-{TEMP}/in.lmp --template tmp/in.lmp.tmp - \
+    make_files tmp/tasks/{i}-T-{TEMP}/run.sh --template tmp/run.sh.tmp --mode 755 - \
     done
 ```
 
