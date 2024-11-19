@@ -21,7 +21,7 @@ checkpoint() {
     fi
 }
 
-echo -e "${GREEN}Functiion: checkpoint${NC}"
+echo -e "${GREEN}Function: checkpoint${NC}"
 cat <<EOF
 Usage:
     checkpoint <flag_file> <command> [arg1] [arg2] ...
