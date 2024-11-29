@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.3.1
+* fix: ensure_dir
+
 ## v0.3.0
 * breaking: change `omb combo make_files` API
 
