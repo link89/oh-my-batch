@@ -1,4 +1,6 @@
 # Change Log
+## v0.3.2
+* feat: tempate file path should support variables
 
 ## v0.3.1
 * fix: ensure_dir
