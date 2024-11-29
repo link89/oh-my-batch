@@ -60,7 +60,7 @@ def ensure_dir(path: str):
     """
     d = os.path.dirname(path)
     if d:
-        os.makedirs(os.path.dirname(d), exist_ok=True)
+        os.makedirs(d, exist_ok=True)
 
 
 def mode_translate(mode: str):
