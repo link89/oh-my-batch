@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.1
+* feat: implement `omb combo run_cmd`
+
 ## v0.4.0
 * breaking: use `set_broadcast` to replace `--broadcast` in `omb combo` command
 
