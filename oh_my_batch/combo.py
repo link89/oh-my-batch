@@ -4,7 +4,7 @@ import random
 import json
 import os
 
-from .util import expand_globs, mode_translate, ensure_dir
+from .util import expand_globs, mode_translate, ensure_dir, shell_run
 
 class ComboMaker:
 
@@ -213,6 +213,28 @@ class ComboMaker:
                 os.chmod(file, mode_translate(str(mode)))
         else:
             print(out)
+        return self
+    
+    def run_cmd(self, cmd: str):
+        """
+        Run command against each combo
+
+        For example, 
+        
+        run_cmd "cp {DATA_FIEL} ./path/to/workdir/{i}/data.txt"
+
+        will copy each file in DATA_FILE to ./path/to/workdir/{i}/data.txt
+        
+        :param cmd: Command to run, can include format style variables, e.g. {i}, {i:03d}, {TEMP}
+        """
+        combos = self._make_combos()
+        for i, combo in enumerate(combos):
+            _cmd = cmd.format(i=i, **combo)
+            cp = shell_run(_cmd)
+            if cp.returncode != 0:
+                print(cp.stdout.decode('utf-8'))
+                print(cp.stderr.decode('utf-8'))
+                raise RuntimeError(f"Failed to run command: {_cmd}")
         return self
 
     def done(self):
