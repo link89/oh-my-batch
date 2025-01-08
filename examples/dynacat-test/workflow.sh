@@ -21,7 +21,7 @@ omb combo \
     add_var STEPS 5000 - \
     add_randint SEED -n 4 -a 100000 -b 999999 - \
     add_files_as_one DP_DATASET "$DP_DATASET" --format json-item --abs - \
-    set_broadcast SEED \
+    set_broadcast SEED - \
     make_files $OUT_DIR/dp-train/model-{MODEL_ID}/input.json --template template/deepmd.json - \
     make_files $OUT_DIR/dp-train/model-{MODEL_ID}/run.sh     --template template/dp-run.sh --mode 755 - \
     done
