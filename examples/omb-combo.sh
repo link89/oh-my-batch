@@ -5,7 +5,7 @@ touch tmp/1.data tmp/2.data tmp/3.data
 
 # prepare a lammps input file template
 cat > tmp/in.lmp.tmp <<EOF
-read_data @DATA_FILE
+read_data data.lmp
 velocity all create @TEMP @RANDOM
 run 1000
 EOF
@@ -23,4 +23,5 @@ omb combo \
     set_broadcast RANDOM - \
     make_files tmp/tasks/{i}-T-{TEMP}/in.lmp --template tmp/in.lmp.tmp - \
     make_files tmp/tasks/{i}-T-{TEMP}/run.sh --template tmp/run.sh.tmp --mode 755 - \
+    run_cmd "cp {DATA_FILE} tmp/tasks/{i}-T-{TEMP}/data.lmp" - \
     done
