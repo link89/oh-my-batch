@@ -10,12 +10,13 @@ class TestCombo(TestCase):
     def test_sanity(self):
         combos = (ComboMaker()
             .add_var('VAR', 1, 2, 3)
-            .add_var('VAR_BC', 4, 5, 6, broadcast=True)
+            .add_var('VAR_BC', 4, 5, 6)
             .add_seq('SEQ', start=0, stop=10, step=1)
             .add_randint('RANDINT', n=5, a=1, b=10, seed=0)
-            .add_rand('RAND_BC', n=5, a=1, b=10, seed=0, broadcast=True)
+            .add_rand('RAND_BC', n=5, a=1, b=10, seed=0)
             .add_files('FILES', f'tests/data/*.dummy.txt')
             .add_files_as_one('FILE_ONE', 'tests/data/*.dummy.txt')
+            .set_broadcast('VAR_BC', 'RAND_BC')
             ._make_combos()
         )
         with open(f'{TEST_DIR}/golden/combos.json', 'r+', encoding='utf-8') as f:
@@ -37,4 +38,4 @@ class TestCombo(TestCase):
         for fmt, expected in test_items:
             combo = ComboMaker()
             combo.add_files_as_one('FILE', pattern, format=fmt)
-            self.assertEqual(combo._product_vars['FILE'][0], expected)
+            self.assertEqual(combo._vars['FILE'][0], expected)

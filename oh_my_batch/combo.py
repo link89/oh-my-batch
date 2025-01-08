@@ -14,13 +14,13 @@ class ComboMaker:
 
         :param seed: Seed for random number generator
         """
-        self._product_vars = {}
-        self._broadcast_vars = {}
+        self._vars = {}
+        self._broadcast_keys = []
         if seed is not None:
             random.seed(seed)
         self._combos = []
 
-    def add_seq(self, key: str, start: int, stop: int, step: int=1, broadcast=False):
+    def add_seq(self, key: str, start: int, stop: int, step: int=1):
         """
         Add a variable with sequence of integer values
 
@@ -28,13 +28,12 @@ class ComboMaker:
         :param start: Start value
         :param stop: Stop value
         :param step: Step
-        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         """
         args = list(range(start, stop, step))
-        self.add_var(key, *args, broadcast=broadcast)
+        self.add_var(key, *args)
         return self
 
-    def add_randint(self, key: str, n: int, a: int, b: int, broadcast=False, seed=None):
+    def add_randint(self, key: str, n: int, a: int, b: int, seed=None):
         """
         Add a variable with random integer values
 
@@ -42,16 +41,15 @@ class ComboMaker:
         :param n: Number of values
         :param a: Lower bound
         :param b: Upper bound
-        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         :param seed: Seed for random number generator
         """
         if seed is not None:
             random.seed(seed)
         args = [random.randint(a, b) for _ in range(n)]
-        self.add_var(key, *args, broadcast=broadcast)
+        self.add_var(key, *args)
         return self
 
-    def add_rand(self, key: str, n: int, a: float, b: float, broadcast=False, seed=None):
+    def add_rand(self, key: str, n: int, a: float, b: float, seed=None):
         """
         Add a variable with random float values
 
@@ -59,16 +57,15 @@ class ComboMaker:
         :param n: Number of values
         :param a: Lower bound
         :param b: Upper bound
-        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         :param seed: Seed for random number generator
         """
         if seed is not None:
             random.seed(seed)
         args = [random.uniform(a, b) for _ in range(n)]
-        self.add_var(key, *args, broadcast=broadcast)
+        self.add_var(key, *args)
         return self
 
-    def add_files(self, key: str, *path: str, broadcast=False, abs=False, raise_invalid=False):
+    def add_files(self, key: str, *path: str, abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern
         For example, suppose there are 3 files named 1.txt, 2.txt, 3.txt in data directory,
@@ -77,7 +74,6 @@ class ComboMaker:
 
         :param key: Variable name
         :param path: Path to files, can include glob pattern
-        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         :param abs: If True, path will be turned into absolute path
         :param raise_invalid: If True, will raise error if no file found for a glob pattern
         """
@@ -86,10 +82,10 @@ class ComboMaker:
             raise ValueError(f"No files found for {path}")
         if abs:
             args = [os.path.abspath(p) for p in args]
-        self.add_var(key, *args, broadcast=broadcast)
+        self.add_var(key, *args)
         return self
 
-    def add_files_as_one(self, key: str, *path: str, broadcast=False, format=None,
+    def add_files_as_one(self, key: str, *path: str, format=None,
                          sep=' ', abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern as one string
@@ -100,7 +96,6 @@ class ComboMaker:
 
         :param key: Variable name
         :param path: Path to files, can include glob pattern
-        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         :param format: the way to format the files, can be None, 'json-list','json-item'
         :param sep: Separator to join files
         :param abs: If True, path will be turned into absolute path
@@ -119,28 +114,19 @@ class ComboMaker:
             value = json.dumps(args).strip('[]')
         else:
             raise ValueError(f"Invalid format: {format}")
-        self.add_var(key, value, broadcast=broadcast)
+        self.add_var(key, value)
         return self
 
-    def add_var(self, key: str, *args, broadcast=False):
+    def add_var(self, key: str, *args):
         """
         Add a variable with values
 
         :param key: Variable name
         :param args: Values
-        :param broadcast: If True, values are broadcasted, otherwise they are producted when making combos
         """
         if key == 'i':
             raise ValueError("Variable name 'i' is reserved")
-
-        if broadcast:
-            if key in self._product_vars:
-                raise ValueError(f"Variable {key} already defined as product variable")
-            self._broadcast_vars.setdefault(key, []).extend(args)
-        else:
-            if key in self._broadcast_vars:
-                raise ValueError(f"Variable {key} already defined as broadcast variable")
-            self._product_vars.setdefault(key, []).extend(args)
+        self._vars.setdefault(key, []).extend(args)
         return self
 
     def shuffle(self, *keys: str, seed=None):
@@ -153,12 +139,22 @@ class ComboMaker:
             random.seed(seed)
 
         for key in keys:
-            if key in self._product_vars:
-                random.shuffle(self._product_vars[key])
-            elif key in self._broadcast_vars:
-                random.shuffle(self._broadcast_vars[key])
+            if key in self._vars:
+                random.shuffle(self._vars[key])
             else:
                 raise ValueError(f"Variable {key} not found")
+        return self
+    
+    def set_broadcast(self, *keys: str):
+        """
+        Specify variables use broadcast strategy instead of cartesian product
+
+        :param keys: Variable names to broadcast
+        """
+        for key in keys:
+            if key not in self._vars:
+                raise ValueError(f"Variable {key} not found")
+            self._broadcast_keys.append(key)
         return self
 
     def make_files(self, file: str, template: str, delimiter='@', mode=None, encoding='utf-8'):
@@ -226,15 +222,23 @@ class ComboMaker:
         pass
 
     def _make_combos(self):
-        if not self._product_vars:
+        if not self._vars:
             return self._combos
-        keys = self._product_vars.keys()
-        values_list = product(*self._product_vars.values())
+        
+        broadcast_vars = {}
+        
+        for k in self._broadcast_keys:
+            broadcast_vars[k] = self._vars[k]
+            del self._vars[k]
+            
+        keys = self._vars.keys()
+        values_list = product(*self._vars.values())
+
         combos = [ dict(zip(keys, values)) for values in values_list ]
         for i, combo in enumerate(combos):
-            for k, v in self._broadcast_vars.items():
+            for k, v in broadcast_vars.items():
                 combo[k] = v[i % len(v)]
         self._combos.extend(combos)
-        self._product_vars = {}
-        self._broadcast_vars = {}
+        self._vars = {}
+        self._broadcast_keys = []
         return self._combos
