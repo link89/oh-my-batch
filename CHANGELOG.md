@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.0
+* breaking: use `set_broadcast` to replace `--broadcast` in `omb combo` command
+
 ## v0.3.2
 * feat: tempate file path should support variables
 
