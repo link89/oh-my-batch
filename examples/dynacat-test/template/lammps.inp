@@ -1,0 +1,52 @@
+variable        TEMP            equal @TEMP
+variable        PRES            equal -1.000000
+variable        TAU_T           equal 0.100000
+variable        TAU_P           equal 0.500000
+variable        NSTEPS          equal @STEPS
+variable        DUMPFREQ        equal 100
+
+units           metal
+boundary        p p p
+atom_style      atomic
+atom_modify     map yes
+
+neighbor        2.0 bin
+
+read_data @DATA_FILE
+mass 1 196.97
+mass 2 12.01
+mass 3 1.008
+
+pair_style      deepmd  @DP_MODELS  out_freq ${DUMPFREQ} out_file model_devi.out
+pair_coeff      * *
+
+thermo_style    custom step temp pe ke etotal
+thermo          1000
+
+# compute atomic temperature
+compute         KE all ke/atom
+variable        KB equal 8.625e-5
+variable        TEMP_per_atom atom c_KE/1.5/${KB}
+compute         peratom all pe/atom
+dump            1 all custom ${DUMPFREQ} ${TEMP}k.lammpstrj id type x y z fx fy fz
+
+dump_modify     1 sort id
+dump_modify     1 element Au C H
+restart         10000 restart/dpgen.restart
+
+velocity        all create ${TEMP} 536797
+fix             1 all nve
+fix             2 all temp/csvr ${TEMP} ${TEMP} 0.1 54324
+fix            dpgen_plm all plumed plumedfile plumed.inp outfile output.plumed
+
+#compute cluster_temp cluster temp
+
+variable temp equal temp
+variable etotal equal etotal
+variable pe equal pe
+variable ke equal ke
+variable step equal step
+fix             sys_info all print 1 "${temp} ${etotal} ${pe} ${ke} ${step}" title "temp etotal pe ke step" file energy.log
+
+timestep        0.000500
+run             ${NSTEPS} upto

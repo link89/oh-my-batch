@@ -1,0 +1,71 @@
+{
+    "model": {
+      "type_map": [
+        "Au",
+        "C",
+        "H"
+      ],
+      "descriptor": {
+        "type": "se_atten_v2",
+        "sel": [
+          100,
+          100,
+          100
+        ],
+        "rcut_smth": 0.50,
+        "rcut": 8.00,
+        "neuron": [
+          25,
+          50,
+          100
+        ],
+        "resnet_dt": false,
+        "axis_neuron": 16,
+        "seed": @SEED,
+        "attn": 128,
+        "attn_layer": 0,
+        "attn_dotr": true,
+        "attn_mask": false,
+        "precision": "float64"
+      },
+      "fitting_net": {
+        "neuron": [
+          240,
+          240,
+          240
+        ],
+        "resnet_dt": true,
+        "precision": "float64",
+        "seed": @SEED
+      }
+    },
+
+    "learning_rate": {
+      "type": "exp",
+      "decay_steps": 5000,
+      "start_lr": 0.003
+    },
+
+    "loss": {
+      "start_pref_e": 0.02,
+      "limit_pref_e": 2,
+      "start_pref_f": 1000,
+      "limit_pref_f": 1,
+      "start_pref_v": 0,
+      "limit_pref_v": 0
+    },
+
+    "training": {
+      "training_data": {
+        "systems": [
+            @DP_DATASET
+        ],
+        "batch_size": 1
+      },
+      "numb_steps": @STEPS,
+      "seed": @SEED,
+      "disp_file": "lcurve.out",
+      "disp_freq": 100,
+      "save_freq": 1000
+    }
+  }
