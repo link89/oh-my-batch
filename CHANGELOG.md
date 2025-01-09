@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.3
+* feat: implement `omb combo show_combos`
+
 ## v0.4.2
 * breaking: rename `add_files_as_one` to `add_file_set`
 
