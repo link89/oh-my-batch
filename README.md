@@ -102,14 +102,11 @@ EOF
 omb batch \
     add_work_dirs tmp/tasks/* - \
     add_header_files tmp/lammps_header.sh - \
-    add_cmds "checkpoint lmp.done ./run.sh" - \
+    add_cmds "./run.sh" - \
     make tmp/lmp-{i}.slurm --concurrency 2
 ```
 
 You will find batch scripts `tmp/lmp-0.slurm` and `tmp/lmp-1.slurm` in `tmp` directory.
-
-`omb batch` will provide some useful functions in the batch script.
-For example, `checkpoint` will check if the job is done and skip the job if it's done.
 
 You can run the above script by `./examples/omb-batch.sh`,
 

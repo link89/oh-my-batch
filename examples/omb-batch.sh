@@ -12,5 +12,5 @@ EOF
 omb batch \
     add_work_dirs tmp/tasks/* - \
     add_header_files tmp/lammps_header.sh - \
-    add_cmds "checkpoint lmp.done ./run.sh" - \
+    add_cmds "./run.sh" - \
     make tmp/lmp-{i}.slurm --concurrency 2
