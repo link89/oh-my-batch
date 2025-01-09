@@ -1,10 +1,9 @@
 #!/bin/bash
-
 set -e
 
 [ -f train.done ] || {
-dp train input.json
-touch train.done
+    dp train input.json
+    touch train.done
 }
 
 
