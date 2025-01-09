@@ -221,7 +221,7 @@ class ComboMaker:
 
         For example,
 
-        run_cmd "cp {DATA_FIEL} ./path/to/workdir/{i}/data.txt"
+        run_cmd "cp {DATA_FILE} ./path/to/workdir/{i}/data.txt"
 
         will copy each file in DATA_FILE to ./path/to/workdir/{i}/data.txt
 
@@ -236,6 +236,20 @@ class ComboMaker:
                 print(cp.stderr.decode('utf-8'))
                 raise RuntimeError(f"Failed to run command: {_cmd}")
         return self
+
+    def show_combos(self):
+        combos = self._make_combos()
+        if not combos:
+            print("No combos")
+        keys = combos[0].keys()
+
+        for i, combo in enumerate(combos):
+            print(f"> Combo {i}:")
+            for k in keys:
+                v = str(combo[k])
+                if '\n' in v:
+                    v = f"\n{v}"
+                print(f"@{k}: {v}")
 
     def done(self):
         """
