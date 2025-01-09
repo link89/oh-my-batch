@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.7
+* `omb job slurm submit` raise error on fail job 
+
 ## v0.4.6
 * don't inject script to `omb batch`
 
