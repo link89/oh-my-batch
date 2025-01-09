@@ -33,7 +33,7 @@ class ComboMaker:
         self.add_var(key, *args)
         return self
 
-    def add_randint(self, key: str, n: int, a: int, b: int, seed=None):
+    def add_randint(self, key: str, n: int, a: int, b: int, uniq=False, seed=None):
         """
         Add a variable with random integer values
 
@@ -41,11 +41,17 @@ class ComboMaker:
         :param n: Number of values
         :param a: Lower bound
         :param b: Upper bound
+        :param uniq: If True, values are unique, default is False
         :param seed: Seed for random number generator
         """
         if seed is not None:
             random.seed(seed)
-        args = [random.randint(a, b) for _ in range(n)]
+        if uniq:
+            if b - a + 1 < n:
+                raise ValueError("Not enough unique values")
+            args = random.sample(range(a, b + 1), n)
+        else:
+            args = [random.randint(a, b) for _ in range(n)]
         self.add_var(key, *args)
         return self
 
