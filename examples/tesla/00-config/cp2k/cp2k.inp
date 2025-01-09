@@ -48,7 +48,7 @@
         &END XC
     &END DFT
     &SUBSYS
-    @include coord_n_cell.inc
+    @include @DATA_FILE
     &KIND O
         BASIS_SET DZVP-MOLOPT-SR-GTH
         # All available BASIS_SET:
