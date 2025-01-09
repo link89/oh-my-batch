@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.6
+* don't inject script to `omb batch`
+
 ## v0.4.5
 * chore: fix fire version
 
