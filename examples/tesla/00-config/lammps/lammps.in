@@ -1,6 +1,7 @@
 variable    DATA_FILE        string @DATA_FILE
 variable    N_STEPS          equal @STEPS
 variable    TEMP             equal @TEMP
+variable    SEED             equal @SEED
 
 variable    TAU_T            equal 0.1
 variable    TAU_P            equal 0.5
@@ -27,7 +28,7 @@ mass ${O} 15.999
 pair_style deepmd @DP_MODELS out_freq ${THERMO_FREQ} out_file model_devi.out
 pair_coeff * *
 
-if "${restart} == 0" then "velocity all create ${TEMP} 13"
+if "${restart} == 0" then "velocity all create ${TEMP} ${SEED}"
 fix 1 all nvt temp ${TEMP} ${TEMP} ${TAU_T}
 fix cll_plumed all plumed plumedfile plumed.in outfile plumed.out
 thermo_style custom step temp pe ke etotal press vol lx ly lz xy xz yz
