@@ -85,13 +85,13 @@ class ComboMaker:
         self.add_var(key, *args)
         return self
 
-    def add_files_as_one(self, key: str, *path: str, format=None,
+    def add_file_set(self, key: str, *path: str, format=None,
                          sep=' ', abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern as one string
         Unlike add_files, this function joins the files with a delimiter.
         For example, suppose there are 1.txt, 2.txt, 3.txt in data directory,
-        then calling add_files_as_one('DATA_FILE', 'data/*.txt') will add string "data/1.txt data/2.txt data/3.txt"
+        then calling add_file_set('DATA_FILE', 'data/*.txt') will add string "data/1.txt data/2.txt data/3.txt"
         to the variable DATA_FILE.
 
         :param key: Variable name
@@ -144,7 +144,7 @@ class ComboMaker:
             else:
                 raise ValueError(f"Variable {key} not found")
         return self
-    
+
     def set_broadcast(self, *keys: str):
         """
         Specify variables use broadcast strategy instead of cartesian product
@@ -214,17 +214,17 @@ class ComboMaker:
         else:
             print(out)
         return self
-    
+
     def run_cmd(self, cmd: str):
         """
         Run command against each combo
 
-        For example, 
-        
+        For example,
+
         run_cmd "cp {DATA_FIEL} ./path/to/workdir/{i}/data.txt"
 
         will copy each file in DATA_FILE to ./path/to/workdir/{i}/data.txt
-        
+
         :param cmd: Command to run, can include format style variables, e.g. {i}, {i:03d}, {TEMP}
         """
         combos = self._make_combos()
@@ -246,13 +246,13 @@ class ComboMaker:
     def _make_combos(self):
         if not self._vars:
             return self._combos
-        
+
         broadcast_vars = {}
-        
+
         for k in self._broadcast_keys:
             broadcast_vars[k] = self._vars[k]
             del self._vars[k]
-            
+
         keys = self._vars.keys()
         values_list = product(*self._vars.values())
 

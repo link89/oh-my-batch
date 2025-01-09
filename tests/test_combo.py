@@ -15,7 +15,7 @@ class TestCombo(TestCase):
             .add_randint('RANDINT', n=5, a=1, b=10, seed=0)
             .add_rand('RAND_BC', n=5, a=1, b=10, seed=0)
             .add_files('FILES', f'tests/data/*.dummy.txt')
-            .add_files_as_one('FILE_ONE', 'tests/data/*.dummy.txt')
+            .add_file_set('FILE_ONE', 'tests/data/*.dummy.txt')
             .set_broadcast('VAR_BC', 'RAND_BC')
             ._make_combos()
         )
@@ -27,7 +27,7 @@ class TestCombo(TestCase):
         self.assertEqual(len(combos), l)
         self.assertEqual(combos, expected)
 
-    def test_add_files_as_one(self):
+    def test_add_file_set(self):
 
         pattern = 'tests/data/*.dummy.txt'
         test_items = [
@@ -37,5 +37,5 @@ class TestCombo(TestCase):
 
         for fmt, expected in test_items:
             combo = ComboMaker()
-            combo.add_files_as_one('FILE', pattern, format=fmt)
+            combo.add_file_set('FILE', pattern, format=fmt)
             self.assertEqual(combo._vars['FILE'][0], expected)
