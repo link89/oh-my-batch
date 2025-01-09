@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.2
+* breaking: rename `add_files_as_one` to `add_file_set`
+
 ## v0.4.1
 * feat: implement `omb combo run_cmd`
 
