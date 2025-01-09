@@ -3,7 +3,7 @@
 set -e
 
 # ensure ITER_NAME is set
-[ -z "$ITER_NAME" ] && echo "environment variable ITER_NAME is not set" && exit 1
+[ -z "$ITER_NAME" ] && echo "environment variable ITER_NAME is not set" && exit 1 || true
 
 CONFIG_DIR=./00-config
 WORK_DIR=./10-workdir
@@ -12,11 +12,11 @@ WORK_DIR=./10-workdir
 ITER_DIR=$WORK_DIR/iter-$ITER_NAME/
 mkdir -p $ITER_DIR
 
-[ -f $ITER_DIR/iter.done ] && echo "iteration $ITER_NAME already done" && exit 0
+[ -f $ITER_DIR/iter.done ] && echo "iteration $ITER_NAME already done" && exit 0 || true
 
 # step 1: training
 
-DP_DIR = $ITER_DIR/deepmd
+DP_DIR=$ITER_DIR/deepmd
 mkdir -p $DP_DIR
 
 omb combo \
@@ -39,7 +39,7 @@ omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $
 
 
 # step 2: explore
-LMP_DIR = $ITER_DIR/lammps
+LMP_DIR=$ITER_DIR/lammps
 mkdir -p $LMP_DIR
 
 omb combo \
@@ -64,7 +64,7 @@ omb job slurm submit "$LMP_DIR/lammps*.slurm" --max_tries 2 --wait --recovery $L
 
 
 # step 3: screening
-SCREENING_DIR = $ITER_DIR/screening
+SCREENING_DIR=$ITER_DIR/screening
 mkdir -p $SCREENING_DIR
 
 # the good, the bad, and the ugly
@@ -77,7 +77,7 @@ ai2-kit tool ase read "$LMP_DIR/job-*/dump.lammpstrj" \
 
 
 # step 4: labeling
-LABELING_DIR = $ITER_DIR/labeling
+LABELING_DIR=$ITER_DIR/labeling
 mkdir -p $LABELING_DIR
 
 # convert the first 10 candidates to cp2k input
