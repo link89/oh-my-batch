@@ -9,7 +9,7 @@ CONFIG_DIR=./00-config
 WORK_DIR=./10-workdir
 
 # create iter dir
-ITER_DIR=$WORK_DIR/iter-$ITER_NAME/
+ITER_DIR=$WORK_DIR/iter-$ITER_NAME
 mkdir -p $ITER_DIR
 
 [ -f $ITER_DIR/iter.done ] && echo "iteration $ITER_NAME already done" && exit 0 || true
