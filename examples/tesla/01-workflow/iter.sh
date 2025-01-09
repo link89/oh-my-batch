@@ -93,6 +93,7 @@ omb batch \
     add_cmds "bash ./run.sh" - \
     make $LABELING_DIR/cp2k-{i}.slurm  --concurrency 5
 
+omb job slurm submit "$LABELING_DIR/cp2k*.slurm" --max_tries 2 --wait --recovery $LABELING_DIR/slurm-recovery.json
 
 # final step: convert cp2k output to dpdata
 ai2-kit tool dpdata read $LABELING_DIR/job-*/output --fmt='cp2k/output' --type_map="[Ag,O]" - write $ITER_DIR/new-dataset
