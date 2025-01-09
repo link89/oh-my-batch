@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.4
+* feat: `omb combo add_randint` support `--uniq` option
+
 ## v0.4.3
 * feat: implement `omb combo show_combos`
 
