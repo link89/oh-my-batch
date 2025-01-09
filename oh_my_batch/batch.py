@@ -86,9 +86,6 @@ class BatchMaker:
         :param path: Path to save batch script files, use {i} to represent index
         :param concurrency: Number of scripts to to make
         """
-        # inject pre-defined functions
-        self.add_header_files(get_asset('functions.sh'))
-
         header = '\n'.join(self._script_header)
         bottom = '\n'.join(self._script_bottom)
         for i, work_dirs in enumerate(split_list(self._work_dirs, concurrency)):
