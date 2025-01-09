@@ -23,7 +23,7 @@ omb combo \
     add_seq MODEL_ID 0 4 - \
     add_var STEPS 5000 - \
     add_randint SEED -n 4 -a 100000 -b 999999 --uniq - \
-    add_file_set DP_DATASET "$WORK_DIR/dp-init-data" "$WORK_DIR/iter-*/new-dataset" --format json-item --abs - \
+    add_file_set DP_DATASET "$WORK_DIR/dp-init-data/*" "$WORK_DIR/iter-*/new-dataset/*" --format json-item --abs - \
     set_broadcast SEED - \
     make_files $DP_DIR/model-{MODEL_ID}/input.json --template $CONFIG_DIR/deepmd/input.json - \
     make_files $DP_DIR/model-{MODEL_ID}/run.sh     --template $CONFIG_DIR/deepmd/run.sh --mode 755 - \
