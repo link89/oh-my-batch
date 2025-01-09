@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.5
+* chore: fix fire version
+
 ## v0.4.4
 * feat: `omb combo add_randint` support `--uniq` option
 
