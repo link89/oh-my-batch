@@ -87,7 +87,13 @@ class BaseJobManager:
                 break
 
             time.sleep(interval)
-
+        for job in jobs:
+            error = False
+            if not JobState.is_success(job['state']):
+                logger.error('Job %s failed', job['script'])
+                error = True
+        if error:
+            raise RuntimeError('Some jobs failed')
 
     def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
         jobs = self._update_state(jobs)
