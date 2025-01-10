@@ -83,6 +83,7 @@ mkdir -p $SCREENING_DIR
 
     touch $SCREENING_DIR/screening.done
 }
+cat $SCREENING_DIR/stats.tsv
 
 
 # step 4: labeling
