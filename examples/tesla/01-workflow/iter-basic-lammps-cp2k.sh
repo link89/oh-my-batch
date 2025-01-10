@@ -19,7 +19,7 @@ mkdir -p $ITER_DIR
 DP_DIR=$ITER_DIR/deepmd
 mkdir -p $DP_DIR
 
-[ -f $DP_DIR/deepmd.done ] || {
+[ -f $DP_DIR/setup.done ] || {
     omb combo \
         add_seq MODEL_ID 0 4 - \
         add_var STEPS 5000 - \
@@ -35,17 +35,16 @@ mkdir -p $DP_DIR
         add_header_files $CONFIG_DIR/deepmd/slurm-header.sh - \
         add_cmds "bash ./run.sh" - \
         make $DP_DIR/dp-train-{i}.slurm  --concurrency 4
-
-    omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $DP_DIR/slurm-recovery.json
-
-    touch $DP_DIR/deepmd.done
+    touch $DP_DIR/setup.done
 }
+
+omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $DP_DIR/slurm-recovery.json
 
 # step 2: explore
 LMP_DIR=$ITER_DIR/lammps
 mkdir -p $LMP_DIR
 
-[ -f $LMP_DIR/lammps.done ] || {
+[ -f $LMP_DIR/setup.done ] || {
     omb combo \
         add_files DATA_FILE "$WORK_DIR/lammps-data/*" --abs -\
         add_file_set DP_MODELS "$DP_DIR/model-*/compress.pb" --abs - \
@@ -64,10 +63,10 @@ mkdir -p $LMP_DIR
         add_cmds "bash ./run.sh" - \
         make $LMP_DIR/lammps-{i}.slurm  --concurrency 5
 
-    omb job slurm submit "$LMP_DIR/lammps*.slurm" --max_tries 2 --wait --recovery $LMP_DIR/slurm-recovery.json
-
-    touch $LMP_DIR/lammps.done
+    touch $LMP_DIR/setup.done
 }
+
+omb job slurm submit "$LMP_DIR/lammps*.slurm" --max_tries 2 --wait --recovery $LMP_DIR/slurm-recovery.json
 
 # step 3: screening
 SCREENING_DIR=$ITER_DIR/screening
@@ -90,7 +89,7 @@ mkdir -p $SCREENING_DIR
 LABELING_DIR=$ITER_DIR/cp2k
 mkdir -p $LABELING_DIR
 
-[ -f $LABELING_DIR/cp2k.done ] || {
+[ -f $LABELING_DIR/setup.done ] || {
     # convert the first 10 candidates to cp2k input
     ai2-kit tool ase read $SCREENING_DIR/candidate.xyz --index :10: - write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
 
@@ -106,10 +105,10 @@ mkdir -p $LABELING_DIR
         add_cmds "bash ./run.sh" - \
         make $LABELING_DIR/cp2k-{i}.slurm  --concurrency 5
 
-    omb job slurm submit "$LABELING_DIR/cp2k*.slurm" --max_tries 2 --wait --recovery $LABELING_DIR/slurm-recovery.json
-
-    touch $LABELING_DIR/cp2k.done
+    touch $LABELING_DIR/setup.done
 }
+
+omb job slurm submit "$LABELING_DIR/cp2k*.slurm" --max_tries 2 --wait --recovery $LABELING_DIR/slurm-recovery.json
 
 # final step: convert cp2k output to dpdata
 ai2-kit tool dpdata read $LABELING_DIR/job-*/output --fmt='cp2k/output' --type_map="[Ag,O]" - write $ITER_DIR/new-dataset
