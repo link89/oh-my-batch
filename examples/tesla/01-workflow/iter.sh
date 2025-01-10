@@ -87,10 +87,10 @@ mkdir -p $SCREENING_DIR
 
 
 # step 4: labeling
-LABELING_DIR=$ITER_DIR/labeling
+LABELING_DIR=$ITER_DIR/cp2k
 mkdir -p $LABELING_DIR
 
-[ -f $LABELING_DIR/labeling.done ] || {
+[ -f $LABELING_DIR/cp2k.done ] || {
     # convert the first 10 candidates to cp2k input
     ai2-kit tool ase read $SCREENING_DIR/candidate.xyz --index :10: - write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
 
@@ -108,7 +108,7 @@ mkdir -p $LABELING_DIR
 
     omb job slurm submit "$LABELING_DIR/cp2k*.slurm" --max_tries 2 --wait --recovery $LABELING_DIR/slurm-recovery.json
 
-    touch $LABELING_DIR/labeling.done
+    touch $LABELING_DIR/cp2k.done
 }
 
 # final step: convert cp2k output to dpdata
