@@ -75,7 +75,7 @@ mkdir -p $SCREENING_DIR
 
 [ -f $SCREENING_DIR/screening.done ] || {
     # the good, the bad, and the ugly
-    ai2-kit tool ase read "$LMP_DIR/job-*/dump.lammpstrj" \
+    ai2-kit tool ase read "$LMP_DIR/job-*/dump.lammpstrj" --specorder "[Ag,O]" \
         - to_model_devi "$LMP_DIR/job-*/model_devi.out" \
         - grade --lo 0.1 --hi 0.2 --col max_devi_f \
         - dump_stats $SCREENING_DIR/stats.tsv \
