@@ -6,7 +6,7 @@ set -e
 
 WORK_DIR=./10-workdir
 
-[ -f $WORK_DIR/setup.done ] && echo "setup already done" && exit 0 || true
+[ -f $WORK_DIR/setup.done ] && echo "setup already done" && exit 0 || echo "starting setup at $WORK_DIR"
 
 ai2-kit tool ase read ./00-config/aimd.xyz - to_dpdata - write $WORK_DIR/dp-init-data
 ai2-kit tool ase read ./00-config/aimd.xyz --index '::20' - write_frames $WORK_DIR/lammps-data/{i:03d}.data --format lammps-data --specorder "[Ag,O]"
