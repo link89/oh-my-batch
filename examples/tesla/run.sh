@@ -2,7 +2,7 @@
 
 set -e
 
-pip install "ai2-kit>=0.22.7" "oh-my-batch>=0.4.7"
+pip install "ai2-kit>=0.22.8" "oh-my-batch>=0.4.7"
 
 ./01-workflow/setup.sh
 
