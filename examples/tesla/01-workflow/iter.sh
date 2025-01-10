@@ -51,7 +51,7 @@ mkdir -p $LMP_DIR
         add_file_set DP_MODELS "$DP_DIR/model-*/compress.pb" --abs - \
         add_var TEMP 300 500 1000 - \
         add_var STEPS 5000 - \
-        add_randint SEED -n 100000 -a 0 -b 25535 --uniq - \
+        add_randint SEED -n 10000 -a 0 -b 99999 - \
         set_broadcast SEED - \
         make_files $LMP_DIR/job-{TEMP}K-{i:03d}/lammps.in --template $CONFIG_DIR/lammps/lammps.in - \
         make_files $LMP_DIR/job-{TEMP}K-{i:03d}/plumed.in --template $CONFIG_DIR/lammps/plumed.in - \
