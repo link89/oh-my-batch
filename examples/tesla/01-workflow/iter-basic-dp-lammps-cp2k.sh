@@ -19,7 +19,7 @@ mkdir -p $ITER_DIR
 DP_DIR=$ITER_DIR/deepmd
 mkdir -p $DP_DIR
 
-[ -f $DP_DIR/setup.done ] || {
+[ -f $DP_DIR/setup.done ] && echo "skip deepmd setup" || {
     omb combo \
         add_seq MODEL_ID 0 4 - \
         add_var STEPS 5000 - \
@@ -44,7 +44,7 @@ omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $
 LMP_DIR=$ITER_DIR/lammps
 mkdir -p $LMP_DIR
 
-[ -f $LMP_DIR/setup.done ] || {
+[ -f $LMP_DIR/setup.done ] && echo "skip lammps setup" || {
     omb combo \
         add_files DATA_FILE "$WORK_DIR/lammps-data/*" --abs -\
         add_file_set DP_MODELS "$DP_DIR/model-*/compress.pb" --abs - \
@@ -72,7 +72,7 @@ omb job slurm submit "$LMP_DIR/lammps*.slurm" --max_tries 2 --wait --recovery $L
 SCREENING_DIR=$ITER_DIR/screening
 mkdir -p $SCREENING_DIR
 
-[ -f $SCREENING_DIR/screening.done ] || {
+[ -f $SCREENING_DIR/screening.done ] && echo "skip screening" || {
     # the good, the bad, and the ugly
     ai2-kit tool ase read "$LMP_DIR/job-*/dump.lammpstrj" --specorder "[Ag,O]" \
         - to_model_devi "$LMP_DIR/job-*/model_devi.out" \
@@ -90,7 +90,7 @@ cat $SCREENING_DIR/stats.tsv
 LABELING_DIR=$ITER_DIR/cp2k
 mkdir -p $LABELING_DIR
 
-[ -f $LABELING_DIR/setup.done ] || {
+[ -f $LABELING_DIR/setup.done ] && echo "skip cp2k setup" || {
     # convert the first 10 candidates to cp2k input
     ai2-kit tool ase read $SCREENING_DIR/candidate.xyz --index :10: - write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
 
