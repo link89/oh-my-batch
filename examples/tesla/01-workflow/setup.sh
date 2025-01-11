@@ -4,7 +4,7 @@
 set -e
 
 
-WORK_DIR=./10-workdir
+WORK_DIR=./20-workdir
 
 [ -f $WORK_DIR/setup.done ] && echo "setup already done" && exit 0 || echo "starting setup at $WORK_DIR"
 

@@ -6,7 +6,7 @@ set -e
 [ -z "$ITER_NAME" ] && echo "environment variable ITER_NAME is not set" && exit 1 || echo "ITER_NAME=$ITER_NAME"
 
 CONFIG_DIR=./00-config
-WORK_DIR=./10-workdir
+WORK_DIR=./20-workdir
 
 # create iter dir
 ITER_DIR=$WORK_DIR/iter-$ITER_NAME
