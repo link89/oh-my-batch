@@ -1,18 +1,15 @@
 # TESLA Workflow
-
 A bash script based workflow for training a machine learning potential automatically.
 
 ## Introduction
-
-**T**rain-**E**xplore-**S**creen-**L**abel **A**ctive-learning (TESLA)  workflow is a bash script based workflow for training a machine learning potential automatically. 
+**T**rain-**E**xplore-**S**creen-**L**abel **A**ctive-learning (TESLA) workflow is a bash script based workflow for training a machine learning potential automatically. 
 
 This workflow is inspired by [dpgen](https://github.com/deepmodeling/dpgen) and [ai2-kit](https://github.com/chenggroup/ai2-kit). 
 
-This workflow is built with `oh-my-batch` and `ai2-kit`. It's a purly bash script, which makes it easy to use and modify. Developers can easily add their custom steps to the workflow by modifying the bash script directly to meet their specific needs.
-
+It is  a plurly bash script built with `oh-my-batch` and `ai2-kit`, which makes it easy to customize. 
+Developers can easily add their own steps to the workflow by modifying the bash script directly. 
 
 ## Getting Started
-
 To run the workflow, you need to ensure your environment has Python 3. And then all you need to do is to run the following command:
 
 ```bash
