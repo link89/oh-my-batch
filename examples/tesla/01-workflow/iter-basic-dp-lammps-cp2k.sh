@@ -73,14 +73,15 @@ SCREENING_DIR=$ITER_DIR/screening
 mkdir -p $SCREENING_DIR
 
 [ -f $SCREENING_DIR/screening.done ] && echo "skip screening" || {
-    # the good, the bad, and the ugly
-    ai2-kit tool ase read "$LMP_DIR/job-*/dump.lammpstrj" --specorder "[Ag,O]" \
-        - to_model_devi "$LMP_DIR/job-*/model_devi.out" \
-        - grade --lo 0.1 --hi 0.2 --col max_devi_f \
-        - dump_stats $SCREENING_DIR/stats.tsv \
-        - to_ase --level bad \
-        - write $SCREENING_DIR/candidate.xyz
+    # the ai2-kit model-devi tool is used to screen the candidates
+    # for more information, please refer to: https://github.com/chenggroup/ai2-kit/blob/main/doc/manual/model-deviation.md
+    ai2-kit tool model_devi read "$LMP_DIR/job-*/" --traj_file dump.lammpstrj  --specorder "[Ag,O]" --ignore_error - \
+        grade --lo 0.1 --hi 0.2 --col max_devi_f - \
+        dump_stats $SCREENING_DIR/stats.tsv - \
+        write $SCREENING_DIR/decent.xyz --level decent --slice "10:" - \
+        done
 
+    # in the above command slice "10:" is used to skip the first 10 frames in dump.lammpstrj
     touch $SCREENING_DIR/screening.done
 }
 cat $SCREENING_DIR/stats.tsv
