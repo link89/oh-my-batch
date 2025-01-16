@@ -76,9 +76,10 @@ mkdir -p $SCREENING_DIR
     # the ai2-kit model-devi tool is used to screen the candidates
     # for more information, please refer to: https://github.com/chenggroup/ai2-kit/blob/main/doc/manual/model-deviation.md
     ai2-kit tool model_devi read "$LMP_DIR/job-*/" --traj_file dump.lammpstrj  --specorder "[Ag,O]" --ignore_error - \
+        slice "10:" - \
         grade --lo 0.1 --hi 0.2 --col max_devi_f - \
         dump_stats $SCREENING_DIR/stats.tsv - \
-        write $SCREENING_DIR/decent.xyz --level decent --slice "10:" - \
+        write $SCREENING_DIR/decent.xyz --level decent \
         done
 
     # in the above command slice "10:" is used to skip the first 10 frames in dump.lammpstrj
