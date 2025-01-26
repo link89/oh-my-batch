@@ -79,10 +79,9 @@ mkdir -p $SCREENING_DIR
         slice "10:" - \
         grade --lo 0.1 --hi 0.2 --col max_devi_f - \
         dump_stats $SCREENING_DIR/stats.tsv - \
-        write $SCREENING_DIR/decent.xyz --level decent \
+        write $SCREENING_DIR/candidate.xyz --level decent - \
         done
-
-    # in the above command slice "10:" is used to skip the first 10 frames in dump.lammpstrj
+    # in the above command slice "10:" is used to skip the first 10 frames of every dump.lammpstrj before grading
     touch $SCREENING_DIR/screening.done
 }
 cat $SCREENING_DIR/stats.tsv
@@ -93,8 +92,9 @@ LABELING_DIR=$ITER_DIR/cp2k
 mkdir -p $LABELING_DIR
 
 [ -f $LABELING_DIR/setup.done ] && echo "skip cp2k setup" || {
-    # convert the first 10 candidates to cp2k input
-    ai2-kit tool ase read $SCREENING_DIR/candidate.xyz --index :10: - write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
+    # pick 10 frames from the candidate.xyz
+    ai2-kit tool ase read $SCREENING_DIR/candidate.xyz - sample 10  - \
+        write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
 
     omb combo \
         add_files DATA_FILE "$LABELING_DIR/data/*" --abs -\
