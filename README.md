@@ -25,16 +25,6 @@ To make the best use of `oh-my-batch`, you need to know some shell tips.
 * [Run multiple line shell script with ssh](https://stackoverflow.com/a/32082912/3099733)
 
 ## Use cases
-### Load functions in shell script
-You can load useful functions from `oh-my-batch` this way:
-
-```bash
-eval "$(omb misc export-shell-func)"
-# or
-omb misc export-shell-func > omb-func.sh && source omb-func.sh
-```
-
-This will load extra functions to your shell script, for example, `checkpoint`.
 
 ### Generate files from different combinations of parameters
 
