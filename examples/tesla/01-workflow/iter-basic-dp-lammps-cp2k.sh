@@ -74,7 +74,9 @@ mkdir -p $SCREENING_DIR
 
 [ -f $SCREENING_DIR/screening.done ] && echo "skip screening" || {
     # the ai2-kit model-devi tool is used to screen the candidates
+    # use srun if your system has restrictions on the login node
     # for more information, please refer to: https://github.com/chenggroup/ai2-kit/blob/main/doc/manual/model-deviation.md
+
     ai2-kit tool model_devi \
         read "$LMP_DIR/job-*/" --traj_file dump.lammpstrj --md_file model_devi.out --specorder "[Ag,O]" --ignore_error - \
         slice "10:" - \
@@ -82,7 +84,9 @@ mkdir -p $SCREENING_DIR
         dump_stats $SCREENING_DIR/stats.tsv - \
         write $SCREENING_DIR/candidate.xyz --level decent - \
         done
+
     # in the above command slice "10:" is used to skip the first 10 frames of every dump.lammpstrj before grading
+    cat $SCREENING_DIR/stats.tsv
     touch $SCREENING_DIR/screening.done
 }
 cat $SCREENING_DIR/stats.tsv
