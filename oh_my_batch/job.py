@@ -94,6 +94,25 @@ class BaseJobManager:
                 error = True
         if error:
             raise RuntimeError('Some jobs failed')
+    
+    def wait(self, *job_ids, timeout=None, interval=10):
+        """
+        Wait for jobs to finish
+
+        :param job_ids: Job ids to wait for
+        :param timeout: Timeout in seconds
+        :param interval: Interval in seconds for checking job status
+        """
+        current = time.time()
+        while True:
+            jobs = [{'id': j, 'state': JobState.NULL} for j in job_ids]
+            jobs = self._update_state(jobs)
+            if all(JobState.is_terminal(j['state']) for j in jobs):
+                break
+            if timeout and time.time() - current > timeout:
+                logger.error('Timeout, current state: %s', jobs)
+                break
+            time.sleep(interval)
 
     def _update_jobs(self, jobs: List[dict], max_tries: int, submit_opts: str):
         jobs = self._update_state(jobs)
