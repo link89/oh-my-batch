@@ -9,7 +9,7 @@ A toolkit to manipulate batch tasks with command line. Designed for scientific c
 ## Features
 * `omb combo`: generate folders/files from different combinations of parameters
 * `omb batch`: generate batch scripts from multiple working directories
-* `omb job`: track the state of job in job schedular
+* `omb job`: track the state of job in job scheduler
 * `omb misc`: miscellaneous commands
 
 ## Install
