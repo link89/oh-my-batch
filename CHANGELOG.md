@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.8
+* implement `omb job slurm wait` command
+
 ## v0.4.7
 * `omb job slurm submit` raise error on fail job 
 
