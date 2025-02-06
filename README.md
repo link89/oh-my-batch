@@ -17,12 +17,8 @@ A toolkit to manipulate batch tasks with command line. Designed for scientific c
 pip install oh-my-batch
 ```
 
-## Shell tips
-`oh-my-batch` is intended to help you implement computational workflows with shell scripts.
-To make the best use of `oh-my-batch`, you need to know some shell tips.
-
-* [Retry commands until success in shell script](https://stackoverflow.com/a/79191004/3099733)
-* [Run multiple line shell script with ssh](https://stackoverflow.com/a/32082912/3099733)
+## Examples
+* [TESLA workflow](./examples/tesla/): A customizable active learning workflow for training machine learning potentials.
 
 ## Use cases
 
@@ -115,3 +111,11 @@ and wait for the jobs to finish. If the job fails, it will retry for at most 3 t
 The `--recovery` option will save the job information to `lammps-jobs.json` file.
 If `omb job` is interrupted, you can rerun the exact same command to recover the job status,
 so that you don't need to resubmit the jobs that are still running or completed.
+
+
+## Shell tips
+`oh-my-batch` is intended to help you implement computational workflows with shell scripts.
+To make the best use of `oh-my-batch`, you need to know some shell tips.
+
+* [Retry commands until success in shell script](https://stackoverflow.com/a/79191004/3099733)
+* [Run multiple line shell script with ssh](https://stackoverflow.com/a/32082912/3099733)
