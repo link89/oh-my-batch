@@ -1,4 +1,7 @@
 # Change Log
+## v0.4.9
+* `omb batch` support full concurrency
+
 ## v0.4.8
 * implement `omb job slurm wait` command
 
