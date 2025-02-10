@@ -79,15 +79,22 @@ class BatchMaker:
         self._command.extend(cmd)
         return self
 
-    def make(self, path: str, concurrency=1, encoding='utf-8', mode='755'):
+    def make(self, path: str, concurrency=0, encoding='utf-8', mode='755'):
         """
         Make batch script files from the previous setup
 
         :param path: Path to save batch script files, use {i} to represent index
-        :param concurrency: Number of scripts to to make
+        :param concurrency: Number of scripts to to make, default is 0, which means make one script for each working directory
+        :param encoding: File encoding
+        :param mode: File mode, default is 755
         """
+
         header = '\n'.join(self._script_header)
         bottom = '\n'.join(self._script_bottom)
+
+        if concurrency < 1:
+            concurrency = len(self._work_dirs)
+
         for i, work_dirs in enumerate(split_list(self._work_dirs, concurrency)):
             body = []
             work_dirs_arr = "\n".join(shlex.quote(w) for w in work_dirs)
