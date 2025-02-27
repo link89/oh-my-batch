@@ -81,9 +81,9 @@ mkdir -p $SCREENING_DIR
         slice "10:" - \
         grade --lo 0.1 --hi 0.2 --col max_devi_f - \
         dump_stats $SCREENING_DIR/stats.tsv - \
+        write $SCREENING_DIR/good.xyz   --level good - \
         write $SCREENING_DIR/decent.xyz --level decent - \
-        write $SCREENING_DIR/good.xyz --level good - \
-        write $SCREENING_DIR/poor.xyz --level poor - \
+        write $SCREENING_DIR/poor.xyz   --level poor - \
         done
     # in the above command slice "10:" is used to skip the first 10 frames of every dump.lammpstrj before grading
     touch $SCREENING_DIR/screening.done
