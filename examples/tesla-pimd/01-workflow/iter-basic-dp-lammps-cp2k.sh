@@ -52,11 +52,11 @@ mkdir -p $LMP_DIR
         add_var STEPS 100000 - \
         add_randint SEED -n 10000 -a 0 -b 99999 - \
         set_broadcast SEED - \
-        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/lammps.in --template $CONFIG_DIR/lammps/lammps.in - \
+        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/lammps.in  --template $CONFIG_DIR/lammps/lammps.in - \
         make_files $LMP_DIR/job-{TEMP}K-{i:03d}/plumed.inp --template $CONFIG_DIR/lammps/plumed.inp - \
-        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/input.xml --template $CONFIG_DIR/lammps/input.xml - \
-        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/conf.lmp    --template $CONFIG_DIR/lammps/conf.lmp - \
-        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/run.sh    --template $CONFIG_DIR/lammps/run.sh --mode 755 - \
+        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/input.xml  --template $CONFIG_DIR/lammps/input.xml - \
+        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/conf.lmp   --template $CONFIG_DIR/lammps/conf.lmp - \
+        make_files $LMP_DIR/job-{TEMP}K-{i:03d}/run.sh     --template $CONFIG_DIR/lammps/run.sh --mode 755 - \
         done
 
     omb batch \
@@ -78,17 +78,17 @@ mkdir -p $SCREENING_DIR
     # the ai2-kit model-devi tool is used to screen the candidates
     # for more information, please refer to: https://github.com/chenggroup/ai2-kit/blob/main/doc/manual/model-deviation.md
     # Taking structures from one client would be sufficient.
-    ai2-kit tool model_devi read "$LMP_DIR/job-*/" --traj_file dump-0.lammpstrj  --specorder "[Bi,H,O,V]" --md_file model_devi-0.out --ignore_error - \
-        read "$LMP_DIR/job-*/" --traj_file dump-1.lammpstrj  --specorder "[Bi,H,O,V]" --md_file model_devi-1.out --ignore_error - \
-        read "$LMP_DIR/job-*/" --traj_file dump-2.lammpstrj  --specorder "[Bi,H,O,V]" --md_file model_devi-2.out --ignore_error - \
-        read "$LMP_DIR/job-*/" --traj_file dump-3.lammpstrj  --specorder "[Bi,H,O,V]" --md_file model_devi-3.out --ignore_error - \
+    ai2-kit tool model_devi \
+	read "$LMP_DIR/job-*/" --traj_file dump-0.lammpstrj --specorder "[Bi,H,O,V]" --md_file model_devi-0.out --ignore_error - \
+        read "$LMP_DIR/job-*/" --traj_file dump-1.lammpstrj --specorder "[Bi,H,O,V]" --md_file model_devi-1.out --ignore_error - \
+        read "$LMP_DIR/job-*/" --traj_file dump-2.lammpstrj --specorder "[Bi,H,O,V]" --md_file model_devi-2.out --ignore_error - \
+        read "$LMP_DIR/job-*/" --traj_file dump-3.lammpstrj --specorder "[Bi,H,O,V]" --md_file model_devi-3.out --ignore_error - \
         slice "10:" - \
         grade --lo 0.2 --hi 0.7 --col max_devi_f - \
         dump_stats $SCREENING_DIR/stats.tsv - \
-        write $SCREENING_DIR/decent.xyz --level decent --inplace=False - \
+        write $SCREENING_DIR/decent.xyz --level decent - \
         done
-
-    # in the above command slice "10:" is used to skip the first 10 frames in dump.lammpstrj
+    # in the above command slice "10:" is used to skip the first 10 frames in each dump.lammpstrj
     touch $SCREENING_DIR/screening.done
 }
 cat $SCREENING_DIR/stats.tsv
@@ -99,8 +99,9 @@ LABELING_DIR=$ITER_DIR/cp2k
 mkdir -p $LABELING_DIR
 
 [ -f $LABELING_DIR/setup.done ] && echo "skip cp2k setup" || {
-    # convert the first 10 candidates to cp2k input
-    ai2-kit tool ase read $SCREENING_DIR/decent.xyz --index 10:: - sample 50 --method random  - write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
+    # drop the first 10 frames and then randomly pick 50 frmaes to label
+    ai2-kit tool ase read $SCREENING_DIR/decent.xyz --index 10:: - sample 50 --method random - \
+	    write_frames $LABELING_DIR/data/{i:03d}.inc --format cp2k-inc
 
     omb combo \
         add_files DATA_FILE "$LABELING_DIR/data/*" --abs -\
@@ -112,7 +113,7 @@ mkdir -p $LABELING_DIR
         add_work_dirs "$LABELING_DIR/job-*" - \
         add_header_files $CONFIG_DIR/cp2k/slurm-header.sh - \
         add_cmds "bash ./run.sh" - \
-        make $LABELING_DIR/cp2k-{i}.slurm  --concurrency 25
+        make $LABELING_DIR/cp2k-{i}.slurm --concurrency 25
 
     touch $LABELING_DIR/setup.done
 }
