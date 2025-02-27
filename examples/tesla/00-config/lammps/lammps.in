@@ -13,24 +13,24 @@ variable    SAMPLE_FREQ      equal 100
 
 units           metal
 atom_style      atomic
+
 boundary p p p
 neighbor 2.0 bin
 box      tilt large
 
 if "${restart} > 0" then "read_restart md.restart.*" else "read_data ${DATA_FILE} extra/atom/types 0"
 
-variable    Ag               equal 1
-variable    O                equal 2
-
-mass ${Ag} 107.8682
-mass ${O} 15.999
+mass 1 107.8682  # Ag
+mass 2 15.999    # O
 
 pair_style deepmd @DP_MODELS out_freq ${THERMO_FREQ} out_file model_devi.out
 pair_coeff * *
 
 if "${restart} == 0" then "velocity all create ${TEMP} ${SEED}"
+
 fix 1 all nvt temp ${TEMP} ${TEMP} ${TAU_T}
 fix cll_plumed all plumed plumedfile plumed.in outfile plumed.out
+
 thermo_style custom step temp pe ke etotal press vol lx ly lz xy xz yz
 thermo       ${THERMO_FREQ}
 dump         1 all custom ${DUMP_FREQ} dump.lammpstrj id type element x y z fx fy fz

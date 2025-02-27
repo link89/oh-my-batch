@@ -22,15 +22,10 @@ box      tilt large
 
 if "${restart} > 0" then "read_restart md.restart.*" else "read_data ${DATA_FILE} extra/atom/types 0"
 
-variable    Bi               equal 1
-variable    H                equal 2
-variable    O                equal 3
-variable    V                equal 4
-
-mass ${Bi} 208.9804
-mass ${H} 1.00784
-mass ${O} 15.999
-mass ${V} 50.9415
+mass 1  208.9804  # Bi
+mass 2  1.00784   # H
+mass 3  15.999    # O
+mass 4  50.9415   # V
 
 pair_style deepmd @DP_MODELS out_freq ${THERMO_FREQ} out_file model_devi-${lammpsid}.out
 pair_coeff * *
