@@ -33,6 +33,8 @@ fix cll_plumed all plumed plumedfile plumed.in outfile plumed.out
 
 thermo_style custom step temp pe ke etotal press vol lx ly lz xy xz yz
 thermo       ${THERMO_FREQ}
+
+# don't dump element unless you specific the type-element mapping corretly
 dump         1 all custom ${DUMP_FREQ} dump.lammpstrj id type x y z fx fy fz
 restart      10000 md.restart
 
