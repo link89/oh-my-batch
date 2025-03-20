@@ -13,13 +13,17 @@ class BatchMaker:
         self._script_bottom = []
         self._command = []
 
-    def add_work_dirs(self, *dir: str):
+    def add_work_dirs(self, *dir: str, abs=False):
         """
         Add working directories
 
         :param dir: Directories to work on, can be glob patterns
+        :param abs: Whether to convert to absolute path
         """
-        self._work_dirs.extend(expand_globs(dir))
+        paths = expand_globs(dir)
+        if abs:
+            paths = [os.path.abspath(p) for p in paths]
+        self._work_dirs.extend(paths)
         return self
 
     def add_header_files(self, *file: str, encoding='utf-8'):
