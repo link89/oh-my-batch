@@ -1,4 +1,7 @@
 # Change Log
+## v0.5.0
+* `omb batch` add_work_dirs support --abs
+
 ## v0.4.9
 * `omb batch` support full concurrency
 
