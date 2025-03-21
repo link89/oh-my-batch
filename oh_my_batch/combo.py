@@ -92,7 +92,7 @@ class ComboMaker:
         return self
 
     def add_file_set(self, key: str, *path: str, format=None,
-                         sep=' ', abs=False, raise_invalid=False):
+                     sep=' ', abs=False, raise_invalid=False):
         """
         Add a variable with files by glob pattern as one string
         Unlike add_files, this function joins the files with a delimiter.
@@ -163,7 +163,8 @@ class ComboMaker:
             self._broadcast_keys.append(key)
         return self
 
-    def make_files(self, file: str, template: str, delimiter='@', mode=None, encoding='utf-8'):
+    def make_files(self, file: str, template: str, delimiter='@', mode=None, encoding='utf-8',
+                   extra_vars_from_file=None):
         """
         Make files from template against each combo
         The template file can include variables with delimiter.
@@ -179,6 +180,7 @@ class ComboMaker:
         can be changed to other character, e.g $, $$, ...
         :param mode: File mode, e.g. 755, 644, ...
         :param encoding: File encoding
+        :param extra_vars_from_file: Load extra variables from json file, which can be used in template
         """
         _delimiter = delimiter
 
@@ -190,9 +192,17 @@ class ComboMaker:
             _template = template.format(i=i, **combo)
             with open(_template, 'r') as f:
                 template_text = f.read()
-            text = _Template(template_text).safe_substitute(combo)
+
+            if extra_vars_from_file is not None:
+                _vars_file = extra_vars_from_file.format(i=i, **combo)
+                with open(_vars_file, 'r') as f:
+                    extra_vars = json.load(f)
+            else:
+                extra_vars = {}
+            text = _Template(template_text).safe_substitute(combo, **extra_vars)
             _file = file.format(i=i, **combo)
             ensure_dir(_file)
+
             with open(_file, 'w', encoding=encoding) as f:
                 f.write(text)
             if mode is not None:
