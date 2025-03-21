@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.5.2
+* `omb combo make_files` support ignore_error 
+
 ## v0.5.1
 * `omb combo make_files` support extra_vars_from_file
 
