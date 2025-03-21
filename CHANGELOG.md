@@ -1,4 +1,8 @@
 # Change Log
+
+## v0.5.1
+* `omb combo make_files` support extra_vars_from_file
+
 ## v0.5.0
 * `omb batch` add_work_dirs support --abs
 
