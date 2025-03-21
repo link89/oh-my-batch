@@ -1,5 +1,6 @@
 from itertools import product
 from string import Template
+import traceback
 import random
 import json
 import os
@@ -164,7 +165,7 @@ class ComboMaker:
         return self
 
     def make_files(self, file: str, template: str, delimiter='@', mode=None, encoding='utf-8',
-                   extra_vars_from_file=None):
+                   extra_vars_from_file=None, ignore_error=False):
         """
         Make files from template against each combo
         The template file can include variables with delimiter.
@@ -181,6 +182,7 @@ class ComboMaker:
         :param mode: File mode, e.g. 755, 644, ...
         :param encoding: File encoding
         :param extra_vars_from_file: Load extra variables from json file, which can be used in template
+        :param ignore_error: If True, ignore error when making files
         """
         _delimiter = delimiter
 
@@ -189,24 +191,31 @@ class ComboMaker:
 
         combos = self._make_combos()
         for i, combo in enumerate(combos):
-            _template = template.format(i=i, **combo)
-            with open(_template, 'r') as f:
-                template_text = f.read()
+            try:
+                _template = template.format(i=i, **combo)
+                with open(_template, 'r') as f:
+                    template_text = f.read()
 
-            if extra_vars_from_file is not None:
-                _vars_file = extra_vars_from_file.format(i=i, **combo)
-                with open(_vars_file, 'r') as f:
-                    extra_vars = json.load(f)
-            else:
-                extra_vars = {}
-            text = _Template(template_text).safe_substitute(combo, **extra_vars)
-            _file = file.format(i=i, **combo)
-            ensure_dir(_file)
+                if extra_vars_from_file is not None:
+                    _vars_file = extra_vars_from_file.format(i=i, **combo)
+                    with open(_vars_file, 'r') as f:
+                        extra_vars = json.load(f)
+                else:
+                    extra_vars = {}
+                text = _Template(template_text).safe_substitute(combo, **extra_vars)
+                _file = file.format(i=i, **combo)
+                ensure_dir(_file)
 
-            with open(_file, 'w', encoding=encoding) as f:
-                f.write(text)
-            if mode is not None:
-                os.chmod(_file, mode_translate(str(mode)))
+                with open(_file, 'w', encoding=encoding) as f:
+                    f.write(text)
+                if mode is not None:
+                    os.chmod(_file, mode_translate(str(mode)))
+            except Exception as e:
+                if ignore_error:
+                    print(f"Error during making file, ignore: {e}")
+                    traceback.print_exc()
+                else:
+                    raise e
         return self
 
     def print(self, *line: str, file: str = '', mode=None, encoding='utf-8'):
