@@ -34,10 +34,11 @@ omb combo \
     add_var OMP_NUMS 64 32 16 8  4  2  1 -\
     add_var MPI_NUMS 1  2  4  8 16  32 64 -\
     set_broadcast MPI_NUMS -\
-    make_files ./out/job-omp-{OPM_NUMS}-mpi-{MPI_NUMS}.sh --template ./out/lmp.sh --mode 755 -\
+    make_files ./out/job-omp-{OMP_NUMS}-mpi-{MPI_NUMS}/run.sh --template ./out/lmp.sh --mode 755 -\
     done
 
 omb batch \
     add_work_dirs ./out/job-*/ --abs -\
     add_header_files ./out/slurm.sh -\
-    make ./out/batch-{i}.slurm
+    add_cmds ./run.sh -\
+    make ./out/batch-{i}.slurm --concurrency 1

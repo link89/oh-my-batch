@@ -19,6 +19,9 @@ pip install oh-my-batch
 
 ## Examples
 * [TESLA workflow](./examples/tesla/): A customizable active learning workflow for training machine learning potentials.
+* [TESLA PIMD workflow](./examples/tesla-pimd/): A customizable active learning workflow for training machine learning potentials with path integral molecular dynamics.
+* [LAMMPS benchmark](./examples/lammps-benchmark/): Find out the best MPI and OpenMP setup for LAMMPS through benchmarking.
+
 
 ## Use cases
 
