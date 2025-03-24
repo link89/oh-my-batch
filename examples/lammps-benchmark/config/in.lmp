@@ -1,0 +1,76 @@
+## lmpdata from fengwang
+
+variable        NSTEPS          equal 10000
+variable        THERMO_FREQ     equal 1000
+variable        DUMP_FREQ       equal 1000
+variable        TEMP            equal 300.000000
+variable        PRES            equal 1.000000
+variable        TAU_T           equal 100.000000
+variable        TAU_P           equal 1000.000000
+
+units           real
+boundary        p p p
+atom_style      full
+bond_style harmonic
+angle_style harmonic
+dihedral_style opls
+
+special_bonds lj/coul 0.0 0.3 0.5
+
+pair_style lj/cut/coul/long 6.0 6.0
+pair_modify mix geometric tail yes
+kspace_style pppm 1.0e-5
+read_data ${data_file}
+pair_coeff    1    1     0.070000     3.550000 # C00 C00
+pair_coeff    2    2     0.140000     2.900000 # O01 O01
+pair_coeff    3    3     0.210000     2.960000 # O02 O02
+pair_coeff    4    4     0.140000     2.900000 # O03 O03
+pair_coeff    5    5     0.065999     3.500000 # C04 C04
+pair_coeff    6    6     0.065999     3.500000 # C05 C05
+pair_coeff    7    7     0.030000     2.500000 # H06 H06
+pair_coeff    8    8     0.030000     2.500000 # H07 H07
+pair_coeff    9    9     0.030000     2.500000 # H08 H08
+pair_coeff   10   10     0.030000     2.500000 # H09 H09
+pair_coeff   11   11     0.030000     2.500000 # H0A H0A
+pair_coeff   12   12     0.030000     2.500000 # H0B H0B
+pair_coeff   13   13     0.200000     3.740000 # P00 P00
+pair_coeff   14   14     0.060994     3.120000 # FP1 FP1
+pair_coeff   15   15     0.060994     3.120000 # FP2 FP2
+pair_coeff   16   16     0.060994     3.120000 # FP3 FP3
+pair_coeff   17   17     0.060994     3.120000 # FP4 FP4
+pair_coeff   18   18     0.060994     3.120000 # FP5 FP5
+pair_coeff   19   19     0.060994     3.120000 # FP6 FP6
+pair_coeff   20   20     0.160134     2.337000 # Li Li
+
+
+    compute PE all pe
+    compute KE all ke
+
+# --------------------- PRINT SECTION ----------------------
+variable PE  equal c_PE
+variable KE  equal c_KE
+variable time equal step*dt/1000
+variable temp equal temp
+variable density equal density
+
+variable float1 format time %8.4f
+variable float2 format temp %8.4f
+variable float3 format PE   %8.4f
+variable float4 format KE   %8.4f
+variable float5 format density   %8.4f
+
+fix print_density all print ${DUMP_FREQ} "${float1}   ${float2}   ${float3}   ${float4}   ${float5}" file properties.ener screen "no" title   "#time T PE KE density"
+# --------------------- PRINT SECTION ----------------------
+neighbor        2.0 bin
+timestep        1.000000
+neigh_modify delay 0 every 1 check yes
+thermo_style    custom step temp pe ke etotal press vol lx ly lz xy xz yz
+thermo          ${THERMO_FREQ}
+velocity        all create ${TEMP} 46448
+fix             1 all npt temp ${TEMP} ${TEMP} ${TAU_T} iso ${PRES} ${PRES} ${TAU_P}
+
+dump TRAJ all custom ${DUMP_FREQ} dump.lammpstrj id type element xu yu zu
+dump_modify TRAJ  sort id element C O O O C C H H H H H H P F F F F F F Li
+
+run             ${NSTEPS} upto
+write_data      out.lmp
