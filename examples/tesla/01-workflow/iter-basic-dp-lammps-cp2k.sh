@@ -20,14 +20,13 @@ DP_DIR=$ITER_DIR/deepmd
 mkdir -p $DP_DIR
 
 [ -f $DP_DIR/setup.done ] && echo "skip deepmd setup" || {
+    # generate 4 uniq random seed to train 4 deepmd models
     omb combo \
-        add_seq MODEL_ID 0 4 - \
+        add_randint SEED -n 4 -a 0 -b 999999 --uniq - \
         add_var STEPS 5000 - \
-        add_randint SEED -n 4 -a 100000 -b 999999 --uniq - \
         add_file_set DP_DATASET "$WORK_DIR/dp-init-data/*" "$WORK_DIR/iter-*/new-dataset/*" --format json-item --abs - \
-        set_broadcast SEED - \
-        make_files $DP_DIR/model-{MODEL_ID}/input.json --template $CONFIG_DIR/deepmd/input.json - \
-        make_files $DP_DIR/model-{MODEL_ID}/run.sh     --template $CONFIG_DIR/deepmd/run.sh --mode 755 - \
+        make_files $DP_DIR/model-{i}/input.json --template $CONFIG_DIR/deepmd/input.json - \
+        make_files $DP_DIR/model-{i}/run.sh     --template $CONFIG_DIR/deepmd/run.sh --mode 755 - \
         done
 
     omb batch \
@@ -35,14 +34,21 @@ mkdir -p $DP_DIR
         add_header_files $CONFIG_DIR/deepmd/slurm-header.sh - \
         add_cmds "bash ./run.sh" - \
         make $DP_DIR/dp-train-{i}.slurm  --concurrency 4
+
     touch $DP_DIR/setup.done
 }
 
+# Submit multiple script to Slurm 
 omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $DP_DIR/slurm-recovery.json
 
-# If you are using a workstation without Slurm, you can just run them as normal shell script, for example:
+# If you are running the workflow on a workstation without Slurm, 
+# you can just run them as normal shell script, for example:
 #
-# 	find $DP_DIR -name "dp-train*.slurm" | xargs bash
+#   parallel -j4 CUDA_VISIBLE_DEVICES='$(({%} - 1))' {} ::: $DP_DIR/dp-train-*.sh
+#
+# The above command will make best use of GPUs, for more information, please read
+# https://stackoverflow.com/a/79326716/3099733
+
 
 # step 2: explore
 LMP_DIR=$ITER_DIR/lammps
