@@ -42,7 +42,7 @@ omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $
 
 # If you are using a workstation without Slurm, you can just run them as normal shell script, for example:
 #
-# 	find . -name "$DP_DIR/dp-train*.slurm" | xargs bash
+# 	find $DP_DIR -name "dp-train*.slurm" | xargs bash
 
 # step 2: explore
 LMP_DIR=$ITER_DIR/lammps
