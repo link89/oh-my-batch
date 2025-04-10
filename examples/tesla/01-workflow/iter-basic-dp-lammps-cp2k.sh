@@ -44,7 +44,7 @@ omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $
 # If you are running the workflow on a workstation without Slurm, 
 # you can just run them as normal shell script, for example:
 #
-#   parallel -j4 CUDA_VISIBLE_DEVICES='$(({%} - 1))' {} ::: $DP_DIR/dp-train-*.sh
+#   parallel -j4 CUDA_VISIBLE_DEVICES='$(({%} - 1))' {} ::: $DP_DIR/dp-train-*.slurm
 #
 # The above command will make best use of GPUs, for more information, please read
 # https://stackoverflow.com/a/79326716/3099733
