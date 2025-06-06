@@ -2,7 +2,6 @@ import shlex
 import os
 
 from .util import split_list, ensure_dir, expand_globs, mode_translate
-from .assets import get_asset
 
 
 class BatchMaker:

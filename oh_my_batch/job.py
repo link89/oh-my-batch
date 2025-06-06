@@ -92,9 +92,9 @@ class BaseJobManager:
             if not JobState.is_success(job['state']):
                 logger.error('Job %s failed', job['script'])
                 error = True
-        if error:
+        if error: # type: ignore
             raise RuntimeError('Some jobs failed')
-    
+
     def wait(self, *job_ids, timeout=None, interval=10):
         """
         Wait for jobs to finish
@@ -135,7 +135,7 @@ class BaseJobManager:
 
     def _update_state(self, jobs: List[dict]):
         raise NotImplementedError
-    
+
     def _submit_job(self, job: dict, submit_opts: str):
         raise NotImplementedError
 
@@ -170,7 +170,7 @@ class Slurm(BaseJobManager):
                     break
             else:
                 logger.error('Job %s not found in sacct output', job['id'])
-        return jobs 
+        return jobs
 
     def _submit_job(self, job:dict, submit_opts:str):
         submit_cmd = f'{self._sbatch_bin} {submit_opts} {job["script"]}'
