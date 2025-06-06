@@ -75,6 +75,7 @@ some_command || echo "ignore error of some_command"
 
 这个版本会在跳过任务时输出一条日志，提示用户该任务已被跳过。这有助于调试和维护脚本。
 
+如果要重新执行一个已经完成的任务，可以删除对应的 `task-name.done` 文件。这样下次执行脚本时，就会重新执行该任务。
 
 
 ## 开发 [TESLA] 工作流 
