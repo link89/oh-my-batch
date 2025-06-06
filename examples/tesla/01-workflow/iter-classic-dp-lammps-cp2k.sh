@@ -38,10 +38,10 @@ mkdir -p $DP_DIR
     touch $DP_DIR/setup.done
 }
 
-# Submit multiple script to Slurm 
+# Submit multiple script to Slurm
 omb job slurm submit "$DP_DIR/dp-train*.slurm" --max_tries 2 --wait --recovery $DP_DIR/slurm-recovery.json
 
-# If you are running the workflow on a workstation without Slurm, 
+# If you are running the workflow on a workstation without Slurm,
 # you can just run them as normal shell script, for example:
 #
 #   parallel -j4 CUDA_VISIBLE_DEVICES='$(({%} - 1))' {} ::: $DP_DIR/dp-train-*.slurm
