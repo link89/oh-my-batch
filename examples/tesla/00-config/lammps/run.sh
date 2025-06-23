@@ -2,6 +2,9 @@
 set -e
 
 [ -f lammps.done ] || {
-    if [ -f md.restart.* ]; then lmp -i lammps.in -v restart 1; else lmp -i lammps.in -v restart 0; fi
+    # check if restart files are created
+    ls md.restart.* &>/dev/null && RESTART=1 || RESTART=0
+    lmp -i lammps.in -v restart $RESTART
+
     touch lammps.done
 }
