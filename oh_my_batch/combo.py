@@ -263,6 +263,9 @@ class ComboMaker:
         return self
 
     def show_combos(self):
+        """
+        Show all combos in a human-readable format for debugging
+        """
         combos = self._make_combos()
         if not combos:
             print("No combos")
