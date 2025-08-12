@@ -93,7 +93,7 @@ class BaseJobManager:
             if not JobState.is_success(job['state']):
                 logger.error('Job %s failed', job['script'])
                 error = True
-        if error:
+        if error and not wait:
             raise RuntimeError('Some jobs failed')
 
     def wait(self, *job_ids, timeout=None, interval=10):
