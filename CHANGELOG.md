@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.5.3
+* fix false error of `omb job slurm submit` without `--wait`
+
 ## v0.5.2
 * `omb combo make_files` support ignore_error 
 
