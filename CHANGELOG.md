@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.5.5
+* implement `combo sort` method
+
 ## v0.5.4
 * fix false error of `omb job slurm submit` without `--wait`
 
