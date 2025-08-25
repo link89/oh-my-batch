@@ -152,6 +152,19 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
         return self
 
+    def sort(self, *keys: str, reverse=False):
+        """
+        Sort variables
+        :param keys: Variable names to sort
+        :param reverse: If True, sort in descending order, default is False
+        """
+        for key in keys:
+            if key in self._vars:
+                self._vars[key].sort(reverse=reverse)
+            else:
+                raise ValueError(f"Variable {key} not found")
+        return self
+
     def set_broadcast(self, *keys: str):
         """
         Specify variables use broadcast strategy instead of cartesian product
