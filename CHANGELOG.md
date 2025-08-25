@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.5.7
+* fix misleading messages
+
 ## v0.5.6
 * implement `combo sort` method
 
