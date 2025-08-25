@@ -292,11 +292,13 @@ class ComboMaker:
                     v = f"\n{v}"
                 print(f"@{k}: {v}")
 
-    def done(self):
+    def done(self, debug=False):
         """
         End of command chain
+        :param debug: If True, show all combos for debugging
         """
-        pass
+        if debug:
+            self.show_combos()
 
     def _make_combos(self):
         if not self._vars:
