@@ -88,13 +88,16 @@ class BaseJobManager:
 
             time.sleep(interval)
 
-        error = False
+        raise_err = False
         for job in jobs:
-            if not JobState.is_success(job['state']):
+            if not JobState.is_terminal(job['state']):
+                logger.warning('Job %s is running, current state: %s', job['script'], job['state'])
+                raise_err = True
+            elif not JobState.is_success(job['state']):
                 logger.error('Job %s failed', job['script'])
-                error = True
-        if error and wait:
-            raise RuntimeError('Some jobs failed')
+                raise_err = True
+        if raise_err and wait:
+            raise RuntimeError('Some jobs failed or not finished yet')
 
     def wait(self, *job_ids, timeout=None, interval=10):
         """
