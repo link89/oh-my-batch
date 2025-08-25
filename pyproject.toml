@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "oh-my-batch"
-version = "0.5.5"
+version = "0.5.6"
 description = ""
 authors = ["weihong.xu <xuweihong.cn@gmail.com>"]
 license = "GPL"

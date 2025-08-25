@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.5.5
+## v0.5.6
 * implement `combo sort` method
 
 ## v0.5.4
