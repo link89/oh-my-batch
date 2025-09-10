@@ -1,3 +1,4 @@
+from typing import Optional
 import shlex
 import os
 
@@ -23,6 +24,24 @@ class BatchMaker:
         if abs:
             paths = [os.path.abspath(p) for p in paths]
         self._work_dirs.extend(paths)
+        return self
+
+    def filter(self, expr: str):
+        """
+        Filter working directories with a Python expression
+
+        :param expr: Python expression, the variable `{workdir} or {w}` is the directory path,
+                     `{index} or {i}` is the index of the directory
+
+        Example: if expr is 'os.path.exits("{workdir}/input.json")',
+        then only the directories containing 'input.json' will be kept.
+        """
+        filtered = []
+        for i, workdir in enumerate(self._work_dirs):
+            expr_eval = expr.format(workdir=workdir, w=workdir, index=i, i=i)
+            if eval(expr_eval):
+                filtered.append(workdir)
+        self._work_dirs = filtered
         return self
 
     def add_header_files(self, *file: str, encoding='utf-8'):
