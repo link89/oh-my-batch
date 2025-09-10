@@ -1,7 +1,9 @@
 # Change Log
+## v0.6.1
+* `omb batch filter` support work_dir in expr
 
 ## v0.6.0
-** implement `omb batch filter` to filter work directory
+* implement `omb batch filter` to filter work directory
 
 ## v0.5.7
 * fix misleading messages
