@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.6.0
+** implement `omb batch filter` to filter work directory
+
 ## v0.5.7
 * fix misleading messages
 
