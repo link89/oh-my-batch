@@ -30,7 +30,7 @@ class BatchMaker:
         """
         Filter working directories with a Python expression
 
-        :param expr: Python expression, the variable `{workdir} or {w}` is the directory path,
+        :param expr: Python expression, the variable `{workdir}, {work_dir} or {w}` is the directory path,
                      `{index} or {i}` is the index of the directory
 
         Example: if expr is 'os.path.exits("{workdir}/input.json")',
@@ -38,7 +38,7 @@ class BatchMaker:
         """
         filtered = []
         for i, workdir in enumerate(self._work_dirs):
-            expr_eval = expr.format(workdir=workdir, w=workdir, index=i, i=i)
+            expr_eval = expr.format(workdir=workdir, work_dir=workdir, w=workdir, index=i, i=i)
             if eval(expr_eval):
                 filtered.append(workdir)
         self._work_dirs = filtered
