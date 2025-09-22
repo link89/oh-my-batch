@@ -1,4 +1,8 @@
 # Change Log
+## v0.6.2
+* `omb batch make` support purge existing files
+* `omb combo` add `dump_combos` method
+
 ## v0.6.1
 * `omb batch filter` support work_dir in expr
 
