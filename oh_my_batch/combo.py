@@ -231,6 +231,24 @@ class ComboMaker:
                     raise e
         return self
 
+    def dump_combos(self, file: str, encoding='utf-8', indent=2):
+        """
+        dump each combo to a json file
+
+        This is useful for debugging or use with `--extra-vars-from-file` in `make_files`
+
+        :param file: path pattern to json file, can include format style variables, e.g. {i}, {i:03d}, {TEMP}
+        :param encoding: File encoding
+        :param indent: Indentation for json file
+        """
+        combos = self._make_combos()
+        for i, combo in enumerate(combos):
+            out_path = file.format(i=i, **combo)
+            ensure_dir(out_path)
+            with open(out_path, 'w', encoding=encoding) as f:
+                json.dump(combo, f, indent=indent)
+        return self
+
     def print(self, *line: str, file: str = '', mode=None, encoding='utf-8'):
         """
         Print lines to a file against each combo
