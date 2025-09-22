@@ -1,5 +1,5 @@
-from typing import Optional
 import shlex
+import glob
 import os
 
 from .util import split_list, ensure_dir, expand_globs, mode_translate
@@ -101,21 +101,27 @@ class BatchMaker:
         self._command.extend(cmd)
         return self
 
-    def make(self, path: str, concurrency=0, encoding='utf-8', mode='755'):
+    def make(self, path: str, concurrency=0, encoding='utf-8', mode='755', purge=False):
         """
         Make batch script files from the previous setup
 
         :param path: Path to save batch script files, use {i} to represent index
         :param concurrency: Number of scripts to to make, default is 0, which means make one script for each working directory
+        :param purge: Whether to purge existing files of the same pattern before making new ones
         :param encoding: File encoding
         :param mode: File mode, default is 755
         """
-
         header = '\n'.join(self._script_header)
         bottom = '\n'.join(self._script_bottom)
 
         if concurrency < 1:
             concurrency = len(self._work_dirs)
+
+        if purge:
+            legacy_files = glob.glob(path.format(i='*'))
+            for f in legacy_files:
+                print(f'Removing existing file {f}')
+                os.remove(f)
 
         for i, work_dirs in enumerate(split_list(self._work_dirs, concurrency)):
             body = []
