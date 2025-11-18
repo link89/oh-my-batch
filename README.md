@@ -17,6 +17,28 @@ A toolkit to manipulate batch tasks with command line. Designed for scientific c
 pip install oh-my-batch
 ```
 
+## Usage
+`oh-my-batch` provides a command line interface `omb` with multiple sub-commands.
+You can read the help message of each sub-command to learn how to use it.
+
+For example,
+```bash
+omb  # see the help message of `omb` command
+omb combo # see the help message of `combo` sub-command
+omb combo set_broadcast --help # see the help message of `set_broadcast` command in combo
+omb batch # see the help message of `batch` sub-command
+omb batch add_work_dirs --help # see the help message of `add_work_dirs` command in batch
+omb job # see the help message of `job` sub-command
+omb job slurm submit --help # see the help message of slurm `submit` command
+```
+
+### Chaining function calls
+`oh-my-batch` makes use of [fire](https://github.com/google/python-fire)'s [chaining function call](https://github.com/google/python-fire/blob/master/docs/guide.md#chaining-function-calls) to provide a flexible command line interface.
+You can see it as builder pattern for command line tools.
+
+For command that supports chaining function calls, you can chain multiple commands with `-` to build your desired command.
+You will find many examples in `Examples` section below.
+
 ## Examples
 * [TESLA workflow](./examples/tesla/): A customizable active learning workflow for training machine learning potentials.
 * [TESLA PIMD workflow](./examples/tesla-pimd/): A customizable active learning workflow for training machine learning potentials with path integral molecular dynamics.
