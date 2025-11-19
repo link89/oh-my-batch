@@ -4,7 +4,7 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/oh-my-batch)](https://pypi.org/project/oh-my-batch/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/oh-my-batch)](https://pypi.org/project/oh-my-batch/)
 
-A toolkit to manipulate batch tasks with command line. Designed for scientific computing community.
+A command line toolkit to simplify batch tasks generation and execution. 
 
 ## Features
 * `omb combo`: generate folders/files from different combinations of parameters
@@ -38,6 +38,11 @@ You can see it as builder pattern for command line tools.
 
 For command that supports chaining function calls, you can chain multiple commands with `-` to build your desired command.
 You will find many examples in `Examples` section below.
+
+### Thinking in oh-my-batch
+[English](./doc/thinking-in-omb.md) | [中文](./doc/thinking-in-omb.zh.md)
+
+> Note that the document is not yet complete. 
 
 ## Examples
 * [TESLA workflow](./examples/tesla/): A customizable active learning workflow for training machine learning potentials.
