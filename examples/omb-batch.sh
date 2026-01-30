@@ -2,11 +2,11 @@
 
 cat > tmp/lammps_header.sh <<EOF
 #!/bin/bash
-set -e
-
 #SBATCH -J lmp
 #SBATCH -n 1
 #SBATCH -t 1:00:00
+
+set -e
 EOF
 
 omb batch \
