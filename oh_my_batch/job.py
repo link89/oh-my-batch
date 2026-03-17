@@ -124,11 +124,6 @@ class BaseJobManager:
         # check if there are jobs to be (re)submitted
         for job in jobs:
             if should_submit(job, max_tries):
-                exit_code_file = job['script'] + '.exitcode'
-                if os.path.exists(exit_code_file):
-                    logger.info('Removing existing .exitcode file: %s', exit_code_file)
-                    os.remove(exit_code_file)
-
                 job['tries'] += 1
                 job['id'] = ''
                 job['state'] = JobState.NULL
@@ -177,7 +172,7 @@ class Slurm(BaseJobManager):
         cp = shell_run(query_cmd)
 
         if cp.returncode != 0:
-            logger.warning('Failed to query job status from sacct, reason: %s,  using fallback squeue', log_cp(cp))
+            logger.debug('Failed to query job status from sacct: %s, using fallback squeue', log_cp(cp))
             return jobs
 
         out = cp.stdout.decode('utf-8')
@@ -214,7 +209,7 @@ class Slurm(BaseJobManager):
                     if len(parts) == 2:
                         new_state_from_squeue[parts[0]] = parts[1]
         else:
-            logger.warning('Failed to query job status from squeue: %s', log_cp(cp))
+            logger.debug('Failed to query job status from squeue: %s', log_cp(cp))
 
         missing_jobs = []
         for job in jobs:
@@ -244,7 +239,33 @@ class Slurm(BaseJobManager):
                 logger.error('Job %s not found in sacct, squeue, and .exitcode file not found at %s', job['id'], exit_code_file)
 
     def _submit_job(self, job:dict, submit_opts:str):
-        submit_cmd = f'{self._sbatch_bin} {submit_opts} {job["script"]}'
+        script_path = os.path.abspath(job["script"])
+        exit_code_path = script_path + '.exitcode'
+
+        # remove exit code file if exists to avoid confusion with previous runs
+        if os.path.exists(exit_code_path):
+            logger.info('Removing existing .exitcode file: %s', exit_code_path)
+            os.remove(exit_code_path)
+
+        # inject exit code logging into the script if not already injected
+        comment_tag = '# LOG EXIT CODE BY OH MY BATCH'
+        with open(script_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        if comment_tag not in content:
+            logger.info('Injecting exit code logging into script: %s', script_path)
+
+            code_to_inject = f'''
+# {comment_tag}
+EXIT_CODE=$? # {comment_tag}
+echo $EXIT_CODE > "{exit_code_path}" # {comment_tag}
+exit $EXIT_CODE # {comment_tag}
+'''
+            with open(script_path, 'a', encoding='utf-8') as f:
+                f.write(code_to_inject)
+
+        # submit job
+        submit_cmd = f'{self._sbatch_bin} {submit_opts} {script_path}'
         cp = shell_run(submit_cmd)
         if cp.returncode != 0:
             logger.error('Failed to submit job: %s', log_cp(cp))
