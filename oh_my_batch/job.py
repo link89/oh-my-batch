@@ -149,6 +149,7 @@ class Slurm(BaseJobManager):
         self._sbatch_bin = sbatch
         self._sacct_bin = sacct
         self._squeue_bin = squeue
+        self._squeue_fail = False
 
     def _update_state(self, jobs: List[dict]):
         jobs_with_id = [j for j in jobs if j['id']]
@@ -159,11 +160,16 @@ class Slurm(BaseJobManager):
         if not missing_jobs:
             return jobs
 
+        self._squeue_fail = False
         missing_jobs = self._update_state_from_squeue(missing_jobs)
         if not missing_jobs:
             return jobs
 
-        self._update_state_from_exitcode(missing_jobs)
+        if not self._squeue_fail:
+            self._update_state_from_exitcode(missing_jobs)
+        else:
+            logger.warning('Skipping .exitcode file check because squeue command failed')
+
         return jobs
 
     def _update_state_from_sacct(self, jobs: List[dict]):
@@ -209,7 +215,8 @@ class Slurm(BaseJobManager):
                     if len(parts) == 2:
                         new_state_from_squeue[parts[0]] = parts[1]
         else:
-            logger.debug('Failed to query job status from squeue: %s', log_cp(cp))
+            logger.warning('Failed to query job status from squeue: %s', log_cp(cp))
+            self._squeue_fail = True
 
         missing_jobs = []
         for job in jobs:
