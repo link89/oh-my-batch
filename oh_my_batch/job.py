@@ -124,11 +124,14 @@ class BaseJobManager:
         # check if there are jobs to be (re)submitted
         for job in jobs:
             if should_submit(job, max_tries):
+                exit_code_file = job['script'] + '.exitcode'
+                if os.path.exists(exit_code_file):
+                    logger.info('Removing existing .exitcode file: %s', exit_code_file)
+                    os.remove(exit_code_file)
+
                 job['tries'] += 1
                 job['id'] = ''
                 job['state'] = JobState.NULL
-                # remove exit
-
                 job_id = self._submit_job(job, submit_opts)
                 if job_id:
                     job['state'] = JobState.PENDING
