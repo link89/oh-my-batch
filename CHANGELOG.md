@@ -1,4 +1,7 @@
 # Change Log
+## v0.6.3
+* `omb job slurm` fallback to squeue if sacct is not supported 
+
 ## v0.6.2
 * `omb batch make` support purge existing files
 * `omb combo` add `dump_combos` method
