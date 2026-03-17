@@ -177,7 +177,7 @@ class Slurm(BaseJobManager):
         cp = shell_run(query_cmd)
 
         if cp.returncode != 0:
-            logger.warning('Failed to query job status from sacct, using fallback: %s', log_cp(cp))
+            logger.warning('Failed to query job status from sacct, reason: %s,  using fallback squeue', log_cp(cp))
             return jobs
 
         out = cp.stdout.decode('utf-8')
@@ -214,7 +214,7 @@ class Slurm(BaseJobManager):
                     if len(parts) == 2:
                         new_state_from_squeue[parts[0]] = parts[1]
         else:
-            logger.error('Failed to query job status from squeue: %s', log_cp(cp))
+            logger.warning('Failed to query job status from squeue: %s', log_cp(cp))
 
         missing_jobs = []
         for job in jobs:
