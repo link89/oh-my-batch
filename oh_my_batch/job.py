@@ -248,7 +248,7 @@ class Slurm(BaseJobManager):
             os.remove(exit_code_path)
 
         # inject exit code logging into the script if not already injected
-        comment_tag = '# LOG EXIT CODE BY OH MY BATCH'
+        comment_tag = 'LOG EXIT CODE BY OH MY BATCH'
         with open(script_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
