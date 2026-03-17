@@ -123,6 +123,13 @@ class BatchMaker:
                 print(f'Removing existing file {f}')
                 os.remove(f)
 
+        log_exit_code = '\n'.join(['',
+            'EXIT_CODE=$?',
+            '__SCRIPT_PATH__=$(cd -- "$(dirname -- "$0")" &> /dev/null && pwd)/${0##*/}',
+            'echo $EXIT_CODE > "$__SCRIPT_PATH__.exitcode"',
+            'exit $EXIT_CODE'
+        ])
+
         for i, work_dirs in enumerate(split_list(self._work_dirs, concurrency)):
             body = []
             work_dirs_arr = "\n".join(shlex.quote(w) for w in work_dirs)
@@ -136,7 +143,7 @@ class BatchMaker:
                 'popd',
                 'done'
             ])
-            script = '\n'.join([header, *body, bottom])
+            script = '\n'.join([header, *body, bottom, log_exit_code])
             out_path = path.format(i=i)
             ensure_dir(out_path)
             with open(out_path, 'w', encoding=encoding) as f:

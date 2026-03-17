@@ -127,6 +127,8 @@ class BaseJobManager:
                 job['tries'] += 1
                 job['id'] = ''
                 job['state'] = JobState.NULL
+                # remove exit
+
                 job_id = self._submit_job(job, submit_opts)
                 if job_id:
                     job['state'] = JobState.PENDING
@@ -145,36 +147,98 @@ class BaseJobManager:
 
 
 class Slurm(BaseJobManager):
-    def __init__(self, sbatch='sbatch',  sacct='sacct'):
+    def __init__(self, sbatch='sbatch', sacct='sacct', squeue='squeue'):
         self._sbatch_bin = sbatch
         self._sacct_bin = sacct
+        self._squeue_bin = squeue
 
     def _update_state(self, jobs: List[dict]):
-        job_ids = [j['id'] for j in jobs if j['id']]
-        if job_ids:
-            query_cmd = f'{self._sacct_bin} -X -P --format=JobID,JobName,State -j {",".join(job_ids)}'
-            cp = shell_run(query_cmd)
-            if cp.returncode != 0:
-                logger.error('Failed to query job status: %s', log_cp(cp))
-                return jobs
-            out = cp.stdout.decode('utf-8')
-            logger.debug('Job status:\n%s', out)
-            new_state = parse_csv(out)
-        else:
-            new_state = []
+        jobs_with_id = [j for j in jobs if j['id']]
+        if not jobs_with_id:
+            return jobs
+
+        missing_jobs = self._update_state_from_sacct(jobs_with_id)
+        if not missing_jobs:
+            return jobs
+
+        missing_jobs = self._update_state_from_squeue(missing_jobs)
+        if not missing_jobs:
+            return jobs
+
+        self._update_state_from_exitcode(missing_jobs)
+        return jobs
+
+    def _update_state_from_sacct(self, jobs: List[dict]):
+        job_ids = [j['id'] for j in jobs]
+        query_cmd = f'{self._sacct_bin} -X -P --format=JobID,State -j {",".join(job_ids)}'
+        cp = shell_run(query_cmd)
+
+        if cp.returncode != 0:
+            logger.warning('Failed to query job status from sacct, using fallback: %s', log_cp(cp))
+            return jobs
+
+        out = cp.stdout.decode('utf-8')
+        logger.debug('sacct output:\n%s', out)
+        new_state_from_sacct = parse_csv(out)
+
+        found_job_ids = {row['JobID'] for row in new_state_from_sacct}
+        missing_jobs = []
 
         for job in jobs:
-            if not job['id']:
-                continue
-            for row in new_state:
-                if job['id'] == row['JobID']:
-                    job['state'] = self._map_state(row['State'])
-                    if job['state'] == JobState.UNKNOWN:
-                        logger.warning('Unknown job %s state: %s',row['JobID'], row['State'])
-                    break
+            if job['id'] in found_job_ids:
+                for row in new_state_from_sacct:
+                    if job['id'] == row['JobID']:
+                        job['state'] = self._map_state(row['State'])
+                        if job['state'] == JobState.UNKNOWN:
+                            logger.warning('Unknown job %s state from sacct: %s', row['JobID'], row['State'])
+                        break
             else:
-                logger.error('Job %s not found in sacct output', job['id'])
-        return jobs
+                logger.warning('Job %s not found in sacct output', job['id'])
+                missing_jobs.append(job)
+        return missing_jobs
+
+    def _update_state_from_squeue(self, jobs: List[dict]):
+        new_state_from_squeue = {}
+        squeue_cmd = f'{self._squeue_bin} -h -o "%A %t"'  # JobID State
+        cp = shell_run(squeue_cmd)
+
+        if cp.returncode == 0:
+            out = cp.stdout.decode('utf-8').strip()
+            logger.debug('squeue output:\n%s', out)
+            if out:
+                for line in out.split('\n'):
+                    parts = line.split()
+                    if len(parts) == 2:
+                        new_state_from_squeue[parts[0]] = parts[1]
+        else:
+            logger.error('Failed to query job status from squeue: %s', log_cp(cp))
+
+        missing_jobs = []
+        for job in jobs:
+            if job['id'] in new_state_from_squeue:
+                job['state'] = self._map_squeue_state(new_state_from_squeue[job['id']])
+            else:
+                missing_jobs.append(job)
+        return missing_jobs
+
+    def _update_state_from_exitcode(self, jobs: List[dict]):
+        for job in jobs:
+            exit_code_file = os.path.abspath(job['script']) + '.exitcode'
+            if os.path.exists(exit_code_file):
+                try:
+                    with open(exit_code_file, 'r', encoding='utf-8') as f:
+                        exit_code = f.read().strip()
+                    if exit_code == '0':
+                        job['state'] = JobState.COMPLETED
+                    else:
+                        job['state'] = JobState.FAILED
+                        logger.warning('Job %s failed with exit code %s found in %s', job['id'], exit_code, exit_code_file)
+                except Exception as e:
+                    logger.error("Error reading exit code file %s for job %s: %s", exit_code_file, job['id'], e)
+                    job['state'] = JobState.FAILED
+            else:
+                job['state'] = JobState.FAILED
+                logger.error('Job %s not found in sacct, squeue, and .exitcode file not found at %s', job['id'], exit_code_file)
 
     def _submit_job(self, job:dict, submit_opts:str):
         submit_cmd = f'{self._sbatch_bin} {submit_opts} {job["script"]}'
@@ -187,6 +251,17 @@ class Slurm(BaseJobManager):
         if not job_id:
             raise ValueError(f'Unexpected sbatch output: {out}')
         return job_id
+
+    def _map_squeue_state(self, state: str):
+        if state in ('PD',):
+            return JobState.PENDING
+        if state in ('R', 'CG', 'CF'):
+            return JobState.RUNNING
+        if state in ('CA', 'F', 'TO', 'NF', 'RV', 'SE'):
+            return JobState.FAILED
+        if state in ('CD',):
+            return JobState.COMPLETED
+        return JobState.UNKNOWN
 
     def _map_state(self, state: str):
         if state.startswith('CANCELLED'):
