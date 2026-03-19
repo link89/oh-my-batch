@@ -100,3 +100,29 @@ def log_cp(cp):
     err = cp.stderr.decode('utf-8').strip()
     if err:
         log += f'\nSTDERR:\n{err}'
+    return log
+
+
+def inject_exit_code_logging(script_path: str, exit_code_path: str):
+    """
+    Inject logic to log exit code to a file at the end of the script
+    """
+    comment_tag = 'LOG EXIT CODE BY OH MY BATCH'
+    lines = []
+
+    if os.path.exists(script_path):
+        with open(script_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                # remove previously injected code if exists
+                if line.strip().endswith(comment_tag):
+                    continue
+                lines.append(line)
+
+    # inject log exit code logic at the end of the script
+    lines.append(f'''
+EXIT_CODE=$? # {comment_tag}
+echo $EXIT_CODE > "{exit_code_path}" # {comment_tag}
+exit $EXIT_CODE # {comment_tag}
+''')
+    with open(script_path, 'w', encoding='utf-8') as f:
+        f.writelines(lines)

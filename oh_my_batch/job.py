@@ -6,7 +6,7 @@ import time
 import os
 import re
 
-from .util import expand_globs, shell_run, parse_csv, ensure_dir, log_cp
+from .util import expand_globs, shell_run, parse_csv, ensure_dir, log_cp, inject_exit_code_logging
 
 
 logger = logging.getLogger(__name__)
@@ -253,23 +253,7 @@ class Slurm(BaseJobManager):
         if os.path.exists(exit_code_path):
             logger.info('Removing existing .exitcode file: %s', exit_code_path)
             os.remove(exit_code_path)
-
-        # inject exit code logging into the script if not already injected
-        comment_tag = 'LOG EXIT CODE BY OH MY BATCH'
-        with open(script_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        if comment_tag not in content:
-            logger.info('Injecting exit code logging into script: %s', script_path)
-
-            code_to_inject = f'''
-# {comment_tag}
-EXIT_CODE=$? # {comment_tag}
-echo $EXIT_CODE > "{exit_code_path}" # {comment_tag}
-exit $EXIT_CODE # {comment_tag}
-'''
-            with open(script_path, 'a', encoding='utf-8') as f:
-                f.write(code_to_inject)
+        inject_exit_code_logging(script_path, exit_code_path)
 
         # submit job
         submit_cmd = f'{self._sbatch_bin} {submit_opts} {script_path}'
