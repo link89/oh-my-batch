@@ -1,4 +1,7 @@
 # Change Log
+## v0.6.5
+* `omb job slurm` refactor log exit code for robustness and simplicity
+
 ## v0.6.4
 * `omb job slurm` tolerent error of squeue
 
