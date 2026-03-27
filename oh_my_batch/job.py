@@ -39,7 +39,8 @@ def new_job(script: str):
 class BaseJobManager:
 
     def submit(self, *script: str, recovery: str = '', wait=False,
-               timeout=None, opts='', max_tries=1, interval=10):
+               timeout=None, opts='', max_tries=1, interval=10,
+               fast_fail=False):
         """
         Submit scripts
 
@@ -50,6 +51,7 @@ class BaseJobManager:
         :param opts: Additional options for submit command
         :param max_tries: Maximum number of tries for each job
         :param interval: Interval in seconds for checking job status
+        :param fast_fail: If True, stop waiting and raise error immediately when there is any failed job and exausted all tries
         """
         jobs = []
         if recovery and os.path.exists(recovery):
@@ -82,6 +84,12 @@ class BaseJobManager:
                     not any(should_submit(j, max_tries) for j in jobs)):
                 break
 
+            # stop if fast_fail is True and there is any failed job and exausted all tries
+            if fast_fail and any(failed_with_no_tries(j, max_tries) for j in jobs):
+                logger.error('Fast fail triggered, current state: %s', jobs)
+                break
+
+            # stop if timeout is set and timeout is reached
             if timeout and time.time() - current > timeout:
                 logger.error('Timeout, current state: %s', jobs)
                 break
@@ -264,7 +272,7 @@ class Slurm(BaseJobManager):
         out = cp.stdout.decode('utf-8')
         job_id  = self._parse_job_id(out)
         if not job_id:
-            raise ValueError(f'Unexpected sbatch output: {out}')
+            logger.error('Failed to parse job id from sbatch output: %s', out)
         return job_id
 
     def _map_squeue_state(self, state: str):
@@ -305,6 +313,10 @@ def should_submit(job: dict, max_tries: int):
     if job['tries'] >= max_tries:
         return False
     return state != JobState.COMPLETED
+
+
+def failed_with_no_tries(job: dict, max_tries: int):
+    return job['tries'] >= max_tries and job['state'] in (JobState.FAILED, JobState.CANCELLED)
 
 
 def norm_path(path: str):
