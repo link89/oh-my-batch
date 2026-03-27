@@ -1,4 +1,7 @@
 # Change Log
+## v0.6.6
+* `omb job slurm submit` implement `--fast_fail` option
+
 ## v0.6.5
 * `omb job slurm` refactor log exit code for robustness and simplicity
 
