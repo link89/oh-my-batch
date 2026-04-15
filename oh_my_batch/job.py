@@ -306,6 +306,113 @@ class Slurm(BaseJobManager):
         return m.group(0) if m else ''
 
 
+class OpenPBS(BaseJobManager):
+    def __init__(self, qsub='qsub', qstat='qstat'):
+        self._qsub_bin = qsub
+        self._qstat_bin = qstat
+        self._qstat_fail = False
+
+    def _update_state(self, jobs: List[dict]):
+        jobs_with_id = [j for j in jobs if j['id']]
+        if not jobs_with_id:
+            return jobs
+
+        self._qstat_fail = False
+        missing_jobs = self._update_state_from_qstat(jobs_with_id)
+        if not missing_jobs:
+            return jobs
+
+        if not self._qstat_fail:
+            self._update_state_from_exitcode(missing_jobs)
+        else:
+            logger.warning('Skipping .exitcode file check because qstat command failed')
+
+        return jobs
+
+    def _update_state_from_qstat(self, jobs: List[dict]):
+        job_ids = [j['id'] for j in jobs]
+        query_cmd = f'{self._qstat_bin} -x -F json {" ".join(job_ids)}'
+        cp = shell_run(query_cmd)
+
+        if cp.returncode != 0:
+            logger.debug('Failed to query job status from qstat: %s', log_cp(cp))
+            # If qstat -x -F json fails, it might be an older PBS version or qstat doesn't like querying finished jobs this way
+            # We don't mark as qstat_fail yet, but we'll try to parse if there's any output or fallback to exitcode
+            if b"Unknown Job Id" in cp.stderr:
+                return jobs # Let exitcode handle missing ones
+            self._qstat_fail = True
+            return jobs
+
+        try:
+            out = cp.stdout.decode('utf-8')
+            data = json.loads(out)
+            job_info = data.get('Jobs', {})
+        except Exception as e:
+            logger.warning('Failed to parse qstat json output: %s', e)
+            self._qstat_fail = True
+            return jobs
+
+        missing_jobs = []
+        for job in jobs:
+            if job['id'] in job_info:
+                state_info = job_info[job['id']]
+                job['state'] = self._map_state(state_info.get('job_state', ''))
+            else:
+                missing_jobs.append(job)
+        return missing_jobs
+
+    def _update_state_from_exitcode(self, jobs: List[dict]):
+        for job in jobs:
+            exit_code_file = os.path.abspath(job['script']) + '.exitcode'
+            if os.path.exists(exit_code_file):
+                try:
+                    with open(exit_code_file, 'r', encoding='utf-8') as f:
+                        exit_code = f.read().strip()
+                    if exit_code == '0':
+                        job['state'] = JobState.COMPLETED
+                    else:
+                        job['state'] = JobState.FAILED
+                        logger.warning('Job %s failed with exit code %s found in %s', job['id'], exit_code, exit_code_file)
+                except Exception as e:
+                    logger.error("Error reading exit code file %s for job %s: %s", exit_code_file, job['id'], e)
+                    job['state'] = JobState.FAILED
+            else:
+                job['state'] = JobState.FAILED
+                logger.error('Job %s not found in qstat and .exitcode file not found at %s', job['id'], exit_code_file)
+
+    def _submit_job(self, job: dict, submit_opts: str):
+        script_path = os.path.abspath(job["script"])
+        exit_code_path = script_path + '.exitcode'
+
+        if os.path.exists(exit_code_path):
+            logger.info('Removing existing .exitcode file: %s', exit_code_path)
+            os.remove(exit_code_path)
+        inject_exit_code_logging(script_path, exit_code_path)
+
+        submit_cmd = f'{self._qsub_bin} {submit_opts} {script_path}'
+        cp = shell_run(submit_cmd)
+        if cp.returncode != 0:
+            logger.error('Failed to submit job: %s', log_cp(cp))
+            return ''
+        out = cp.stdout.decode('utf-8').strip()
+        job_id = out # qsub usually returns just the job id
+        if not job_id:
+            logger.error('Failed to parse job id from qsub output: %s', out)
+        return job_id
+
+    def _map_state(self, state: str):
+        # Q (Queued), H (Held), W (Waiting) -> PENDING
+        # R (Running), E (Exiting), T (Transit) -> RUNNING
+        # F (Finished), C (Completed) -> COMPLETED (exitcode will refine this)
+        if state in ('Q', 'H', 'W', 'U', 'S'):
+            return JobState.PENDING
+        if state in ('R', 'E', 'T'):
+            return JobState.RUNNING
+        if state in ('F', 'C'):
+            return JobState.COMPLETED
+        return JobState.UNKNOWN
+
+
 def should_submit(job: dict, max_tries: int):
     state: int = job['state']
     if not JobState.is_terminal(state):

@@ -8,6 +8,10 @@ class JobCli:
         from .job import Slurm
         return Slurm
 
+    def openpbs(self):
+        from .job import OpenPBS
+        return OpenPBS
+
 
 class OhMyBatch:
 
