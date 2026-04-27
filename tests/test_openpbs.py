@@ -1,6 +1,7 @@
 import json
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
+
 from oh_my_batch.job import OpenPBS, JobState
 
 class TestOpenPBS(TestCase):
@@ -18,7 +19,7 @@ class TestOpenPBS(TestCase):
         job = {'script': 'test.sh'}
         with patch('oh_my_batch.job.inject_exit_code_logging'):
             job_id = self.pbs._submit_job(job, '-q batch')
-        
+
         self.assertEqual(job_id, "1234.server")
         mock_run.assert_called_once()
         self.assertIn('qsub -q batch', mock_run.call_args[0][0])
@@ -48,9 +49,9 @@ class TestOpenPBS(TestCase):
             {'id': '1235.server', 'state': JobState.PENDING},
             {'id': '1236.server', 'state': JobState.PENDING},
         ]
-        
+
         updated_jobs = self.pbs._update_state(jobs)
-        
+
         self.assertEqual(updated_jobs[0]['state'], JobState.RUNNING)
         self.assertEqual(updated_jobs[1]['state'], JobState.PENDING)
         self.assertEqual(updated_jobs[2]['state'], JobState.COMPLETED)
@@ -72,12 +73,12 @@ class TestOpenPBS(TestCase):
         mock_cp.returncode = 0
         mock_cp.stdout = b'{"Jobs": {}}'
         mock_run.return_value = mock_cp
-        
+
         # .exitcode file exists and contains '0'
         mock_exists.side_effect = lambda p: p.endswith('.exitcode')
         mock_open.return_value.__enter__.return_value.read.return_value = "0"
-        
+
         job = {'id': '1234.server', 'script': '/path/to/test.sh', 'state': JobState.PENDING}
         updated_jobs = self.pbs._update_state([job])
-        
+
         self.assertEqual(updated_jobs[0]['state'], JobState.COMPLETED)

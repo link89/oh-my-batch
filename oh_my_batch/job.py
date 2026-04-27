@@ -306,6 +306,118 @@ class Slurm(BaseJobManager):
         return m.group(0) if m else ''
 
 
+class LSF(BaseJobManager):
+    def __init__(self, bsub='bsub', bjobs='bjobs'):
+        self._bsub_bin = bsub
+        self._bjobs_bin = bjobs
+        self._bjobs_fail = False
+
+    def _update_state(self, jobs: List[dict]):
+        jobs_with_id = [j for j in jobs if j['id']]
+        if not jobs_with_id:
+            return jobs
+
+        self._bjobs_fail = False
+        missing_jobs = self._update_state_from_bjobs(jobs_with_id)
+        if not missing_jobs:
+            return jobs
+
+        if not self._bjobs_fail:
+            self._update_state_from_exitcode(missing_jobs)
+        else:
+            logger.warning('Skipping .exitcode file check because bjobs command failed')
+
+        return jobs
+
+    def _update_state_from_bjobs(self, jobs: List[dict]):
+        job_ids = [j['id'] for j in jobs]
+        query_cmd = f'{self._bjobs_bin} -noheader -o "jobid stat" {" ".join(job_ids)}'
+        cp = shell_run(query_cmd)
+
+        if cp.returncode != 0:
+            logger.debug('Failed to query job status from bjobs: %s', log_cp(cp))
+            if b'is not found' in cp.stderr or b'not found' in cp.stderr:
+                return jobs
+            self._bjobs_fail = True
+            return jobs
+
+        out = cp.stdout.decode('utf-8').strip()
+        logger.debug('bjobs output:\n%s', out)
+
+        new_state_from_bjobs = {}
+        if out:
+            for line in out.split('\n'):
+                parts = line.split()
+                if len(parts) >= 2:
+                    new_state_from_bjobs[parts[0]] = parts[1]
+
+        missing_jobs = []
+        for job in jobs:
+            if job['id'] in new_state_from_bjobs:
+                job['state'] = self._map_state(new_state_from_bjobs[job['id']])
+            else:
+                missing_jobs.append(job)
+        return missing_jobs
+
+    def _update_state_from_exitcode(self, jobs: List[dict]):
+        for job in jobs:
+            exit_code_file = os.path.abspath(job['script']) + '.exitcode'
+            if os.path.exists(exit_code_file):
+                try:
+                    with open(exit_code_file, 'r', encoding='utf-8') as f:
+                        exit_code = f.read().strip()
+                    if exit_code == '0':
+                        job['state'] = JobState.COMPLETED
+                    else:
+                        job['state'] = JobState.FAILED
+                        logger.warning('Job %s failed with exit code %s found in %s', job['id'], exit_code, exit_code_file)
+                except Exception as e:
+                    logger.error('Error reading exit code file %s for job %s: %s', exit_code_file, job['id'], e)
+                    job['state'] = JobState.FAILED
+            else:
+                job['state'] = JobState.FAILED
+                logger.error('Job %s not found in bjobs and .exitcode file not found at %s', job['id'], exit_code_file)
+
+    def _submit_job(self, job: dict, submit_opts: str):
+        script_path = os.path.abspath(job['script'])
+        exit_code_path = script_path + '.exitcode'
+
+        if os.path.exists(exit_code_path):
+            logger.info('Removing existing .exitcode file: %s', exit_code_path)
+            os.remove(exit_code_path)
+        inject_exit_code_logging(script_path, exit_code_path)
+
+        submit_cmd = f'{self._bsub_bin} {submit_opts} < {script_path}'
+        cp = shell_run(submit_cmd)
+        if cp.returncode != 0:
+            logger.error('Failed to submit job: %s', log_cp(cp))
+            return ''
+        out = cp.stdout.decode('utf-8').strip()
+        job_id = self._parse_job_id(out)
+        if not job_id:
+            logger.error('Failed to parse job id from bsub output: %s', out)
+        return job_id
+
+    def _map_state(self, state: str):
+        if state in ('PEND', 'PROV', 'PSUSP', 'USUSP', 'SSUSP', 'WAIT'):
+            return JobState.PENDING
+        if state in ('RUN',):
+            return JobState.RUNNING
+        if state in ('DONE',):
+            return JobState.COMPLETED
+        if state in ('EXIT',):
+            return JobState.FAILED
+        return JobState.UNKNOWN
+
+    def _parse_job_id(self, output: str):
+        m = re.search(r'Job\s+<(\d+)>', output)
+        return m.group(1) if m else ''
+
+
+class LFS(LSF):
+    pass
+
+
 class OpenPBS(BaseJobManager):
     def __init__(self, qsub='qsub', qstat='qstat'):
         self._qsub_bin = qsub

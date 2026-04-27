@@ -8,6 +8,10 @@ class JobCli:
         from .job import Slurm
         return Slurm
 
+    def lsf(self):
+        from .job import LSF
+        return LSF
+
     def openpbs(self):
         from .job import OpenPBS
         return OpenPBS
