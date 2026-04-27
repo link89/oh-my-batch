@@ -1,4 +1,8 @@
 # Change Log
+
+## v0.7.1
+* refine `omb shell require_env` output
+
 ## v0.7.0
 * experimental implementation of `omb job lsf` and `omb job openpbs` command
 * new `omb shell require_env` command to check required environment variables
