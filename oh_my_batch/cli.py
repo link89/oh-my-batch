@@ -26,9 +26,9 @@ class OhMyBatch:
     def job(self):
         return JobCli()
 
-    def misc(self):
-        from .misc import Misc
-        return Misc()
+    def shell(self):
+        from .shell import Shell
+        return Shell()
 
 
 def main():
