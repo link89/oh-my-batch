@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.7.2
+* new `omb combo compute` command 
+
 ## v0.7.1
 * refine `omb shell require_env` output
 
