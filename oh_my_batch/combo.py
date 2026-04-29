@@ -17,6 +17,7 @@ class ComboMaker:
         """
         self._vars = {}
         self._broadcast_keys = []
+        self._computes = []
         if seed is not None:
             random.seed(seed)
         self._combos = []
@@ -318,6 +319,16 @@ class ComboMaker:
         if debug:
             self.show_combos()
 
+    def compute(self, key: str, expr: str):
+        """
+        Compute a new variable based on existing variables in each combo
+
+        :param key: New variable name
+        :param expr: Python expression to evaluate
+        """
+        self._computes.append((key, expr))
+        return self
+
     def _make_combos(self):
         if not self._vars:
             return self._combos
@@ -335,7 +346,11 @@ class ComboMaker:
         for i, combo in enumerate(combos):
             for k, v in broadcast_vars.items():
                 combo[k] = v[i % len(v)]
+            for k, expr in self._computes:
+                combo[k] = eval(expr, {}, combo)
+
         self._combos.extend(combos)
         self._vars = {}
         self._broadcast_keys = []
+        self._computes = []
         return self._combos
