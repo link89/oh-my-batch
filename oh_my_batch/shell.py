@@ -1,3 +1,4 @@
+import glob
 import os
 import sys
 
@@ -5,12 +6,12 @@ class Shell:
 
     def try_file(self, *files:str):
         """
-        Return the first existing file or directory from the given list
+        Return the first existing file, directory, or matching glob from the given list
 
-        :param files: candidate file or directory paths
+        :param files: candidate file, directory, or glob paths
         """
         for path in files:
-            if os.path.exists(path):
+            if glob.glob(path, recursive=True):
                 return path
 
         print(f"Error: None of the given files or directories exist: {', '.join(files)}", file=sys.stderr)

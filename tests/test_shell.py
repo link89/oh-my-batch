@@ -23,6 +23,22 @@ class TestShell(TestCase):
 
         self.assertEqual(result, existing_file)
 
+    def test_try_file_returns_original_glob_when_it_matches(self):
+        shell = Shell()
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            existing_file = os.path.join(temp_dir, 'input.txt')
+            with open(existing_file, 'w'):
+                pass
+
+            pattern = os.path.join(temp_dir, '*.txt')
+            result = shell.try_file(
+                os.path.join(temp_dir, 'missing.txt'),
+                pattern,
+            )
+
+        self.assertEqual(result, pattern)
+
     def test_try_file_exits_when_no_path_exists(self):
         shell = Shell()
 
