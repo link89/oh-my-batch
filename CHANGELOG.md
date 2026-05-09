@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.7.3
+* new `omb shell try_file` command to try multiple files and return the first existing one
+
 ## v0.7.2
 * new `omb combo compute` command 
 

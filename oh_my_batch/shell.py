@@ -3,6 +3,19 @@ import sys
 
 class Shell:
 
+    def try_file(self, *files:str):
+        """
+        Return the first existing file or directory from the given list
+
+        :param files: candidate file or directory paths
+        """
+        for path in files:
+            if os.path.exists(path):
+                return path
+
+        print(f"Error: None of the given files or directories exist: {', '.join(files)}", file=sys.stderr)
+        sys.exit(1)
+
     def require_env(self, *env_names:str):
         """
         Check if the required environment variables are set
