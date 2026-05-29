@@ -12,6 +12,17 @@ from .util import expand_globs, shell_run, parse_csv, ensure_dir, log_cp, inject
 logger = logging.getLogger(__name__)
 
 
+_JOB_STATE_NAMES = {
+    0: 'NULL',
+    1: 'PENDING',
+    2: 'RUNNING',
+    3: 'CANCELLED',
+    4: 'COMPLETED',
+    5: 'FAILED',
+    6: 'UNKNOWN',
+}
+
+
 class JobState:
     NULL = 0
     PENDING = 1
@@ -28,6 +39,28 @@ class JobState:
     @classmethod
     def is_success(cls, state: int):
         return state == JobState.COMPLETED
+
+    @classmethod
+    def name(cls, state):
+        return _JOB_STATE_NAMES.get(state, f'INVALID({state!r})')
+
+
+def format_job_state(state):
+    if isinstance(state, str):
+        normalized = state.strip()
+        if normalized.isdigit():
+            return f'{JobState.name(int(normalized))}({state!r})'
+        return f'{normalized.upper()}({state!r})'
+    return f'{JobState.name(state)}({state!r})'
+
+
+def format_job_for_log(job: dict):
+    return {
+        'script': job.get('script', ''),
+        'id': job.get('id', ''),
+        'state': format_job_state(job.get('state')),
+        'tries': job.get('tries', 0),
+    }
 
 
 def new_job(script: str):
@@ -57,12 +90,13 @@ class BaseJobManager:
         if recovery and os.path.exists(recovery):
             with open(recovery, 'r', encoding='utf-8') as f:
                 jobs = json.load(f)
+            logger.info('Jobs recovered from %s: %s', recovery, [format_job_for_log(job) for job in jobs])
 
         recover_scripts = set(j['script'] for j in jobs)
         logger.info('Scripts in recovery files: %s', recover_scripts)
 
         scripts = set(norm_path(s) for s in expand_globs(script, raise_invalid=True))
-        logger.info('Scripts to submit: %s', scripts)
+        logger.info('Requested scripts: %s', scripts)
 
         for script_file in scripts:
             if script_file not in recover_scripts:
@@ -132,6 +166,13 @@ class BaseJobManager:
         # check if there are jobs to be (re)submitted
         for job in jobs:
             if should_submit(job, max_tries):
+                logger.info(
+                    'Submitting job %s with state=%s tries=%s/%s',
+                    job['script'],
+                    format_job_state(job.get('state')),
+                    job.get('tries', 0),
+                    max_tries,
+                )
                 job['tries'] += 1
                 job['id'] = ''
                 job['state'] = JobState.NULL
