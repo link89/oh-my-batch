@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.7.5
+* `omb combo` alias `broadcast` => `set_broadcast`
+
 ## v0.7.4
 * `omb shell try_file` now support glob pattern
 
