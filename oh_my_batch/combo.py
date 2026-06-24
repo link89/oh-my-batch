@@ -166,7 +166,7 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
         return self
 
-    def set_broadcast(self, *keys: str):
+    def broadcast(self, *keys: str):
         """
         Specify variables use broadcast strategy instead of cartesian product
 
@@ -177,6 +177,14 @@ class ComboMaker:
                 raise ValueError(f"Variable {key} not found")
             self._broadcast_keys.append(key)
         return self
+
+    def set_broadcast(self, *keys: str):
+        """
+        Specify variables use broadcast strategy instead of cartesian product
+
+        :param keys: Variable names to broadcast
+        """
+        return self.broadcast(self, *keys)
 
     def make_files(self, file: str, template: str, delimiter='@', mode=None, encoding='utf-8',
                    extra_vars_from_file=None, ignore_error=False):
