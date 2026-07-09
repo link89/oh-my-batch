@@ -158,11 +158,44 @@ Building a workflow does not always require a dedicated framework.
 In many cases, solid scripting practices and a well-structured project layout are enough.
 With Bash and [Oh-My-Batch], you can build robust workflows without introducing much additional machinery.
 
-### Introduction to [TESLA]
+### Directory planning
 
+A common approach for a Bash-based workflow project is to organize the repository around
+configuration, data, scripts, and runtime directories.
 
-### Directory layout
-TODO
+The configuration directory stores software configuration, parameter files, templates,
+and other small data files.
+Because these files are updated frequently, they are usually tracked in Git.
+
+The data directory stores large static assets required by the workflow, such as model weights and datasets.
+These files can be managed with Git LFS, or stored externally and downloaded into a local cache when needed.
+
+The script directory stores workflow scripts and related source code.
+Like configuration files, these files should normally be version-controlled with Git.
+
+The runtime directory stores data generated while the workflow is running.
+This data is often large, so it is usually excluded from Git, cleaned up when appropriate,
+or archived to platforms such as Zenodo after the run completes.
+
+Finally, one or more entry scripts are used to orchestrate the workflow.
+They start the job and provide a central place to define adjustable parameters.
+
+In the [TESLA] example:
+
+`00-config` is the configuration directory.
+It stores software configuration templates, command templates for launching software,
+HPC environment templates, and small input data such as initial structures.
+Because this example does not rely on large static assets, there is no separate data directory.
+
+`10-workflow` is the script directory.
+It contains the one-time initialization script `setup.sh`,
+as well as iteration scripts such as `iter-classic-dp-lammps-cp2k.sh`.
+
+Runtime data is stored under `20-workdir`,
+which is excluded through `.gitignore` and not tracked in version control.
+
+`run.sh` is the entry script for the workflow.
+It is responsible for orchestration and for defining adjustable parameters.
 
 [Oh-My-Batch]: https://github.com/link89/oh-my-batch
 [ai2-kit]: https://github.com/chenggroup/ai2-kit
