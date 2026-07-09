@@ -164,7 +164,7 @@ to show how to build a complex workflow with [Oh-My-Batch].
 ### Directory planning
 
 A common approach for a Bash-based workflow project is to organize the repository around
-configuration, data, scripts, and runtime directories.
+**configuration, data, scripts, and runtime directories**.
 
 The **configuration directory** stores software configuration, parameter files, templates,
 and other small data files.
