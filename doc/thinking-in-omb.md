@@ -1,78 +1,89 @@
 # Thinking in [Oh-My-Batch]
 
-This document introduces the design philosophy and usage of [Oh-My-Batch].
-[Oh-My-Batch] is a CLI- and Python-based toolkit for building batch scripts and workflows.
-It provides a set of standalone command-line tools and Python modules
-that help you quickly implement a computational workflow by writing a shell or Python script,
-then run it on a local machine or an HPC cluster.
+This document outlines the design principles and usage of [Oh-My-Batch].
+[Oh-My-Batch] is a CLI- and Python-based toolkit for building batch scripts and computational workflows.
+It provides standalone command-line tools and Python modules that let you assemble a workflow in shell or Python
+and run it on a local machine or an HPC cluster.
 
-Specifically, when used together with [ai2-kit], [Oh-My-Batch] can help quickly develop an active-learning workflow
-that combines different computational chemistry software.
-Such workflows typically follow an active learning structure we call TESLA,
-composed of four basic steps: train, explore, screen, and label.
-This document uses a TESLA workflow as the running example to demonstrate the basic features and tips of [Oh-My-Batch]
-so that you can get productive fast.
+When used with [ai2-kit], [Oh-My-Batch] is particularly useful for developing active-learning workflows
+that combine multiple computational chemistry packages.
+These workflows often follow a TESLA-style loop with four stages: train, explore, screen, and label.
+This document uses TESLA as the main example to introduce the core features and working patterns of [Oh-My-Batch].
 
-In addition, we also cover some general-purpose shell tips.
-These tips are useful not only for [Oh-My-Batch] workflows, but also when writing other shell scripts.
+The document also covers general shell techniques that are useful in [Oh-My-Batch] workflows
+and in shell scripting more broadly.
 
 
 ## Common shell tips
-Shell scripting is a convenient way to quickly build automated workflows. Mastering a few common patterns
-will help you write efficient and reliable automation. These techniques are used throughout the [TESLA] scripts,
-so learning them in advance will make the scripts easier to read.
+Shell scripting is a practical way to build automation quickly.
+A small set of common patterns goes a long way toward making scripts more reliable and easier to maintain.
+These patterns appear throughout the [TESLA] scripts, so understanding them early will make the examples easier to follow.
 
 ### Use `set -e` for fail-fast
-Add `set -e` at the beginning of a script to make it exit immediately when a command fails instead of continuing.
+Add `set -e` near the top of a script to exit immediately when a command fails.
 
 ```bash
 #!/bin/bash
 set -e
 ```
 
-In most cases, it’s recommended to add `set -e` up top to improve robustness.
-This prevents errors from being ignored and the script from proceeding into an unexpected state.
-For commands whose failures you intentionally want to ignore, see the next section.
+In most cases, this is the right default.
+It prevents silent failures and reduces the chance that the script continues in an invalid state.
+If a specific command is allowed to fail, handle it explicitly as shown below.
 
 
 ### Ignore errors selectively
-If you want a command’s failure not to stop the script, you can append `|| true` to suppress the error, e.g.:
+If a command is allowed to fail without stopping the script, append `|| true`:
 
 ```bash
 some_command || true
 ```
 
-An improved version is to log it with `echo`, for example:
+In practice, logging the decision is usually better:
 
 ```bash
 some_command || echo "ignore error of some_command"
 ```
-This prints a log line to signal that the error of this command was intentionally ignored.
+This makes it clear that the failure was expected and intentionally ignored.
 
 ### Be cautious when changing the working directory
 
-Using `cd` is a side effect that may impact subsequent commands, so be extra careful.
-In general, try to avoid frequent directory changes, especially in complex scripts.
+Using `cd` introduces global state into the script, which can easily affect later commands.
+As a rule, avoid changing the working directory unless it is necessary.
 
-Instead of changing the directory and then running a command, prefer specifying input and output paths explicitly
-within the command when possible. For example, to archive files under `data`, you can run:
+When possible, pass explicit paths to commands instead of switching directories first.
+For example, to archive files under `data`, prefer:
 
 ```bash
 tar -czf archive.tar.gz data/ -C data/
 ```
 
-rather than:
+instead of:
 
 ```bash
 cd data
 tar -czf ../archive.tar.gz .
 ```
 
-Both yield the same result, but the latter changes the working directory and may cause later commands to fail
-if you forget to restore it.
+Both forms produce the same archive, but the second one mutates the working directory.
+If you forget to restore it, later commands may fail in non-obvious ways.
 
-If you must change directories, use a paired `pushd` and `popd` to manage the directory stack.
-This ensures you always return to the original directory, for example:
+If a directory change is unavoidable, consider a subshell so the change does not leak into the parent shell:
+
+```bash
+(
+    cd data
+    tar -czf ../archive.tar.gz .
+)
+```
+
+Or in one line:
+
+```bash
+(cd data && tar -czf ../archive.tar.gz .)
+```
+
+If you need to change directories in the current shell, use `pushd` and `popd` as a pair:
 
 ```bash
 pushd some/directory
@@ -81,22 +92,24 @@ popd
 ```
 
 ### Auto cd to the script directory (use with caution)
-If you want the script to automatically switch to its own directory at start, add this to the top:
+If a script should always start from its own directory, add this near the top:
 
 ```bash
 cd $(dirname "$0")
 ```
 
-This helps ensure the script begins from a deterministic path, avoiding errors caused by a wrong working directory
-(e.g., relative paths not being found).
+This establishes a predictable starting location and avoids failures caused by incorrect relative paths.
 
-However, not all scripts should do this. Usually only the outermost script (the one users invoke directly)
-needs it. For helper scripts that are invoked by others, decide based on actual needs.
+Do not use this pattern everywhere.
+In most cases, only the top-level entry script, the one invoked directly by the user, should do this.
+
+Helper scripts usually should not force their own working directory.
+They should inherit the caller’s working directory unless there is a clear reason not to.
 
 
 ### Automatically skip completed tasks
-For complex scripts, you need a way to avoid re-running completed tasks when the script fails partway or
-when you revise it. A common technique is to use a “done file” flag to mark completion. The typical pattern is:
+In long or iterative workflows, you need a way to avoid re-running work that has already completed.
+A common pattern is to create a marker file:
 
 ```bash
 [ -f task-name.done ]  || {
@@ -106,10 +119,11 @@ when you revise it. A common technique is to use a “done file” flag to mark 
 }
 ```
 
-This checks whether `task-name.done` exists. If not, it runs the block. If the block succeeds, it creates the file to
-indicate the task is complete. The next time the script runs, it will skip the task if the file exists.
+This checks for `task-name.done`.
+If the file is missing, the block runs; if the block succeeds, the marker file is created.
+On the next run, the task is skipped.
 
-An improved version:
+It is often useful to log skipped tasks:
 
 ```bash
 [ -f task-name.done ] && echo "skip <task-name>"  || {
@@ -119,30 +133,28 @@ An improved version:
 }
 ```
 
-This logs a message when the task is skipped, which helps debugging and maintenance.
+This makes script output easier to read during debugging and maintenance.
 
-To re-run a completed task, simply delete the corresponding `task-name.done` file, and the next run will execute it again.
+To re-run the task, delete the corresponding `task-name.done` file.
 
-Of course, if the task produces signature output files, you can also check for those directly to decide whether to skip.
+If the task already produces a clear output artifact, you can check for that file instead of maintaining a separate marker.
 
 
 ### Limited retries
 
-For tasks that may fail transiently but are worth retrying, use a loop to implement limited retries:
+Some commands fail transiently and should be retried a limited number of times:
 
 ```bash
 EXIT_CODE=0
 for i in {1..5}; do
     some_flaky_command && break || EXIT_CODE=$?
     sleep 5
-
 done
 [ $EXIT_CODE -eq 0 ] || exit $EXIT_CODE
 ```
 
-In this example, `some_flaky_command` is a command that may fail. The script tries up to 5 times.
-If it succeeds (returns 0), the loop breaks. If it fails, it waits 5 seconds and retries.
-If all attempts fail, the script exits with the last command’s exit code.
+Here the script retries `some_flaky_command` up to five times, with a five-second delay between attempts.
+If every attempt fails, the script exits with the last non-zero status.
 
 
 ## Writing complex workflows (using [TESLA] as an example)
@@ -154,23 +166,22 @@ TODO
 TODO
 
 #### Naming convention for iteration scripts `iter-`
-Scripts starting with `iter-` are the ones executed in each iteration of the [TESLA] workflow. We recommend the following
-format to keep names clear and readable:
+Scripts prefixed with `iter-` are executed in each iteration of the [TESLA] workflow.
+We recommend the following naming pattern:
 
 `iter-<feature>-<software-...>-<version>.sh`
 
 Where:
-* feature describes a variant, e.g. `classic` for the classic mode, `redox` for redox-potential workflows, etc. Pick a name that’s easy to remember.
-* software lists the software being used, e.g. `dp`, `lammps`, `cp2k`, `vasp`, etc.
-* version is the software/script version tag. If you need to modify the script in later iterations, you should copy it and
-  bump the version instead of editing the original. Use the version suffix to distinguish variants.
+* `feature` identifies the workflow variant, for example `classic` or `redox`. Choose a short, memorable name.
+* `software` lists the software stack, for example `dp`, `lammps`, `cp2k`, or `vasp`.
+* `version` distinguishes revisions. If the script changes in later iterations, copy it and increment the version instead of editing the original in place.
 
-For example,
-* `iter-classic-dp-lammps-cp2k.sh` means the initial version using `DeepMD`, `LAMMPS`, and `CP2K` in classic mode.
-* `iter-classic-dp-lammps-cp2k-v1.sh` means the first revision using `DeepMD`, `LAMMPS`, and `CP2K` in classic mode.
-* `iter-classic-dp-lammps-vasp.sh` means the initial version using `DeepMD`, `LAMMPS`, and `VASP` in classic mode.
+Examples:
+* `iter-classic-dp-lammps-cp2k.sh` is the initial classic-mode script using `DeepMD`, `LAMMPS`, and `CP2K`.
+* `iter-classic-dp-lammps-cp2k-v1.sh` is the first revision of that script.
+* `iter-classic-dp-lammps-vasp.sh` is the initial classic-mode script using `DeepMD`, `LAMMPS`, and `VASP`.
 
-And so on.
+The same pattern can be extended as needed.
 
 [Oh-My-Batch]: https://github.com/link89/oh-my-batch
 [ai2-kit]: https://github.com/chenggroup/ai2-kit
