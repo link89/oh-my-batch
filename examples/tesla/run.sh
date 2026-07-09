@@ -8,7 +8,7 @@ export CONFIG_DIR=./00-config
 export WORK_DIR=./20-workdir
 export TYPE_MAP="[O,H]"
 
-./01-workflow/setup.sh
+./10-workflow/setup.sh
 
 export MODEL_NUM=4
 export MD_WORKERS=10
@@ -24,12 +24,12 @@ export UPDATE_MD_CONFS=0
 export MD_STEPS=1000
 export SAMPLE_FREQ=10
 
-ITER_NAME="001" ./01-workflow/iter-classic-dp-lammps-cp2k.sh
+ITER_NAME="001" ./10-workflow/iter-classic-dp-lammps-cp2k.sh
 
 export MD_STEPS=4000
 export SAMPLE_FREQ=100
 
-ITER_NAME="002" ./01-workflow/iter-classic-dp-lammps-cp2k.sh
+ITER_NAME="002" ./10-workflow/iter-classic-dp-lammps-cp2k.sh
 
 export TRAIN_STEPS=400000
 export DECAY_STEPS=2000
@@ -39,8 +39,8 @@ export UPDATE_MD_CONFS=2
 export MAX_LABEL=50
 export MD_TEMP="330 430 530 630"
 
-ITER_NAME="003" ./01-workflow/iter-classic-dp-lammps-cp2k.sh
-ITER_NAME="004" ./01-workflow/iter-classic-dp-lammps-cp2k.sh
-ITER_NAME="005" ./01-workflow/iter-classic-dp-lammps-cp2k.sh
+ITER_NAME="003" ./10-workflow/iter-classic-dp-lammps-cp2k.sh
+ITER_NAME="004" ./10-workflow/iter-classic-dp-lammps-cp2k.sh
+ITER_NAME="005" ./10-workflow/iter-classic-dp-lammps-cp2k.sh
 
 
