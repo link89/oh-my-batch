@@ -166,17 +166,17 @@ to show how to build a complex workflow with [Oh-My-Batch].
 A common approach for a Bash-based workflow project is to organize the repository around
 configuration, data, scripts, and runtime directories.
 
-The configuration directory stores software configuration, parameter files, templates,
+The **configuration directory** stores software configuration, parameter files, templates,
 and other small data files.
 Because these files are updated frequently, they are usually tracked in Git.
 
-The data directory stores large static assets required by the workflow, such as model weights and datasets.
+The **data directory** stores large static assets required by the workflow, such as model weights and datasets.
 These files can be managed with Git LFS, or stored externally and downloaded into a local cache when needed.
 
-The script directory stores workflow scripts and related source code.
+The **script directory** stores workflow scripts and related source code.
 Like configuration files, these files should normally be version-controlled with Git.
 
-The runtime directory stores data generated while the workflow is running.
+The **runtime directory** stores data generated while the workflow is running.
 This data is often large, so it is usually excluded from Git, cleaned up when appropriate,
 or archived to platforms such as Zenodo after the run completes.
 
