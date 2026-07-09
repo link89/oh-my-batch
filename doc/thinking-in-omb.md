@@ -14,10 +14,9 @@ The document also covers general shell techniques that are useful in [Oh-My-Batc
 and in shell scripting more broadly.
 
 
-## Common shell tips
+## Shell practices
 Shell scripting is a practical way to build automation quickly.
-A small set of common patterns goes a long way toward making scripts more reliable and easier to maintain.
-These patterns appear throughout the [TESLA] scripts, so understanding them early will make the examples easier to follow.
+A small set of good shell practices goes a long way toward making scripts more reliable and easier to maintain.
 
 ### Use `set -e` for fail-fast
 Add `set -e` near the top of a script to exit immediately when a command fails.
@@ -29,10 +28,6 @@ set -e
 
 In most cases, this is the right default.
 It prevents silent failures and reduces the chance that the script continues in an invalid state.
-If a specific command is allowed to fail, handle it explicitly as shown below.
-
-
-### Ignore errors selectively
 If a command is allowed to fail without stopping the script, append `|| true`:
 
 ```bash
@@ -158,30 +153,16 @@ If every attempt fails, the script exits with the last non-zero status.
 
 
 ## Writing complex workflows (using [TESLA] as an example)
-### Introduction
+
+Building a workflow does not always require a dedicated framework.
+In many cases, solid scripting practices and a well-structured project layout are enough.
+With Bash and [Oh-My-Batch], you can build robust workflows without introducing much additional machinery.
+
+### Introduction to [TESLA]
+
+
+### Directory layout
 TODO
-
-### Conventions
-#### Directory layout
-TODO
-
-#### Naming convention for iteration scripts `iter-`
-Scripts prefixed with `iter-` are executed in each iteration of the [TESLA] workflow.
-We recommend the following naming pattern:
-
-`iter-<feature>-<software-...>-<version>.sh`
-
-Where:
-* `feature` identifies the workflow variant, for example `classic` or `redox`. Choose a short, memorable name.
-* `software` lists the software stack, for example `dp`, `lammps`, `cp2k`, or `vasp`.
-* `version` distinguishes revisions. If the script changes in later iterations, copy it and increment the version instead of editing the original in place.
-
-Examples:
-* `iter-classic-dp-lammps-cp2k.sh` is the initial classic-mode script using `DeepMD`, `LAMMPS`, and `CP2K`.
-* `iter-classic-dp-lammps-cp2k-v1.sh` is the first revision of that script.
-* `iter-classic-dp-lammps-vasp.sh` is the initial classic-mode script using `DeepMD`, `LAMMPS`, and `VASP`.
-
-The same pattern can be extended as needed.
 
 [Oh-My-Batch]: https://github.com/link89/oh-my-batch
 [ai2-kit]: https://github.com/chenggroup/ai2-kit

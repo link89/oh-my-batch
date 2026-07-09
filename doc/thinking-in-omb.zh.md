@@ -15,9 +15,9 @@
 这些技巧不仅可以用于 [Oh-My-Batch] 工作流，同时也可以用于其他 Shell 脚本的编写，希望对读者有所帮助。
 
 
-## Shell 常用技巧
-Shell 脚本是快速构建自动化工作流的常用方法，掌握一些常用的 Shell 技巧会有助于构建高效可靠的自动化脚本。
-这些技巧在 [TESLA] 脚本中会被大量使用，因此提前了解将有助于大家更好地阅读脚本。
+## Shell 实践
+Shell 脚本是快速构建自动化工作流的一种方式，
+掌握一些好的的 Shell 技巧会有助于构建高效可靠的自动化脚本。
 
 ### 设置 `set -e` 快速失败
 在脚本开头添加 `set -e` 可以使脚本在遇到错误时立即退出，而不是继续执行后续命令。
@@ -29,11 +29,9 @@ set -e
 
 在多数情况下，建议在脚本开头添加 `set -e` 来确保脚本的健壮性。
 这样可以避免错误被忽略，导致脚本继续执行并产生不可预期的结果。
-对于可以忽略错误的命令，可参见下节提供的方法。
 
-
-### 忽略错误
-如果希望一个命令在失败仍可以继续执行脚本，可以在该命令后加 `|| true` 来抑制错误。例如：
+如果希望一个命令在失败仍可以继续执行脚本，
+可以在该命令后加 `|| true` 来抑制错误。例如：
 
 ```bash
 some_command || true
@@ -81,7 +79,6 @@ tar -czf ../archive.tar.gz .
 ```bash
 (cd data && tar -czf ../archive.tar.gz .)
 ```
-
 
 对于不得不更改工作目录的情况，建议使用成对的 `pushd` 和 `popd` 命令来管理目录栈，
 这样可以确保在脚本结束时恢复到原始目录。例如：
@@ -162,29 +159,18 @@ done
 
 
 ## 编写复杂工作流（以 [TESLA] 为例）
-### 介绍
+
+构建工作流未必需要专门的框架，
+在很多情况下，只要采用良好的脚本编写实践，
+并规划好项目的目录结构，
+仅通过 Bash 脚本配合 [Oh-My-Batch] 也可以写出健壮的工作流。
+
+### [TESLA] 简介
+
+
+### 目录结构
 TODO
 
-### 约定
-#### 目录结构
-TODO
-
-#### 迭代脚本`iter-` 命名规范
-以 `iter-` 开头命名的脚本是 [TESLA] 工作流在每次迭代中所使用的脚本。我们建议使用以下命名格式以确保脚本的可读性：
-
-`iter-<feature>-<software-...>-<version>.sh`
-
-其中，
-* feature 用于描述这个替代的特征，比如 `classic` 代表经典模式，`redox` 代表用于 `redox potential` 等，开发者可以根据相应的特征选取合适的名字方便记忆。
-* software 用于指代使用到的软件，如 `dp`, `lammps`, `cp2k` ,`vasp`等。
-* version 用于指代软件的版本号。如果在后续迭代中需要对脚本进行修改，开发者应该复制一份脚本并修改版本号，而不是直接修改原来的版本，这时就可以在原始版本上添加 version 编号进行区分。
-
-例如，
-* `iter-classic-dp-lammps-cp2k.sh` 代表使用经典模式的 `DeepMD`, `LAMMPS`, `CP2K` 的初始版本。
-* `iter-classic-dp-lammps-cp2k-v1.sh` 代表使用经典模式的 `DeepMD`, `LAMMPS`, `CP2K` 的第一个改版。
-* `iter-classic-dp-lammps-vasp.sh` 代表使用经典模式的 `DeepMD`, `LAMMPS`, `VASP` 的初始版本。
-
-以此类推。
 
 [Oh-My-Batch]: https://github.com/link89/oh-my-batch
 [ai2-kit]: https://github.com/chenggroup/ai2-kit
