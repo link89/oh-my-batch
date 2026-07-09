@@ -152,11 +152,14 @@ Here the script retries `some_flaky_command` up to five times, with a five-secon
 If every attempt fails, the script exits with the last non-zero status.
 
 
-## Writing complex workflows (using [TESLA] as an example)
+## Writing complex workflows
 
 Building a workflow does not always require a dedicated framework.
 In many cases, solid scripting practices and a well-structured project layout are enough.
 With Bash and [Oh-My-Batch], you can build robust workflows without introducing much additional machinery.
+
+This section uses the development of a [TESLA] workflow as a practical example
+to show how to build a complex workflow with [Oh-My-Batch].
 
 ### Directory planning
 
