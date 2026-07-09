@@ -206,6 +206,9 @@ done
 负责任务编排以及可调整参数的设置。
 
 
+### 通用结构
+<img src="./assets/building-block.svg" alt="Building blocks of a workflow" width="600"/>
+
 
 [Oh-My-Batch]: https://github.com/link89/oh-my-batch
 [ai2-kit]: https://github.com/chenggroup/ai2-kit
