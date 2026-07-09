@@ -8,3 +8,4 @@
 set -e
 module load intel/oneapi2021.1
 module load cp2k/7.1
+export CP2K_DATA_DIR=/public/software/cp2k-7.1/data
