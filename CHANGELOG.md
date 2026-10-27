@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.7.7
+* chore: upgrade `fire` to 0.7.1
+
 ## v0.7.6
 * fix `omb combo set_broadcast` raising `ValueError` (it passed the maker instance as a key); now correctly aliases `broadcast`
 
